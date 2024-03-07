@@ -1,5 +1,4 @@
 set -x EDITOR nvim
-set -x PRIVATE_LIBRARY_GITHUB_ACCESS_TOKEN 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
 set -x PNPM_HOME $HOME/Library/pnpm
 set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
 
