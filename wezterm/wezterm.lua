@@ -7,7 +7,7 @@ local config = wezterm.config_builder()
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = 'Mono White (Gogh)'
 config.font = wezterm.font_with_fallback({ "MonoLisa", "nonicons" })
 config.font_size = 14
 config.enable_scroll_bar = false

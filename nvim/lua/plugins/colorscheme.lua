@@ -57,14 +57,14 @@ return {
   },
   {
     "aktersnurra/no-clown-fiesta.nvim",
-    -- lazy = false,
-    -- priority = 1000
+    lazy = false,
+    priority = 1000
   },
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,
-    priority = 1000,
+    -- lazy = false,
+    -- priority = 1000,
     vscode = false,
     config = function()
       require("catppuccin").setup({
@@ -81,21 +81,21 @@ return {
           shade = "dark",
           percentage = 0.15, -- percentage of the shade to apply to the inactive window
         },
-        no_italic = true, -- Force no italic
+        no_italic = false, -- Force no italic
         no_bold = false, -- Force no bold
         no_underline = false, -- Force no underline
         styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
           comments = { "italic" }, -- Change the style of comments
-          conditionals = {},
-          loops = {},
-          functions = {},
+          conditionals = { "bold" },
+          loops = { "bold" },
+          functions = { "bold" },
           keywords = { "bold" },
           strings = {},
           variables = {},
           numbers = {},
           booleans = {},
           properties = {},
-          types = {},
+          types = { "bold" },
           operators = {},
           -- miscs = {}, -- Uncomment to turn off hard-coded styles
         },
@@ -118,7 +118,25 @@ return {
           neotree = true,
           noice = true,
           telescope = true,
-          which_key = true
+          which_key = true,
+          native_lsp = {
+            enabled = true,
+            virtual_text = {
+              errors = { "italic" },
+              hints = { "italic" },
+              warnings = { "italic" },
+              information = { "italic" },
+            },
+            underlines = {
+              errors = { "underline" },
+              hints = { "underline" },
+              warnings = { "underline" },
+              information = { "underline" },
+            },
+            inlay_hints = {
+              background = true,
+            },
+          },
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       })
@@ -128,7 +146,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "no-clown-fiesta",
     },
   },
 }
