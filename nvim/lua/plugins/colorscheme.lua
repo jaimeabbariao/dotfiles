@@ -58,7 +58,7 @@ return {
   {
     "aktersnurra/no-clown-fiesta.nvim",
     lazy = false,
-    priority = 1000
+    priority = 1000,
   },
   {
     "catppuccin/nvim",
@@ -143,10 +143,11 @@ return {
       vim.o.termguicolors = true
     end,
   },
+  { "sainnhe/gruvbox-material", lazy = false, priority = 1000 },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "doom-one",
+      colorscheme = "gruvbox-material",
     },
   },
 }

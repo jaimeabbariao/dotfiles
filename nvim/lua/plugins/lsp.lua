@@ -136,9 +136,9 @@ return {
         require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
-      Util.lsp.on_attach(function(client)
-        client.server_capabilities.semanticTokensProvider = nil
-      end)
+      -- Util.lsp.on_attach(function(client)
+      --   client.server_capabilities.semanticTokensProvider = nil
+      -- end)
 
       local register_capability = vim.lsp.handlers["client/registerCapability"]
 
