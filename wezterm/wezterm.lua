@@ -4,10 +4,7 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
-
 -- For example, changing the color scheme:
-config.color_scheme = 'Mono White (Gogh)'
 config.font = wezterm.font_with_fallback({ "MonoLisa", "nonicons" })
 config.font_size = 14
 config.enable_scroll_bar = false
@@ -21,6 +18,7 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
 config.freetype_load_target = "HorizontalLcd"
+config.color_scheme = "DoomOne"
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
