@@ -34,14 +34,6 @@ return {
       vim.g.doom_one_plugin_lspsaga = true
     end,
   },
-  {
-    "rockyzhang24/arctic.nvim",
-    dependencies = { "rktjmp/lush.nvim" },
-    name = "arctic",
-    branch = "v2",
-    -- lazy = false,
-    -- priority = 1000,
-  },
   -- { "Mofiqul/vscode.nvim", lazy = false, priority = 1000 },
   {
     "ja153903/vscode.nvim",
@@ -54,11 +46,6 @@ return {
         underline_links = true,
       })
     end,
-  },
-  {
-    "aktersnurra/no-clown-fiesta.nvim",
-    lazy = false,
-    priority = 1000,
   },
   {
     "catppuccin/nvim",
