@@ -1,6 +1,7 @@
 return {
   {
     "NTBBloodbath/doom-one.nvim",
+    enabled = false,
     -- lazy = false,
     -- priority = 1000,
     config = function()
@@ -37,6 +38,7 @@ return {
   -- { "Mofiqul/vscode.nvim", lazy = false, priority = 1000 },
   {
     "ja153903/vscode.nvim",
+    enabled = false,
     -- lazy = false,
     -- priority = 1000,
     branch = "feat/neotree-support",
@@ -50,6 +52,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    enabled = false,
     -- lazy = false,
     -- priority = 1000,
     vscode = false,
@@ -130,7 +133,16 @@ return {
       vim.o.termguicolors = true
     end,
   },
-  { "sainnhe/gruvbox-material", lazy = false, priority = 1000 },
+  {
+    "sainnhe/gruvbox-material",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.gruvbox_material_background = "hard"
+      vim.g.gruvbox_material_foreground = "mix"
+      vim.g.gruvbox_material_enable_bold = 1
+    end,
+  },
   {
     "LazyVim/LazyVim",
     opts = {
