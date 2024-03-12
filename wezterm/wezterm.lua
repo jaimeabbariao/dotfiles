@@ -18,7 +18,7 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
 config.freetype_load_target = "HorizontalLcd"
-config.color_scheme = 'Gruvbox dark, hard (base16)'
+config.color_scheme = 'Material Darker (base16)'
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
