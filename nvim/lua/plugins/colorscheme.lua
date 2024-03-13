@@ -146,8 +146,9 @@ return {
   },
   {
     "marko-cerovac/material.nvim",
-    lazy = false,
-    priority = 1000,
+    enabled = false,
+    -- lazy = false,
+    -- priority = 1000,
     config = function()
       vim.g.material_style = "darker"
       require("material").setup({
@@ -280,8 +281,8 @@ return {
         },
 
         highlight_groups = {
-          -- Comment = { fg = "foam" },
-          -- VertSplit = { fg = "muted", bg = "muted" },
+          Comment = { fg = "foam" },
+          VertSplit = { fg = "muted", bg = "muted" },
         },
 
         before_highlight = function(group, highlight, palette)
