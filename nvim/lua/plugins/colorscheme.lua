@@ -209,22 +209,6 @@ return {
     end,
   },
   {
-    "craftzdog/solarized-osaka.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = function()
-      return {
-        transparent = false,
-        styles = {
-          comments = { italic = true },
-          keywords = { italic = true },
-          functions = { bold = true },
-        },
-        day_brightness = 0.5, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-      }
-    end,
-  },
-  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "carbonfox",
