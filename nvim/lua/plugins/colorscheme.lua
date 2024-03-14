@@ -38,9 +38,8 @@ return {
   -- { "Mofiqul/vscode.nvim", lazy = false, priority = 1000 },
   {
     "ja153903/vscode.nvim",
-    enabled = false,
-    -- lazy = false,
-    -- priority = 1000,
+    lazy = false,
+    priority = 1000,
     branch = "feat/neotree-support",
     config = function()
       require("vscode").setup({
@@ -211,7 +210,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "carbonfox",
+      colorscheme = "vscode",
     },
   },
 }
