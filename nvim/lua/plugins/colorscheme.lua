@@ -35,17 +35,16 @@ return {
       vim.g.doom_one_plugin_lspsaga = true
     end,
   },
-  -- { "Mofiqul/vscode.nvim", lazy = false, priority = 1000 },
   {
-    "ja153903/vscode.nvim",
+    "Mofiqul/vscode.nvim",
     lazy = false,
     priority = 1000,
-    branch = "feat/neotree-support",
-    config = function()
-      require("vscode").setup({
-        -- Underline `@markup.link.*` variants
-        underline_links = true,
-      })
+    opts = function()
+      return {
+        color_overrides = {
+          vscBack = "#161616",
+        },
+      }
     end,
   },
   {
