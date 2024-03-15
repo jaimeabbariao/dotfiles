@@ -5,7 +5,6 @@ return {
     enabled = false,
     -- lazy = false,
     -- priority = 1000,
-    vscode = false,
     config = function()
       require("catppuccin").setup({
         flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -158,7 +157,7 @@ return {
       })
     end,
   },
-  { "fcancelinha/northern.nvim", branch = "master", priority = 1000 },
+  { "fcancelinha/northern.nvim", branch = "master", priority = 1000, lazy = false },
   {
     "LazyVim/LazyVim",
     opts = {
