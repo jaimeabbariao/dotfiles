@@ -67,18 +67,6 @@ return {
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                diagnosticMode = "openFilesOnly",
-                autoSearchPaths = true,
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = "off",
-              },
-            },
-          },
-        },
         lua_ls = {
           -- mason = false, -- set to false if you don't want this server to be installed with mason
           -- Use this to add any additional keymaps
