@@ -28,14 +28,14 @@ local aurora = {
 	purple = "#B48EAD",
 }
 
-local active_tab = {
-	bg_color = polar_night.nord0,
+local inactive_tab = {
+	bg_color = polar_night.nord1,
 	fg_color = snow_storm.nord4,
 }
 
-local inactive_tab = {
-	bg_color = polar_night.nord3,
-	fg_color = snow_storm.nord6,
+local active_tab = {
+	bg_color = aurora.green,
+	fg_color = polar_night.nord0,
 }
 
 function M.colors()
