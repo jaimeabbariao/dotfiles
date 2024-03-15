@@ -11,7 +11,7 @@ if vim.g.vscode then
     spec = {
       { "LazyVim/LazyVim", import = "lazyvim.plugins" },
       { import = "lazyvim.plugins.extras.vscode" },
-      { import = "plugins" },
+      -- { import = "plugins" },
     },
   })
 else
