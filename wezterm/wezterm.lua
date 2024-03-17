@@ -1,8 +1,8 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
-local colors = require("lua/nord").colors()
-local window_frame = require("lua/nord").window_frame()
+-- local colors = require("lua/nord").colors()
+-- local window_frame = require("lua/nord").window_frame()
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
@@ -21,8 +21,9 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
 config.freetype_load_target = "HorizontalLcd"
-config.colors = colors
-config.window_frame = window_frame
+-- config.colors = colors
+-- config.window_frame = window_frame
+config.color_scheme = "Catppuccin Mocha"
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
