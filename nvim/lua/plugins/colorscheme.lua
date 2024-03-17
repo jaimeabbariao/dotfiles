@@ -22,21 +22,6 @@ return {
         no_italic = false, -- Force no italic
         no_bold = false, -- Force no bold
         no_underline = false, -- Force no underline
-        styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-          comments = { "italic" }, -- Change the style of comments
-          conditionals = { "bold" },
-          loops = { "bold" },
-          functions = { "bold" },
-          keywords = { "bold" },
-          strings = {},
-          variables = {},
-          numbers = {},
-          booleans = {},
-          properties = {},
-          types = { "bold" },
-          operators = {},
-          -- miscs = {}, -- Uncomment to turn off hard-coded styles
-        },
         color_overrides = {},
         custom_highlights = {},
         integrations = {
