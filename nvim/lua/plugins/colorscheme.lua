@@ -69,8 +69,8 @@ return {
   },
   {
     "rose-pine/neovim",
-    lazy = false,
-    priority = 1000,
+    -- lazy = false,
+    -- priority = 1000,
     name = "rose-pine",
     config = function()
       require("rose-pine").setup({
@@ -144,6 +144,8 @@ return {
   { "fcancelinha/northern.nvim", branch = "master", enabled = false },
   {
     "tiagovla/tokyodark.nvim",
+    lazy = false,
+    priority = 1000,
     opts = {
       -- custom options here
     },
@@ -154,7 +156,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = "tokyodark",
     },
   },
 }
