@@ -1,15 +1,15 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- local colors = require("lua/nord").colors()
--- local window_frame = require("lua/nord").window_frame()
+local colors = require("lua/rose-pine").colors()
+local window_frame = require("lua/rose-pine").window_frame()
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 config.font = wezterm.font_with_fallback({ { family = "MonoLisa", weight = "Medium" }, "nonicons" })
-config.font_size = 16
+config.font_size = 14
 config.enable_scroll_bar = false
 config.window_padding = {
 	left = 0,
@@ -21,9 +21,10 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
 config.freetype_load_target = "HorizontalLcd"
--- config.colors = colors
--- config.window_frame = window_frame
-config.color_scheme = "Catppuccin Mocha"
+config.colors = colors
+config.window_frame = window_frame
+-- config.color_scheme = "Catppuccin Macchiato"
+config.line_height = 1.2
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }

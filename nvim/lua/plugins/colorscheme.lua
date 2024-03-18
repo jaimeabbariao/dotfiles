@@ -1,9 +1,10 @@
 return {
   {
     "catppuccin/nvim",
+    enabled = false,
     name = "catppuccin",
-    lazy = false,
-    priority = 1000,
+    -- lazy = false,
+    -- priority = 1000,
     config = function()
       require("catppuccin").setup({
         flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -68,9 +69,8 @@ return {
   },
   {
     "rose-pine/neovim",
-    enabled = false,
-    -- lazy = false,
-    -- priority = 1000,
+    lazy = false,
+    priority = 1000,
     name = "rose-pine",
     config = function()
       require("rose-pine").setup({
@@ -154,7 +154,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "rose-pine",
     },
   },
 }
