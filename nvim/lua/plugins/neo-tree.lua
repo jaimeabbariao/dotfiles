@@ -57,7 +57,7 @@ return {
         hijack_netrw_behavior = "disabled",
       },
       window = {
-        position = "current",
+        position = "left",
         mappings = {
           ["<space>"] = "none",
         },
