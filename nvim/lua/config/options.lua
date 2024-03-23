@@ -3,9 +3,10 @@
 -- Add any additional options here
 
 vim.opt.swapfile = false
-vim.opt.autochdir = true
+-- vim.opt.autochdir = true
 vim.opt.cursorline = true
 vim.g.autoformat = false
+vim.g.root_spec = { "cwd" }
 
 vim.api.nvim_create_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
 
