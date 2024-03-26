@@ -21,7 +21,7 @@ return {
     event = "LazyFile",
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-      { "folke/neodev.nvim", opts = {} },
+      { "folke/neodev.nvim",  opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
@@ -84,6 +84,17 @@ return {
             },
           },
         },
+        sorbet = {
+          root_dir = function()
+            local cwd = vim.fn.getcwd()
+
+            if string.find(cwd, "figma/figma") then
+              return vim.fn.getcwd() .. "/sinatra"
+            else
+              return cwd
+            end
+          end
+        }
       },
       -- you can do any additional lsp ser setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -151,14 +162,14 @@ return {
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            local icons = require("lazyvim.config").icons.diagnostics
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
+            or function(diagnostic)
+              local icons = require("lazyvim.config").icons.diagnostics
+              for d, icon in pairs(icons) do
+                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                  return icon
+                end
               end
             end
-          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
