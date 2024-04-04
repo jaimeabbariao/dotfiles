@@ -1,12 +1,13 @@
 {
   "extras": [
+    "lazyvim.plugins.extras.coding.copilot",
     "lazyvim.plugins.extras.editor.harpoon2",
     "lazyvim.plugins.extras.lang.elixir",
     "lazyvim.plugins.extras.lang.python",
     "lazyvim.plugins.extras.lang.ruby"
   ],
   "news": {
-    "NEWS.md": "2850"
+    "NEWS.md": "3314"
   },
   "version": 3
 }
