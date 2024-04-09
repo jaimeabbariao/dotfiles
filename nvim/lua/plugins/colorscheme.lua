@@ -1,7 +1,6 @@
 return {
   {
     "catppuccin/nvim",
-    enabled = false,
     name = "catppuccin",
     -- lazy = false,
     -- priority = 1000,
@@ -156,7 +155,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyodark",
+      colorscheme = "catppuccin-mocha",
     },
   },
 }
