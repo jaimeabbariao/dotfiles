@@ -1,15 +1,12 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
-local colors = require("lua/tokyodark").colors()
-local window_frame = require("lua/tokyodark").window_frame()
-
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
-config.font = wezterm.font_with_fallback({ { family = "MonoLisa", weight = "Medium" }, "nonicons" })
-config.font_size = 13.5
+config.font = wezterm.font_with_fallback({ { family = "Berkeley Mono", weight = "Regular" }, "nonicons" })
+config.font_size = 15
 config.enable_scroll_bar = false
 config.window_padding = {
 	left = 0,
