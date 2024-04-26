@@ -17,7 +17,6 @@ config.window_padding = {
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
-config.freetype_load_target = "Light"
 -- config.colors = colors
 -- config.window_frame = window_frame
 config.line_height = 1.2
