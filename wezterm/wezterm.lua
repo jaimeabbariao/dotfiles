@@ -19,7 +19,7 @@ config.tab_bar_at_bottom = true
 config.tab_max_width = 64
 -- config.colors = colors
 -- config.window_frame = window_frame
-config.line_height = 1.2
+config.line_height = 1.5
 
 local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
 custom.background = "#000000"
