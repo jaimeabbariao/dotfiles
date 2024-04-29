@@ -34,12 +34,12 @@ config.color_scheme = "OLEDCat"
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
   {
-    key = "p",
+    key = "n",
     mods = "LEADER",
     action = wezterm.action.ActivateTabRelative(1),
   },
   {
-    key = "n",
+    key = "p",
     mods = "LEADER",
     action = wezterm.action.ActivateTabRelative(-1),
   },
