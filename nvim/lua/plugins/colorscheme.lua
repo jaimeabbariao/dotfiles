@@ -80,7 +80,7 @@ return {
     enabled = false,
     name = "rose-pine",
     opts = {
-      variant = "moon",    -- auto, main, moon, or dawn
+      variant = "moon",      -- auto, main, moon, or dawn
       dark_variant = "moon", -- main, moon, or dawn
       dim_inactive_windows = false,
       extend_background_behind_borders = true,
@@ -88,7 +88,7 @@ return {
       enable = {
         terminal = true,
         legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-        migrations = true,      -- Handle deprecated options automatically
+        migrations = true,        -- Handle deprecated options automatically
       },
 
       styles = {
@@ -146,7 +146,37 @@ return {
       end,
     }
   },
-  { "miikanissi/modus-themes.nvim", priority = 1000 },
+  {
+    "miikanissi/modus-themes.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      -- Theme comes in two styles `modus_operandi` and `modus_vivendi`
+      -- `auto` will automatically set style based on background set with vim.o.background
+      variant = "default", -- Theme comes in four variants `default`, `tinted`, `deuteranopia`, and `tritanopia`
+      transparent = false, -- Transparent background (as supported by the terminal)
+      dim_inactive = false, -- "non-current" windows are dimmed
+      styles = {
+        -- Style to be applied to different syntax groups
+        -- Value is any valid attr-list value for `:help nvim_set_hl`
+        comments = { italic = true },
+        keywords = { bold = true, italic = false },
+        functions = {},
+        variables = {},
+      },
+
+      --- You can override specific color groups to use other groups or a hex color
+      --- function will be called with a ColorScheme table
+      ---@param colors ColorScheme
+      on_colors = function(colors) end,
+
+      --- You can override specific highlights to use other groups or a hex color
+      --- function will be called with a Highlights and ColorScheme table
+      ---@param highlights Highlights
+      ---@param colors ColorScheme
+      on_highlights = function(highlights, colors) end,
+    }
+  },
   {
     "LazyVim/LazyVim",
     opts = {
