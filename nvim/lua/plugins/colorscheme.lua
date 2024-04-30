@@ -2,8 +2,9 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,
-    priority = 1000,
+    enabled = false,
+    -- lazy = false,
+    -- priority = 1000,
     config = function()
       require("catppuccin").setup({
         flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -73,6 +74,8 @@ return {
     end,
   }, {
   "rose-pine/neovim",
+  lazy = false,
+  priority = 1000,
   name = "rose-pine",
   opts = {
     variant = "moon",      -- auto, main, moon, or dawn
