@@ -161,7 +161,7 @@ return {
         -- Value is any valid attr-list value for `:help nvim_set_hl`
         comments = { italic = true },
         keywords = { bold = true, italic = false },
-        functions = {},
+        functions = { bold = true },
         variables = {},
       },
 
