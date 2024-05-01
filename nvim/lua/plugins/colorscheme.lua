@@ -75,13 +75,12 @@ return {
   },
   {
     "rose-pine/neovim",
-    -- lazy = false,
-    -- priority = 1000,
-    enabled = false,
+    lazy = false,
+    priority = 1000,
     name = "rose-pine",
     opts = {
-      variant = "moon",      -- auto, main, moon, or dawn
-      dark_variant = "moon", -- main, moon, or dawn
+      variant = "dawn",      -- auto, main, moon, or dawn
+      -- dark_variant = "moon", -- main, moon, or dawn
       dim_inactive_windows = false,
       extend_background_behind_borders = true,
 
@@ -148,8 +147,8 @@ return {
   },
   {
     "miikanissi/modus-themes.nvim",
-    lazy = false,
-    priority = 1000,
+    -- lazy = false,
+    -- priority = 1000,
     opts = {
       -- Theme comes in two styles `modus_operandi` and `modus_vivendi`
       -- `auto` will automatically set style based on background set with vim.o.background
@@ -182,7 +181,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "modus_vivendi",
+      colorscheme = "rose-pine",
     },
   },
 }
