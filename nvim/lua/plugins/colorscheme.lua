@@ -153,8 +153,8 @@ return {
     opts = {
       -- Theme comes in two styles `modus_operandi` and `modus_vivendi`
       -- `auto` will automatically set style based on background set with vim.o.background
-      variant = "default", -- Theme comes in four variants `default`, `tinted`, `deuteranopia`, and `tritanopia`
-      transparent = false, -- Transparent background (as supported by the terminal)
+      variant = "tinted",   -- Theme comes in four variants `default`, `tinted`, `deuteranopia`, and `tritanopia`
+      transparent = false,  -- Transparent background (as supported by the terminal)
       dim_inactive = false, -- "non-current" windows are dimmed
       styles = {
         -- Style to be applied to different syntax groups
@@ -174,7 +174,9 @@ return {
       --- function will be called with a Highlights and ColorScheme table
       ---@param highlights Highlights
       ---@param colors ColorScheme
-      on_highlights = function(highlights, colors) end,
+      on_highlights = function(highlights, colors)
+        highlights['@tag.tsx'] = { fg = '#00eff0', style = 'bold' }
+      end,
     }
   },
   {
