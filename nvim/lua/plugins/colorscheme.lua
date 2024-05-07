@@ -47,7 +47,6 @@ return {
           },
           neotree = true,
           noice = true,
-          telescope = true,
           which_key = true,
           native_lsp = {
             enabled = true,
@@ -79,7 +78,7 @@ return {
     priority = 1000,
     name = "rose-pine",
     opts = {
-      variant = "dawn",      -- auto, main, moon, or dawn
+      variant = "moon",      -- auto, main, moon, or dawn
       -- dark_variant = "moon", -- main, moon, or dawn
       dim_inactive_windows = false,
       extend_background_behind_borders = true,
