@@ -78,7 +78,7 @@ return {
     priority = 1000,
     name = "rose-pine",
     opts = {
-      variant = "moon",      -- auto, main, moon, or dawn
+      variant = "moon", -- auto, main, moon, or dawn
       -- dark_variant = "moon", -- main, moon, or dawn
       dim_inactive_windows = false,
       extend_background_behind_borders = true,
@@ -144,11 +144,11 @@ return {
       end,
     }
   },
-  { "RRethy/base16-nvim", lazy = false, priority = 1000 },
+  { "navarasu/onedark.nvim", lazy = false, priority = 1000 },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "base16-tomorrow-night-eighties",
+      colorscheme = "onedark",
     },
   },
 }
