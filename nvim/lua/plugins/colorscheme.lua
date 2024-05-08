@@ -144,10 +144,11 @@ return {
       end,
     }
   },
+  { "RRethy/base16-nvim", lazy = false, priority = 1000 },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = "base16-tomorrow-night-eighties",
     },
   },
 }
