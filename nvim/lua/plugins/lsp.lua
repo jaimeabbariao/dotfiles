@@ -94,6 +94,9 @@ return {
               return cwd
             end
           end
+        },
+        clangd = {
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
         }
       },
       -- you can do any additional lsp ser setup here
