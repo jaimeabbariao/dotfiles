@@ -74,8 +74,9 @@ return {
   },
   {
     "rose-pine/neovim",
-    lazy = false,
-    priority = 1000,
+    enabled = false,
+    -- lazy = false,
+    -- priority = 1000,
     name = "rose-pine",
     opts = {
       variant = "moon", -- auto, main, moon, or dawn
