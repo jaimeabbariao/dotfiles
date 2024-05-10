@@ -194,8 +194,9 @@ return {
   {
     "mcchrish/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
-    lazy = false,
-    priority = 1000,
+    enabled = false,
+    -- lazy = false,
+    -- priority = 1000,
     -- config = function()
     --   vim.g.zenwritten = { darkness = "dark" }
     -- end
@@ -203,7 +204,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "zenwritten",
+      colorscheme = "onedark",
     },
   },
 }
