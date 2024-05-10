@@ -26,7 +26,7 @@ config.line_height = 1.5
 -- config.color_scheme = 'One Dark (Gogh)'
 
 local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
-custom.background = "#0E0E0E"
+custom.background = "#191919"
 custom.tab_bar.background = "#040404"
 custom.tab_bar.inactive_tab.bg_color = "#0f0f0f"
 custom.tab_bar.new_tab.bg_color = "#080808"

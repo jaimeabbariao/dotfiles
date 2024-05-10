@@ -192,14 +192,18 @@ return {
     end
   },
   {
-    'kdheepak/monochrome.nvim',
+    "mcchrish/zenbones.nvim",
+    dependencies = "rktjmp/lush.nvim",
     lazy = false,
-    priority = 1000
+    priority = 1000,
+    config = function()
+      vim.g.zenwritten = { darkness = "dark" }
+    end
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "monochrome",
+      colorscheme = "zenwritten",
     },
   },
 }
