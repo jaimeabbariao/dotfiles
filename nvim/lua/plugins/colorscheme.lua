@@ -66,15 +66,16 @@ return {
         end
 
         if highlight.fg == palette.pine then
-            highlight.fg = palette.foam
+          highlight.fg = palette.foam
         end
       end,
     }
   },
+  { 'romgrk/doom-one.vim', lazy = false, priority = 1000 },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = "doom-one",
     },
   },
 }

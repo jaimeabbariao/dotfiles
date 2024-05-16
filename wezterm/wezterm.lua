@@ -1,9 +1,9 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
-local rose_pine_main = require('lua/rose-pine-official').main
-local colors = rose_pine_main.colors()
-local window_frame = rose_pine_main.window_frame()
+-- local rose_pine_main = require('lua/rose-pine-official').main
+-- local colors = rose_pine_main.colors()
+-- local window_frame = rose_pine_main.window_frame()
 -- local colors = require('lua/rose-pine').colors()
 -- local window_frame = require('lua/rose-pine').window_frame()
 
@@ -23,8 +23,8 @@ config.window_padding = {
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
-config.colors = colors
-config.window_frame = window_frame
+-- config.colors = colors
+-- config.window_frame = window_frame
 config.line_height = 1.2
 -- config.color_scheme = 'One Dark (Gogh)'
 
@@ -38,6 +38,8 @@ config.line_height = 1.2
 -- config.color_scheme = "OLEDCat"
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
+config.color_scheme = 'DoomOne'
+
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
   {
