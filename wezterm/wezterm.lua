@@ -11,7 +11,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
-config.font = wezterm.font_with_fallback({ "Berkeley Mono", "nonicons" })
+config.font = wezterm.font_with_fallback({ "MonoLisa", "nonicons" })
 config.font_size = 14
 config.enable_scroll_bar = false
 config.window_padding = {
@@ -28,14 +28,41 @@ config.tab_max_width = 64
 config.line_height = 1.2
 -- config.color_scheme = 'One Dark (Gogh)'
 
-local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
-custom.background = "#040404"
-custom.tab_bar.background = "#040404"
-custom.tab_bar.inactive_tab.bg_color = "#0f0f0f"
-custom.tab_bar.new_tab.bg_color = "#080808"
+-- config.color_scheme = 'Solarized Dark - Patched'
+config.window_background_opacity = 0.95
 
-config.color_schemes = { ["OLEDCat"] = custom }
-config.color_scheme = "OLEDCat"
+local custom = wezterm.color.get_builtin_schemes()["Solarized Dark - Patched"]
+custom.background = "#00141A"
+custom.tab_bar = {
+  background = "#00141A",
+  active_tab = {
+    bg_color = "#2C3300",
+    fg_color = "#FFF"
+  },
+  inactive_tab = {
+    bg_color = "#00141A",
+    fg_color = "#FFF",
+  },
+  new_tab = {
+    bg_color = "#002B36",
+    fg_color = "#EEE8D5",
+  },
+}
+-- custom.tab_bar.background = "#00141A"
+-- custom.tab_bar.inactive_tab.bg_color = "#9EACAD"
+-- custom.tab_bar.new_tab.bg_color = "#ADB8B8"
+
+config.color_schemes = { ["Solarized Osaka"] = custom }
+config.color_scheme = 'Solarized Osaka'
+
+-- local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
+-- custom.background = "#040404"
+-- custom.tab_bar.background = "#040404"
+-- custom.tab_bar.inactive_tab.bg_color = "#0f0f0f"
+-- custom.tab_bar.new_tab.bg_color = "#080808"
+--
+-- config.color_schemes = { ["OLEDCat"] = custom }
+-- config.color_scheme = "OLEDCat"
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
 -- config.color_scheme = 'Moonfly'
