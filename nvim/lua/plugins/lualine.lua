@@ -22,15 +22,15 @@ local lualine = require('lualine')
 local colors = {
   bg = "#00141A",
   fg = "#FFF",
-  yellow = "#332700",
-  cyan = "#103B3D",
+  yellow = "#B58900",
+  cyan = "#2AA198",
   darkblue = "#103956",
-  green = "#2C3300",
-  orange = "#5C220A",
-  violet = "#25285B",
-  magenta = "#541232",
+  green = "#BAFB00",
+  orange = "#CB4B16",
+  violet = "#6C71C4",
+  magenta = "#D33682",
   blue = "#268BD2",
-  red = "#57100F"
+  red = "#DC322F"
 }
 
 local conditions = {
