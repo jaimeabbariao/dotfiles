@@ -11,7 +11,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
-config.font = wezterm.font_with_fallback({ "MonoLisa", "nonicons" })
+config.font = wezterm.font_with_fallback({ "Berkeley Mono", "nonicons" })
 config.font_size = 14
 config.enable_scroll_bar = false
 config.window_padding = {
@@ -29,7 +29,7 @@ config.line_height = 1.2
 -- config.color_scheme = 'One Dark (Gogh)'
 
 -- config.color_scheme = 'Solarized Dark - Patched'
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.85
 
 local custom = wezterm.color.get_builtin_schemes()["Solarized Dark - Patched"]
 custom.background = "#00141A"
