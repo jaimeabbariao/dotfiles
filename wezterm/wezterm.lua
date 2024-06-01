@@ -15,10 +15,10 @@ config.font = wezterm.font_with_fallback({ "Berkeley Mono", "nonicons" })
 config.font_size = 14
 config.enable_scroll_bar = false
 config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 0,
-  bottom = 0,
+	left = 0,
+	right = 0,
+	top = 0,
+	bottom = 0,
 }
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
@@ -33,26 +33,27 @@ config.window_background_opacity = 1.0
 
 -- Solarized Osaka
 local custom = wezterm.color.get_builtin_schemes()["Solarized Dark - Patched"]
-custom.background = "#00141A"
+-- custom.background = "#00141A"
+custom.background = "#000"
 custom.foreground = "#FFF"
 custom.tab_bar = {
-  background = "#00141A",
-  active_tab = {
-    bg_color = "#063642",
-    fg_color = "#FFF"
-  },
-  inactive_tab = {
-    bg_color = "#00141A",
-    fg_color = "#FFF",
-  },
-  new_tab = {
-    bg_color = "#002B36",
-    fg_color = "#EEE8D5",
-  },
+	background = "#00141A",
+	active_tab = {
+		bg_color = "#063642",
+		fg_color = "#FFF",
+	},
+	inactive_tab = {
+		bg_color = "#00141A",
+		fg_color = "#FFF",
+	},
+	new_tab = {
+		bg_color = "#002B36",
+		fg_color = "#EEE8D5",
+	},
 }
 
 config.color_schemes = { ["Solarized Osaka"] = custom }
-config.color_scheme = 'Solarized Osaka'
+config.color_scheme = "Solarized Osaka"
 
 -- local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
 -- custom.background = "#040404"
@@ -68,52 +69,52 @@ config.color_scheme = 'Solarized Osaka'
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
-  {
-    key = "n",
-    mods = "LEADER",
-    action = wezterm.action.ActivateTabRelative(1),
-  },
-  {
-    key = "p",
-    mods = "LEADER",
-    action = wezterm.action.ActivateTabRelative(-1),
-  },
-  {
-    key = "h",
-    mods = "LEADER",
-    action = wezterm.action.ActivatePaneDirection("Left"),
-  },
-  {
-    key = "l",
-    mods = "LEADER",
-    action = wezterm.action.ActivatePaneDirection("Right"),
-  },
-  {
-    key = "k",
-    mods = "LEADER",
-    action = wezterm.action.ActivatePaneDirection("Up"),
-  },
-  {
-    key = "j",
-    mods = "LEADER",
-    action = wezterm.action.ActivatePaneDirection("Down"),
-  },
-  {
-    key = "-",
-    mods = "LEADER",
-    action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-  },
-  {
-    key = "|",
-    mods = "LEADER|SHIFT",
-    action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-  },
-  -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
-  {
-    key = "a",
-    mods = "LEADER|CTRL",
-    action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }),
-  },
+	{
+		key = "n",
+		mods = "LEADER",
+		action = wezterm.action.ActivateTabRelative(1),
+	},
+	{
+		key = "p",
+		mods = "LEADER",
+		action = wezterm.action.ActivateTabRelative(-1),
+	},
+	{
+		key = "h",
+		mods = "LEADER",
+		action = wezterm.action.ActivatePaneDirection("Left"),
+	},
+	{
+		key = "l",
+		mods = "LEADER",
+		action = wezterm.action.ActivatePaneDirection("Right"),
+	},
+	{
+		key = "k",
+		mods = "LEADER",
+		action = wezterm.action.ActivatePaneDirection("Up"),
+	},
+	{
+		key = "j",
+		mods = "LEADER",
+		action = wezterm.action.ActivatePaneDirection("Down"),
+	},
+	{
+		key = "-",
+		mods = "LEADER",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "|",
+		mods = "LEADER|SHIFT",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
+	{
+		key = "a",
+		mods = "LEADER|CTRL",
+		action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }),
+	},
 }
 
 -- and finally, return the configuration to wezterm
