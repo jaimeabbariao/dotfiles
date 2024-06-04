@@ -67,7 +67,7 @@ config.color_scheme = "Solarized Osaka"
 -- timeout_milliseconds defaults to 1000 and can be omitted
 -- config.color_scheme = 'Moonfly'
 
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "e", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
 	{
 		key = "n",
