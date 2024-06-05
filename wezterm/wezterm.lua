@@ -32,27 +32,29 @@ config.line_height = 1.2
 config.window_background_opacity = 1.0
 
 -- Solarized Osaka
-local custom = wezterm.color.get_builtin_schemes()["Solarized Dark - Patched"]
-custom.background = "#00141A"
-custom.foreground = "#FFF"
-custom.tab_bar = {
-	background = "#00141A",
-	active_tab = {
-		bg_color = "#063642",
-		fg_color = "#FFF",
-	},
-	inactive_tab = {
-		bg_color = "#00141A",
-		fg_color = "#FFF",
-	},
-	new_tab = {
-		bg_color = "#002B36",
-		fg_color = "#EEE8D5",
-	},
-}
+-- local custom = wezterm.color.get_builtin_schemes()["Solarized Dark - Patched"]
+-- local custom = wezterm.color.get_builtin_schemes()["Modus Operandi (Gogh)"]
+-- config.color_scheme = "Modus Operandi (Gogh)"
+-- custom.background = "#00141A"
+-- custom.foreground = "#FFF"
+-- custom.tab_bar = {
+-- 	background = "#00141A",
+-- 	active_tab = {
+-- 		bg_color = "#063642",
+-- 		fg_color = "#FFF",
+-- 	},
+-- 	inactive_tab = {
+-- 		bg_color = "#00141A",
+-- 		fg_color = "#FFF",
+-- 	},
+-- 	new_tab = {
+-- 		bg_color = "#002B36",
+-- 		fg_color = "#EEE8D5",
+-- 	},
+-- }
 
-config.color_schemes = { ["Solarized Osaka"] = custom }
-config.color_scheme = "Solarized Osaka"
+-- config.color_schemes = { ["Modus Operandi Mine"] = custom }
+-- config.color_scheme = "Modus Operandi Mine"
 
 -- local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
 -- custom.background = "#040404"
