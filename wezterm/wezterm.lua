@@ -8,7 +8,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
-config.font = wezterm.font_with_fallback({ "Berkeley Mono", "nonicons" })
+config.font = wezterm.font_with_fallback({ "MonoLisa", "nonicons" })
 config.font_size = 14
 config.freetype_load_flags = "NO_HINTING"
 config.enable_scroll_bar = false
@@ -69,7 +69,7 @@ config.inactive_pane_hsb = {
 -- config.color_scheme = "OLEDppuccin"
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "e", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
 	{
 		key = "n",
@@ -113,9 +113,9 @@ config.keys = {
 	},
 	-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
 	{
-		key = "a",
+		key = "e",
 		mods = "LEADER|CTRL",
-		action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }),
+		action = wezterm.action.SendKey({ key = "e", mods = "CTRL" }),
 	},
 }
 
