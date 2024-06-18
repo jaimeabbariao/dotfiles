@@ -21,7 +21,7 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
 config.line_height = 1.4
-config.window_background_opacity = 0.85
+config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
 
 config.color_schemes = { ['Solarized Osaka'] = solarized_osaka }
