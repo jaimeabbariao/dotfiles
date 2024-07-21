@@ -20,7 +20,7 @@ config.window_padding = {
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
-config.line_height = 1.5
+config.line_height = 1.2
 -- config.window_background_opacity = 0.9
 -- config.macos_window_background_blur = 20
 
