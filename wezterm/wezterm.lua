@@ -25,7 +25,7 @@ config.line_height = 1.5
 -- config.macos_window_background_blur = 20
 
 config.color_schemes = { ['Solarized Osaka'] = solarized_osaka }
-config.color_scheme = 'zenbones_dark'
+config.color_scheme = 'Solarized Osaka'
 
 config.inactive_pane_hsb = {
   saturation = 1.0,

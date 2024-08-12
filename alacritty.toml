@@ -1,21 +1,20 @@
 [font]
 size = 14.0
-offset.y = 3
 
 [font.bold]
-family = "MonoLisa Nerd Font"
+family = "Berkeley Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "MonoLisa Nerd Font"
+family = "Berkeley Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "MonoLisa Nerd Font"
+family = "Berkeley Mono"
 style = "Italic"
 
 [font.normal]
-family = "MonoLisa Nerd Font"
+family = "Berkeley Mono"
 style = "Regular"
 
 [shell]
