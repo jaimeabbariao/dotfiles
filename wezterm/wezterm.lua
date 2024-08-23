@@ -8,7 +8,7 @@ local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 config.font = wezterm.font_with_fallback { 'MonoLisa', 'nonicons' }
-config.font_size = 14
+config.font_size = 13
 config.freetype_load_flags = 'NO_HINTING'
 config.enable_scroll_bar = false
 config.window_padding = {
@@ -25,7 +25,7 @@ config.line_height = 1.4
 -- config.macos_window_background_blur = 20
 
 config.color_schemes = { ['Solarized Osaka'] = solarized_osaka }
-config.color_scheme = 'Tokyo Night Storm'
+config.color_scheme = 'Modus-Vivendi'
 
 config.inactive_pane_hsb = {
   saturation = 1.0,
