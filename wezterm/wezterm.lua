@@ -25,7 +25,7 @@ config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
 
 config.color_schemes = { ['Solarized Osaka'] = solarized_osaka }
-config.color_scheme = 'Modus-Vivendi'
+config.color_scheme = 'Solarized Osaka'
 
 config.inactive_pane_hsb = {
   saturation = 1.0,
