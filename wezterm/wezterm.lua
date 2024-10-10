@@ -8,8 +8,8 @@ local solarized_osaka = require('lua/solarized-osaka').custom
 local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
-config.font = wezterm.font_with_fallback { 'Berkeley Mono', 'nonicons' }
-config.font_size = 14
+config.font = wezterm.font_with_fallback { 'MonoLisa', 'nonicons' }
+config.font_size = 13
 config.freetype_load_flags = 'NO_HINTING'
 config.enable_scroll_bar = false
 config.window_padding = {
@@ -24,8 +24,9 @@ config.tab_max_width = 64
 config.line_height = 1.4
 
 config.color_schemes = { ['Solarized Osaka'] = solarized_osaka }
-config.colors = rose_pine_theme.colors()
-config.window_frame = rose_pine_theme.window_frame()
+config.color_scheme = 'Solarized Osaka'
+-- config.colors = rose_pine_theme.colors()
+-- config.window_frame = rose_pine_theme.window_frame()
 
 config.inactive_pane_hsb = {
   saturation = 1.0,

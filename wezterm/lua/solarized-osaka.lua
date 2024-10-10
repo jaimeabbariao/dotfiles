@@ -7,11 +7,11 @@ custom.foreground = '#FFF'
 custom.tab_bar = {
   background = '#00141A',
   active_tab = {
-    bg_color = '#063642',
+    bg_color = '#00141A',
     fg_color = '#FFF',
   },
   inactive_tab = {
-    bg_color = '#00141A',
+    bg_color = '#063642',
     fg_color = '#FFF',
   },
   new_tab = {
