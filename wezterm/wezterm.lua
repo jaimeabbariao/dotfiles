@@ -24,7 +24,7 @@ config.tab_max_width = 64
 config.line_height = 1.4
 
 config.color_schemes = { ['Solarized Osaka'] = solarized_osaka }
-config.color_scheme = 'Solarized Osaka'
+config.color_scheme = 'nightfox'
 -- config.colors = rose_pine_theme.colors()
 -- config.window_frame = rose_pine_theme.window_frame()
 
