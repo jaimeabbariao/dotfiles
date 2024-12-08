@@ -1,7 +1,6 @@
 // pane_frames false
 
-// theme "catppuccin-mocha"
-theme "dracula"
+theme "catppuccin-mocha"
 themes {
   noriko {
     bg "#dddddd"
@@ -57,7 +56,7 @@ themes {
   }
 }
 
-simplified_ui true
+// simplified_ui true
 
 keybinds {
   normal {}

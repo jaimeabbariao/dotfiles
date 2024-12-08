@@ -9,7 +9,7 @@ local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 config.font = wezterm.font_with_fallback { 'MonoLisa', 'nonicons' }
-config.font_size = 13
+config.font_size = 12
 config.freetype_load_flags = 'NO_HINTING'
 config.enable_scroll_bar = false
 config.window_padding = {
@@ -21,10 +21,10 @@ config.window_padding = {
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 64
-config.line_height = 1.4
+config.line_height = 1.3
 
 config.color_schemes = { ['Solarized Osaka'] = solarized_osaka }
-config.color_scheme = 'nightfox'
+config.color_scheme = 'carbonfox'
 -- config.colors = rose_pine_theme.colors()
 -- config.window_frame = rose_pine_theme.window_frame()
 
@@ -81,6 +81,26 @@ config.keys = {
     key = 'e',
     mods = 'LEADER|CTRL',
     action = wezterm.action.SendKey { key = 'e', mods = 'CTRL' },
+  },
+  {
+    key = 'H',
+    mods = 'LEADER',
+    action = wezterm.action.AdjustPaneSize { 'Left', 5 },
+  },
+  {
+    key = 'L',
+    mods = 'LEADER',
+    action = wezterm.action.AdjustPaneSize { 'Right', 5 },
+  },
+  {
+    key = 'K',
+    mods = 'LEADER',
+    action = wezterm.action.AdjustPaneSize { 'Up', 5 },
+  },
+  {
+    key = 'J',
+    mods = 'LEADER',
+    action = wezterm.action.AdjustPaneSize { 'Down', 5 },
   },
 }
 
