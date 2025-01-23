@@ -3,3 +3,6 @@
 -- Add any additional autocmds here
 
 vim.api.nvim_create_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
+
+-- Stop indent backwards when dot operator is used in Ruby
+vim.cmd([[autocmd FileType ruby setlocal indentkeys-=.]])
