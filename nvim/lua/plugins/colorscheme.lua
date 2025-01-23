@@ -206,8 +206,9 @@ return {
   },
   {
     "craftzdog/solarized-osaka.nvim",
-    lazy = false,
-    priority = 1000,
+    -- lazy = false,
+    -- priority = 1000,
+    enabled = false,
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
@@ -231,7 +232,41 @@ return {
       lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
     },
     config = function()
-      vim.cmd([[colorscheme solarized-osaka]])
+      -- vim.cmd([[colorscheme solarized-osaka]])
+    end,
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = function()
+      require("gruvbox").setup({
+        terminal_colors = true, -- add neovim terminal colors
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = {
+          strings = false,
+          emphasis = false,
+          comments = true,
+          operators = false,
+          folds = false,
+        },
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = false, -- invert background for search, diffs, statuslines and errors
+        contrast = "", -- can be "hard", "soft" or empty string
+        palette_overrides = {},
+        overrides = {
+          NormalFloat = { fg = "#ebdbb2", bg = "#282828" },
+        },
+        dim_inactive = false,
+        transparent_mode = false,
+      })
+
+      vim.cmd([[colorscheme gruvbox]])
     end,
   },
 }
