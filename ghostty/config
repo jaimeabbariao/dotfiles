@@ -2,7 +2,6 @@ theme = rose-pine-dark
 
 font-family = TX-02
 font-thicken = true
-font-feature = +liga
 font-size = 13
 
 adjust-cell-height = 15
