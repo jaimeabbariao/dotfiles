@@ -1,0 +1,4 @@
+customCommands:
+  - key: 'P'
+    context: 'graphite submit'
+    command: 'gt submit'
