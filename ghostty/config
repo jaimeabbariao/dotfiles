@@ -1,6 +1,7 @@
 theme = rose-pine-dark
 
 font-family = TX-02
+font-family = MonoLisa Nerd Font
 font-thicken = true
 font-size = 13
 
