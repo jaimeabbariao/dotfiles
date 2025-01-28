@@ -99,7 +99,7 @@ return {
           end,
         },
       },
-      extensions = { "neo-tree", "lazy", "fzf" },
+      extensions = { "neo-tree", "lazy" },
     }
     return opts
   end,
