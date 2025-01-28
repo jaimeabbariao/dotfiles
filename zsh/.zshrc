@@ -97,4 +97,5 @@ export ZELLIJ_AUTO_START="true"
 export ZELLIJ_AUTO_EXIT="true"
 
 eval "$(zellij setup --generate-auto-start zsh)"
-source /opt/homebrew/opt/spaceship/spaceship.zsh
+
+eval "$(starship init zsh)"
