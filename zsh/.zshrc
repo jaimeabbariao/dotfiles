@@ -6,7 +6,6 @@ plugins=(git z zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
-
 # Testing
 hello-world () {
   msg="hello, $1"
@@ -96,11 +95,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+export ZELLIJ_AUTO_START="true"
+export ZELLIJ_AUTO_EXIT="true"
 
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
-[[ ! -r '/Users/jabbariao/.opam/opam-init/init.zsh' ]] || source '/Users/jabbariao/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
-# END opam configuration
+eval "$(zellij setup --generate-auto-start zsh)"

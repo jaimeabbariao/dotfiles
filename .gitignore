@@ -1,0 +1,13 @@
+.DS_Store
+
+
+nvim/tt.*
+nvim/.tests
+nvim/doc/tags
+nvim/debug
+nvim/.repro
+nvim/foo.*
+nvim/*.log
+nvim/data
+
+zellij/zjstatus-releases
