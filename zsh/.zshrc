@@ -96,6 +96,6 @@ eval "$(pyenv init -)"
 export ZELLIJ_AUTO_START="true"
 export ZELLIJ_AUTO_EXIT="true"
 
-eval "$(zellij setup --generate-auto-start zsh)"
+# eval "$(zellij setup --generate-auto-start zsh)"
 
 eval "$(starship init zsh)"
