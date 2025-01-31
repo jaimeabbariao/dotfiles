@@ -24,6 +24,7 @@ return {
       options = {
         theme = "modus-vivendi",
         globalstatus = vim.o.laststatus == 3,
+        section_separators = { left = "", right = "" },
         disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
       },
       sections = {
