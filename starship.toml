@@ -1,23 +1,11 @@
 format = """
 $username\
 $directory\
-$git_branch\
-$git_status\
-$fill\
-$c\
-$elixir\
-$elm\
-$golang\
-$haskell\
-$java\
-$julia\
-$nodejs\
-$nim\
 $rust\
-$scala\
-$conda\
+$nodejs\
 $python\
-$time\n  \
+$git_branch\
+$git_status\n \
 [󱞪](fg:iris) \
 """
 
@@ -35,8 +23,8 @@ iris = '#c4a7e7'
 [directory]
 format = "[](fg:overlay)[ $path ]($style)[](fg:overlay) "
 style = "bg:overlay fg:pine"
-truncation_length = 3
-truncation_symbol = "…/"
+# truncation_length = 3
+# truncation_symbol = "…/"
 
 [directory.substitutions]
 Documents = "󰈙"
@@ -108,18 +96,6 @@ format = "[](fg:overlay)[$symbol$version]($style)[](fg:overlay) "
 disabled = false
 symbol = " "
 
-[haskell]
-style = "bg:overlay fg:pine"
-format = "[](fg:overlay)[$symbol$version]($style)[](fg:overlay) "
-disabled = false
-symbol = " "
-
-[java]
-style = "bg:overlay fg:pine"
-format = "[](fg:overlay)[$symbol$version]($style)[](fg:overlay) "
-disabled = false
-symbol = " "
-
 [julia]
 style = "bg:overlay fg:pine"
 format = "[](fg:overlay)[$symbol$version]($style)[](fg:overlay) "
@@ -142,7 +118,7 @@ symbol = "󰆥 "
 style = "bg:overlay fg:pine"
 format = "[](fg:overlay)[$symbol$version]($style)[](fg:overlay) "
 disabled = false
-symbol = ""
+symbol = " "
 
 [scala]
 style = "bg:overlay fg:pine"
@@ -152,7 +128,7 @@ symbol = " "
 
 [python]
 style = "bg:overlay fg:pine"
-format = "[](fg:overlay)[$symbol$version]($style)[](fg:overlay) "
+format = "[](fg:overlay)[$symbol$version $virtualenv]($style)[](fg:overlay) "
 disabled = false
 symbol = ' '
 

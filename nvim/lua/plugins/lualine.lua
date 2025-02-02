@@ -25,13 +25,15 @@ return {
         theme = "modus-vivendi",
         globalstatus = vim.o.laststatus == 3,
         section_separators = { left = "", right = "" },
+        component_separators = { left = "|", right = "|" },
         disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
       },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch" },
+        lualine_a = {},
+        lualine_b = {},
         lualine_c = {
-          -- LazyVim.lualine.root_dir({ icon = "" }),
+          { LazyVim.lualine.pretty_path({ relative = "root", length = 999 }) },
+          "branch",
           {
             "diagnostics",
             symbols = {
@@ -41,10 +43,6 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
-          { LazyVim.lualine.pretty_path({ relative = "root" }) },
-        },
-        lualine_x = {
-          Snacks.profiler.status(),
           {
             "diff",
             symbols = {
@@ -64,10 +62,11 @@ return {
             end,
           },
         },
+        lualine_x = {},
         lualine_y = {},
         lualine_z = {},
       },
-      extensions = { "neo-tree", "lazy" },
+      extensions = { "neo-tree", "lazy", "fzf" },
     }
     return opts
   end,
