@@ -19,6 +19,7 @@ return {
           javascriptreact = { "biome", "prettier" },
           javascript = { "biome", "prettier" },
           ruby = { "prettier" },
+          json = { "jq", "prettier" },
         },
         -- The options you set here will be merged with the builtin formatters.
         -- You can also define any custom formatters here.
@@ -30,6 +31,10 @@ return {
           },
           prettier = {
             require_cwd = true,
+          },
+          jq = {
+            require_cwd = true,
+            prepend_args = { "to_entries | sort_by(.key) | from_entries" },
           },
           -- # Example of using dprint only when a dprint.json file is present
           -- dprint = {
