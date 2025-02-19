@@ -114,7 +114,7 @@ return {
           floats = "dark", -- style for floating windows
         },
         sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-        day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+        day_brightness = 0.5, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
         hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
         dim_inactive = false, -- dims inactive windows
         lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
@@ -122,14 +122,9 @@ return {
         --- function will be called with a ColorScheme table
         ---@param colors ColorScheme
         on_colors = function(colors)
-          -- local base03 = "#002b36"
-          -- local base02 = "#073642"
-          -- colors.bg = base03
-          -- colors.bg_float = base03
-          -- colors.bg_highlight = base03
-          -- colors.bg_popup = base02
-          -- colors.bg_sidebar = base02
-          -- colors.bg_statusline = base03
+          -- colors.bg = colors.base03
+          -- colors.bg_float = colors.base03
+          colors.bg_statusline = colors.base02
         end,
       })
       vim.cmd([[colorscheme solarized-osaka]])
