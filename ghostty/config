@@ -1,6 +1,4 @@
-#theme = Builtin Solarized Dark
-# theme = solarized_osaka
-theme = catppuccin-macchiato
+theme = tokyonight-day
 
 font-family = TX-02
 font-size = 12
