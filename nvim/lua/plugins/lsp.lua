@@ -5,18 +5,13 @@ return {
       inlay_hints = {
         enabled = false,
       },
-      servers = {
-        vtsls = {
-          settings = {
-            typescript = {
-              tsserver = {
-                nodePath = "node",
-                maxTsServerMemory = 8192,
-              },
-            },
-          },
-        },
-      },
+    },
+  },
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {
+      tsserver_max_memory = 8192,
     },
   },
 }
