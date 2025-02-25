@@ -1,10 +1,10 @@
-theme = dayfox
+theme = solarized_osaka
 
 font-family = TX-02
 font-size = 13
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
+font-feature = +calt
+font-feature = +liga
+font-feature = +dlig
 font-thicken = true
 
 adjust-cell-height = 12
@@ -22,6 +22,9 @@ copy-on-select = true
 
 macos-titlebar-style = tabs
 macos-option-as-alt = true
+
+background-opacity = 0.95
+background-blur = true
 
 window-padding-x = 0
 window-padding-y = 0
