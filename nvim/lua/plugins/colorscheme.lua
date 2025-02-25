@@ -1,11 +1,19 @@
 return {
+  -- {
+  --   "craftzdog/solarized-osaka.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {},
+  --   config = function()
+  --     vim.cmd([[colorscheme solarized-osaka]])
+  --   end,
+  -- },
   {
-    "craftzdog/solarized-osaka.nvim",
+    "Mofiqul/vscode.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
     config = function()
-      vim.cmd([[colorscheme solarized-osaka]])
+      vim.cmd([[colorscheme vscode]])
     end,
   },
 }
