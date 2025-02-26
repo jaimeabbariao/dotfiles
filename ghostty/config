@@ -1,4 +1,4 @@
-theme = 0x96f
+theme = OneHalfDark
 
 font-family = TX-02
 font-size = 13
@@ -7,7 +7,7 @@ font-feature = +liga
 font-feature = +dlig
 font-thicken = true
 
-adjust-cell-height = 12
+adjust-cell-height = 18
 
 cursor-style = block
 cursor-style-blink = true
