@@ -1,4 +1,4 @@
-theme = solarized_osaka
+theme = Dark Pastel
 
 font-family = TX-02
 font-size = 13
@@ -23,7 +23,7 @@ copy-on-select = true
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 
-background-opacity = 0.95
+background-opacity = 0.9
 background-blur = true
 
 window-padding-x = 0
