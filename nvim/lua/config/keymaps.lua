@@ -5,3 +5,5 @@
 if vim.g.vscode then
   vim.keymap.del("n", "<leader>e")
 end
+
+vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>")

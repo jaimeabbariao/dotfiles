@@ -1,13 +1,20 @@
-theme = cobalt
+#theme = cobalt
+#theme = dark:catppuccin-mocha,light:catppuccin-latte
+#theme = Builtin Solarized Light
+# theme = modus_vivendi
+# theme = tokyonight-storm
+# theme = rose-pine
+theme = solarized_osaka
 
-font-family = TX-02
-font-size = 13
+# font-family = TX-02
+font-family = MonoLisa
+font-size = 12
 font-feature = +calt
 font-feature = +liga
 font-feature = +dlig
 font-thicken = true
 
-adjust-cell-height = 18
+# adjust-cell-height = 18
 
 cursor-style = block
 cursor-style-blink = true
@@ -23,8 +30,8 @@ copy-on-select = true
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 
-background-opacity = 0.97
-background-blur = true
+# background-opacity = 0.97
+# background-blur = true
 
 window-padding-x = 0
 window-padding-y = 0
