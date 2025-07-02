@@ -1,4 +1,5 @@
-theme = vague
+theme = vscode
+
 font-family = TX-02 
 font-size = 12
 font-feature = -calt
@@ -52,4 +53,3 @@ keybind = ctrl+e>shift+j=resize_split:down,50
 keybind = ctrl+e>shift+k=resize_split:up,50
 
 keybind = ctrl+e>equal=equalize_splits
-keybind = shift+enter=text:\n
