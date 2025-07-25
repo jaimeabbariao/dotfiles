@@ -4,6 +4,17 @@
 
 vim.api.nvim_create_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.orig", "MERGE_*", "COMMIT_EDITMSG" },
+  callback = function()
+    vim.diagnostic.enable(false)
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    for _, client in ipairs(clients) do
+      vim.lsp.buf_detach_client(0, client.id)
+    end
+  end,
+})
+
 -- Stop indent backwards when dot operator is used in Ruby
 vim.cmd([[autocmd FileType ruby setlocal indentkeys-=.]])
 
@@ -17,6 +28,3 @@ function _G.set_terminal_keymaps()
   vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
   vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
