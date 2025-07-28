@@ -1,14 +1,14 @@
-theme = kanagawa-paper-ink
+theme = vague
 
-font-family = TX-02 
-font-size = 12
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
+font-family = ProggyClean Nerd Font
+font-size = 18
+font-feature = +calt
+font-feature = +liga
+font-feature = +dlig
 font-thicken = true
 
-adjust-cell-height = 15
-adjust-cursor-height = 15
+adjust-cell-height = 10
+adjust-cursor-height = 10
 
 alpha-blending = linear-corrected
 
@@ -26,8 +26,8 @@ copy-on-select = true
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 
-#background-opacity = 0.9
-#background-blur-radius = 40
+# background-opacity = 0.9
+# background-blur-radius = 40
 
 window-padding-x = 0
 window-padding-y = 0

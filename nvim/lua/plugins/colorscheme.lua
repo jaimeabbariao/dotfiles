@@ -1,10 +1,14 @@
 return {
+  -- Lazy
   {
-    "thesimonho/kanagawa-paper.nvim",
-    lazy = false,
-    priority = 1000,
+    "vague2k/vague.nvim",
     config = function()
-      vim.cmd.colorscheme("kanagawa-paper")
+      -- NOTE: you do not need to call setup if you don't want to.
+      require("vague").setup({
+        -- optional configuration here
+      })
+
+      vim.cmd("colorscheme vague")
     end,
   },
 }
