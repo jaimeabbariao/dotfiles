@@ -1,13 +1,13 @@
 theme = vague
 
-font-family = ProggyClean Nerd Font
-font-size = 18
+font-family = MonoLisa
+font-size = 16
 font-feature = +calt
 font-feature = +liga
 font-feature = +dlig
 font-thicken = true
 
-adjust-cell-height = 10
+adjust-cell-height = 5
 adjust-cursor-height = 10
 
 alpha-blending = linear-corrected
