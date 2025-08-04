@@ -1,4 +1,4 @@
-theme = vscode
+theme = catppuccin-mocha
 
 font-family = TX-02
 font-feature = +calt
