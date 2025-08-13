@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
@@ -49,6 +50,33 @@ config.keys = {
 		action = wezterm.action.ActivatePaneDirection("Down"),
 	},
 }
+
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
+config.tab_max_width = 100
+
+tabline.setup({
+	options = {
+		icons_enabled = true,
+		theme = "GruvboxDark",
+		tabs_enabled = true,
+		theme_overrides = {},
+		section_separators = "",
+		component_separators = "",
+		tab_separators = "",
+	},
+	sections = {
+		tabline_a = { "" },
+		tabline_b = { "" },
+		tabline_c = { "" },
+		tab_active = {},
+		tab_inactive = { "index", { "process", padding = { left = 0, right = 1 } } },
+		tabline_x = { "ram", "cpu" },
+		tabline_y = { "battery" },
+		tabline_z = { "datetime" },
+	},
+	extensions = {},
+})
 
 -- Finally, return the configuration to wezterm:
 return config
