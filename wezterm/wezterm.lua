@@ -71,12 +71,9 @@ tabline.setup({
 		tabline_c = { "" },
 		tab_active = {
 			"index",
-			{ "parent", padding = 0 },
-			"/",
 			{ "cwd", padding = { left = 0, right = 1 } },
-			{ "zoomed", padding = 0 },
 		},
-		tab_inactive = { "index", { "process", padding = { left = 0, right = 1 } } },
+		tab_inactive = { "index", { "cwd", padding = { left = 0, right = 1 } } },
 		tabline_x = { "ram", "cpu" },
 		tabline_y = { "battery" },
 		tabline_z = { "datetime" },
