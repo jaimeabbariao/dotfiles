@@ -81,5 +81,7 @@ tabline.setup({
 	extensions = {},
 })
 
+config.window_decorations = "NONE"
+
 -- Finally, return the configuration to wezterm:
 return config
