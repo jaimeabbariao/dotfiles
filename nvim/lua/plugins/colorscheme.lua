@@ -14,9 +14,9 @@ return {
   },
   {
     "Mofiqul/vscode.nvim",
-    -- enabled = false,
-    lazy = false,
-    priority = 1000,
+    enabled = false,
+    -- lazy = false,
+    -- priority = 1000,
     config = function()
       -- -- Lua:
       -- -- For dark theme (neovim's default)
@@ -57,7 +57,7 @@ return {
       -- require('vscode').load()
 
       -- load the theme without affecting devicon colors.
-      vim.cmd.colorscheme("vscode")
+      -- vim.cmd.colorscheme("vscode")
     end,
   },
   {
@@ -143,6 +143,14 @@ return {
         transparent_mode = false,
       })
       -- vim.cmd("colorscheme gruvbox")
+    end,
+  },
+  {
+    "ishan9299/modus-theme-vim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme modus-vivendi]])
     end,
   },
 }

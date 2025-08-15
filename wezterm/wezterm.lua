@@ -15,7 +15,8 @@ config.initial_rows = 28
 -- or, changing the font size and color scheme.
 config.font_size = 12
 
-config.color_scheme = "Vs Code Dark+ (Gogh)"
+-- config.color_scheme = "Vs Code Dark+ (Gogh)"
+config.color_scheme = "Modus-Vivendi"
 
 config.leader = { key = "e", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -58,7 +59,7 @@ config.tab_max_width = 100
 tabline.setup({
 	options = {
 		icons_enabled = true,
-		theme = "GruvboxDark",
+		theme = "Modus-Vivendi",
 		tabs_enabled = true,
 		theme_overrides = {},
 		section_separators = "",
@@ -81,7 +82,7 @@ tabline.setup({
 	extensions = {},
 })
 
-config.window_decorations = "NONE"
+config.window_decorations = "RESIZE"
 
 -- Finally, return the configuration to wezterm:
 return config
