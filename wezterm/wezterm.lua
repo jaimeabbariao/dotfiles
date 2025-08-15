@@ -16,7 +16,7 @@ config.initial_rows = 28
 config.font_size = 12
 
 -- config.color_scheme = "Vs Code Dark+ (Gogh)"
-config.color_scheme = "Modus-Vivendi"
+config.color_scheme = "tokyonight_moon"
 
 config.leader = { key = "e", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -59,7 +59,6 @@ config.tab_max_width = 100
 tabline.setup({
 	options = {
 		icons_enabled = true,
-		theme = "Modus-Vivendi",
 		tabs_enabled = true,
 		theme_overrides = {},
 		section_separators = "",
