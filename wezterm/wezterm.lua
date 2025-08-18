@@ -16,7 +16,7 @@ config.initial_rows = 28
 config.font_size = 12
 
 -- config.color_scheme = "Vs Code Dark+ (Gogh)"
-config.color_scheme = "tokyonight_moon"
+config.color_scheme = "carbonfox"
 
 config.leader = { key = "e", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -60,6 +60,7 @@ tabline.setup({
 	options = {
 		icons_enabled = true,
 		tabs_enabled = true,
+		theme = "carbonfox",
 		theme_overrides = {},
 		section_separators = "",
 		component_separators = "",
@@ -82,6 +83,14 @@ tabline.setup({
 })
 
 config.window_decorations = "RESIZE"
+
+for i = 1, 8 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "CTRL|ALT",
+		action = wezterm.action.MoveTab(i - 1),
+	})
+end
 
 -- Finally, return the configuration to wezterm:
 return config
