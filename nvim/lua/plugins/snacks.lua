@@ -17,7 +17,16 @@ return {
       scroll = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
-      picker = { enabled = false },
+      picker = {
+        layout = {
+          fullscreen = true,
+        },
+        sources = {
+          explorer = {
+            auto_close = true,
+          },
+        },
+      },
       scope = { enabled = true },
       animate = { enabled = false },
       image = { enabled = false },

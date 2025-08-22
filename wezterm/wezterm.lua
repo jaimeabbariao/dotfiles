@@ -7,7 +7,7 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices.
 
-config.font = wezterm.font("Monaspace Krypton")
+config.font = wezterm.font("MonoLisa")
 
 -- For example, changing the initial geometry for new windows:
 config.initial_cols = 120
@@ -81,8 +81,6 @@ tabline.setup({
 	},
 	extensions = {},
 })
-
-config.window_decorations = "RESIZE"
 
 for i = 1, 8 do
 	table.insert(config.keys, {
