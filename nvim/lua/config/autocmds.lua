@@ -3,6 +3,7 @@
 -- Add any additional autocmds here
 
 vim.api.nvim_create_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
+vim.api.nvim_create_user_command("CopyAbsPath", "call setreg('+', expand('%:p'))", {})
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.orig", "MERGE_*", "COMMIT_EDITMSG" },

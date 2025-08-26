@@ -7,7 +7,9 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices.
 
-config.font = wezterm.font("Monaspace Krypton")
+-- config.font = wezterm.font("Monaspace Krypton")
+config.font = wezterm.font("TX-02")
+-- config.font = wezterm.font("MonoLisa")
 
 config.font_size = 13
 
