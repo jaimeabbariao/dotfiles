@@ -8,13 +8,20 @@ local config = wezterm.config_builder()
 -- This is where you actually apply your config choices.
 
 -- config.font = wezterm.font("Monaspace Krypton")
-config.font = wezterm.font_with_fallback({ "TX-02", "Noto Color Emoji" })
+-- config.font = wezterm.font_with_fallback({ "Monaspace Krypton", "Noto Color Emoji" })
+-- config.font = wezterm.font_with_fallback({ "TX-02", "Noto Color Emoji" })
+-- config.font = wezterm.font_with_fallback({ "MonoLisa", "Noto Color Emoji" })
+-- config.font = wezterm.font_with_fallback({ { family = "Operator Mono", weight = "Light" }, "Noto Color Emoji" })
 -- config.font = wezterm.font("MonoLisa")
+-- config.font = wezterm.font_with_fallback({ "Gintronic", "Noto Color Emoji" })
 
-config.font_size = 13
+config.font_size = 14
+-- config.cell_width = 0.9
 
 -- config.color_scheme = "Vs Code Dark+ (Gogh)"
 config.color_scheme = "nightfox"
+
+config.freetype_load_flags = "NO_HINTING"
 
 config.leader = { key = "e", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
