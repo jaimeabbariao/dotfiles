@@ -14,12 +14,11 @@ local config = wezterm.config_builder()
 -- config.font = wezterm.font_with_fallback({ { family = "Operator Mono", weight = "Light" }, "Noto Color Emoji" })
 -- config.font = wezterm.font("MonoLisa")
 -- config.font = wezterm.font_with_fallback({ "Gintronic", "Noto Color Emoji" })
+config.font = wezterm.font_with_fallback({ "mononoki", "Noto Color Emoji" })
 
 config.font_size = 14
--- config.cell_width = 0.9
 
--- config.color_scheme = "Vs Code Dark+ (Gogh)"
-config.color_scheme = "nightfox"
+config.color_scheme = "dawnfox"
 
 config.freetype_load_flags = "NO_HINTING"
 
@@ -65,7 +64,7 @@ tabline.setup({
 	options = {
 		icons_enabled = true,
 		tabs_enabled = true,
-		theme = "carbonfox",
+		theme = "Modus-Operandi",
 		theme_overrides = {},
 		section_separators = "",
 		component_separators = "",
