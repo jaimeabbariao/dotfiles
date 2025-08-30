@@ -16,9 +16,9 @@ local config = wezterm.config_builder()
 -- config.font = wezterm.font_with_fallback({ "Gintronic", "Noto Color Emoji" })
 config.font = wezterm.font_with_fallback({ "mononoki", "Noto Color Emoji" })
 
-config.font_size = 14
+config.font_size = 16
 
-config.color_scheme = "dawnfox"
+config.color_scheme = "Gruvbox dark, hard (base16)"
 
 config.freetype_load_flags = "NO_HINTING"
 
@@ -64,7 +64,7 @@ tabline.setup({
 	options = {
 		icons_enabled = true,
 		tabs_enabled = true,
-		theme = "Modus-Operandi",
+		theme = "Gruvbox dark, hard (base16)",
 		theme_overrides = {},
 		section_separators = "",
 		component_separators = "",
