@@ -1,8 +1,9 @@
 return {
   {
     "miikanissi/modus-themes.nvim",
-    priority = 1000,
-    lazy = false,
+    enabled = false,
+    -- priority = 1000,
+    -- lazy = false,
     config = function()
       require("modus-themes").setup({
         -- Theme comes in two styles `modus_operandi` and `modus_vivendi`
@@ -37,7 +38,7 @@ return {
         on_highlights = function(highlights, colors) end,
       })
 
-      vim.cmd("colorscheme modus_operandi") -- or 'modus-operandi' for light mode
+      -- vim.cmd("colorscheme modus_operandi") -- or 'modus-operandi' for light mode
     end,
   },
   {
@@ -72,7 +73,7 @@ return {
       })
 
       -- setup must be called before loading
-      -- vim.cmd("colorscheme duskfox")
+      vim.cmd("colorscheme carbonfox")
     end,
   }, -- lazy
 }
