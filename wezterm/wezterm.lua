@@ -26,7 +26,7 @@ config.window_padding = {
 	bottom = 0,
 }
 
-config.color_scheme = "Vs Code Dark+ (Gogh)"
+config.color_scheme = "nordic"
 -- config.color_scheme = "Vs Code Light+ (Gogh)"
 
 config.freetype_load_flags = "NO_HINTING"
