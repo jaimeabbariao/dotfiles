@@ -26,7 +26,7 @@ copy-on-select = true
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 
-background-opacity = 0.9
+background-opacity = 0.85
 background-blur-radius = 30
 
 window-padding-x = 0
@@ -37,20 +37,20 @@ clipboard-read = allow
 clipboard-write = allow
 
 # Keybinds
-keybind = ctrl+e>n=new_split:right
-keybind = ctrl+e>shift+n=new_split:left
-keybind = ctrl+e>d=new_split:down
-keybind = ctrl+e>shift+d=new_split:up
+keybind = ctrl+s>n=new_split:right
+keybind = ctrl+s>shift+n=new_split:left
+keybind = ctrl+s>d=new_split:down
+keybind = ctrl+s>shift+d=new_split:up
 
-keybind = ctrl+e>l=goto_split:right
-keybind = ctrl+e>h=goto_split:left
-keybind = ctrl+e>j=goto_split:bottom
-keybind = ctrl+e>k=goto_split:top
+keybind = ctrl+s>l=goto_split:right
+keybind = ctrl+s>h=goto_split:left
+keybind = ctrl+s>j=goto_split:bottom
+keybind = ctrl+s>k=goto_split:top
 
-keybind = ctrl+e>shift+l=resize_split:right,50
-keybind = ctrl+e>shift+h=resize_split:left,50
-keybind = ctrl+e>shift+j=resize_split:down,50
-keybind = ctrl+e>shift+k=resize_split:up,50
+keybind = ctrl+s>shift+l=resize_split:right,50
+keybind = ctrl+s>shift+h=resize_split:left,50
+keybind = ctrl+s>shift+j=resize_split:down,50
+keybind = ctrl+s>shift+k=resize_split:up,50
 
-keybind = ctrl+e>equal=equalize_splits
+keybind = ctrl+s>equal=equalize_splits
 keybind = shift+enter=text:\n
