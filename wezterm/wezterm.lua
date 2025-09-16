@@ -5,19 +5,17 @@ local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabl
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices.
-
--- config.font = wezterm.font("Monaspace Krypton")
--- config.font = wezterm.font_with_fallback({ "Monaspace Krypton", "Noto Color Emoji" })
--- config.font = wezterm.font_with_fallback({ "TX-02", "Noto Color Emoji" })
--- config.font = wezterm.font_with_fallback({ "MonoLisa", "Noto Color Emoji" })
--- config.font = wezterm.font_with_fallback({ { family = "Operator Mono", weight = "Light" }, "Noto Color Emoji" })
--- config.font = wezterm.font("MonoLisa")
--- config.font = wezterm.font_with_fallback({ "Gintronic", "Noto Color Emoji" })
 config.font = wezterm.font_with_fallback({ "TX-02", "Noto Color Emoji" })
 
 config.font_size = 13
 config.line_height = 1.2
+
+config.window_background_opacity = 0.9
+config.macos_window_background_blur = 20
+
+config.max_fps = 144
+config.animation_fps = 60
+config.cursor_blink_rate = 250
 
 config.window_padding = {
 	left = 0,
@@ -26,9 +24,7 @@ config.window_padding = {
 	bottom = 0,
 }
 
-config.color_scheme = "nordic"
--- config.color_scheme = "Vs Code Light+ (Gogh)"
-
+config.color_scheme = "cyberdream"
 config.freetype_load_flags = "NO_HINTING"
 
 config.leader = { key = "s", mods = "CTRL", timeout_milliseconds = 1000 }
