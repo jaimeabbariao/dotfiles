@@ -1,4 +1,4 @@
-theme = cyberdream
+theme = solarized_osaka
 
 font-family = TX-02
 font-family = Noto Color Emoji
@@ -26,11 +26,11 @@ copy-on-select = true
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 
-background-opacity = 0.85
+background-opacity = 0.93
 background-blur-radius = 30
 
-window-padding-x = 0
-window-padding-y = 0
+#window-padding-x = 0
+#window-padding-y = 0
 window-padding-balance = true
 
 clipboard-read = allow
