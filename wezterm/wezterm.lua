@@ -23,8 +23,8 @@ config.window_padding = {
 	bottom = 0,
 }
 
-config.color_scheme = "Catppuccin Mocha (Gogh)"
-config.freetype_load_flags = "NO_HINTING"
+config.color_scheme = "carbonfox"
+-- config.freetype_load_flags = "NO_HINTING"
 
 config.leader = { key = "s", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
