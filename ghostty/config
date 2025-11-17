@@ -1,5 +1,5 @@
-theme = cobalt
-font-family = Monaspace Neon
+theme = Builtin Solarized Dark
+font-family = TX-02
 font-family = Noto Color Emoji
 font-feature = +calt
 font-feature = +liga
