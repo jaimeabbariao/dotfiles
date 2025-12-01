@@ -1,29 +1,8 @@
 return {
   {
-    "tiesen243/vercel.nvim",
-    enabled = false,
+    "EdenEast/nightfox.nvim",
     -- lazy = false,
     -- priority = 1000,
-    config = function()
-      require("vercel").setup({
-        transparent = true, -- Boolean: Sets the background to transparent (Default: false)
-        italics = {
-          comments = false, -- Boolean: Italicizes comments (Default: true)
-          keywords = false, -- Boolean: Italicizes keywords (Default: true)
-          functions = false, -- Boolean: Italicizes functions (Default: true)
-          strings = false, -- Boolean: Italicizes strings (Default: true)
-          variables = false, -- Boolean: Italicizes variables (Default: true)
-          bufferline = false, -- Boolean: Italicizes bufferline (Default: false)
-        },
-        overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
-      })
-
-      -- This must be called before setting the colorscheme, otherwise it will always default to light mode
-      -- vim.cmd.colorscheme("vercel")
-    end,
-  },
-  {
-    "EdenEast/nightfox.nvim",
     enabled = false,
     config = function()
       -- Default options
@@ -32,7 +11,7 @@ return {
           -- Compiled file's destination location
           compile_path = vim.fn.stdpath("cache") .. "/nightfox",
           compile_file_suffix = "_compiled", -- Compiled file suffix
-          transparent = false, -- Disable setting background
+          transparent = true, -- Disable setting background
           terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
           dim_inactive = false, -- Non focused panes set to alternative background
           module_default = true, -- Default enable value for modules
@@ -72,18 +51,18 @@ return {
       })
 
       -- setup must be called before loading
-      -- vim.cmd("colorscheme carbonfox")
+      -- vim.cmd("colorscheme dayfox")
     end,
   }, -- lazy
   {
     "Mofiqul/vscode.nvim",
-    enabled = false,
+    -- enabled = false,
     lazy = false,
     config = function()
       local c = require("vscode.colors").get_colors()
       require("vscode").setup({
         -- Alternatively set style in setup
-        -- style = 'light'
+        style = "light",
 
         -- Enable transparent background
         transparent = false,
@@ -118,7 +97,7 @@ return {
       -- require('vscode').load()
 
       -- load the theme without affecting devicon colors.
-      -- vim.cmd.colorscheme("vscode")
+      vim.cmd.colorscheme("vscode")
     end,
   },
   {
@@ -162,57 +141,5 @@ return {
       })
       -- vim.cmd.colorscheme("solarized-osaka")
     end,
-  },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
-      light_style = "day", -- The theme is used when the background is set to light
-      transparent = true, -- Enable this to disable setting the background color
-      terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-      styles = {
-        -- Style to be applied to different syntax groups
-        -- Value is any valid attr-list value for `:help nvim_set_hl`
-        comments = { italic = true },
-        keywords = { italic = true },
-        functions = {},
-        variables = {},
-        -- Background styles. Can be "dark", "transparent" or "normal"
-        sidebars = "transparent", -- style for sidebars, see below
-        floats = "transparent", -- style for floating windows
-      },
-      day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-      dim_inactive = false, -- dims inactive windows
-      lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
-
-      --- You can override specific color groups to use other groups or a hex color
-      --- function will be called with a ColorScheme table
-      ---@param colors ColorScheme
-      on_colors = function(colors) end,
-
-      --- You can override specific highlights to use other groups or a hex color
-      --- function will be called with a Highlights and ColorScheme table
-      ---@param highlights tokyonight.Highlights
-      ---@param colors ColorScheme
-      on_highlights = function(highlights, colors) end,
-
-      cache = true, -- When set to true, the theme will be cached for better performance
-
-      ---@type table<string, boolean|{enabled:boolean}>
-      plugins = {
-        -- enable all plugins when not using lazy.nvim
-        -- set to false to manually enable/disable plugins
-        all = package.loaded.lazy == nil,
-        -- uses your plugin manager to automatically enable needed plugins
-        -- currently only lazy.nvim is supported
-        auto = true,
-        -- add any plugins here that you want to enable
-        -- for all possible plugins, see:
-        --   * https://github.com/folke/tokyonight.nvim/tree/main/lua/tokyonight/groups
-        -- telescope = true,
-      },
-    },
   },
 }
