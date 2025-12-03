@@ -1,4 +1,4 @@
-theme = modus_operandi
+theme = no-clown-fiesta
 font-family = TX-02
 font-family = Noto Color Emoji
 font-feature = +calt
@@ -26,8 +26,8 @@ copy-on-select = true
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 
-background-opacity = 0.93
-background-blur-radius = 30
+#background-opacity = 0.93
+#background-blur-radius = 30
 
 #window-padding-x = 0
 #window-padding-y = 0
