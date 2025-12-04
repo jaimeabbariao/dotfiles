@@ -14,9 +14,6 @@ live_config_reload = true  # Default: true
 # Offer IPC using alacritty msg (unix only)
 ipc_socket = true  # Default: true
 
-# [terminal.shell]
-# program = "/opt/homebrew/bin/zellij"
-# args = ["attach", "--index", "0"]
 
 #######
 # ENV #
@@ -104,7 +101,7 @@ italic = { style = "Italic" }  # Inherits family from normal, Default style: Ita
 bold_italic = { style = "Bold Italic" }  # Inherits family from normal, Default style: Bold Italic
 
 # Font size in points
-size = 11.25  # Default: 11.25
+size = 12  # Default: 11.25
 
 # Offset is extra space around each character
 offset = { x = 0, y = 0 }  # Default: x = 0, y = 0
@@ -130,7 +127,7 @@ draw_bold_text_with_bright_colors = false  # Default
 # Primary colors
 [colors.primary]
 foreground = "#d8d8d8"  # Default
-background = "#181818"  # Default
+background = "#151515"  # Default
 dim_foreground = "#828482"  # Default
 bright_foreground = "None"  # Default
 
@@ -280,7 +277,7 @@ osc52 = "CopyPaste"  # Default: "OnlyCopy"
 [mouse]
 
 # When true, the cursor is temporarily hidden when typing
-hide_when_typing = true  # Default: false
+hide_when_typing = false  # Default: false
 
 # Mouse bindings (actual bindings need to be defined as per user preference)
 # Example: bindings = [{ mouse = "Left", action = "Paste" }]
