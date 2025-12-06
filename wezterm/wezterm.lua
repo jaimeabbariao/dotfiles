@@ -5,7 +5,7 @@ local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabl
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-config.font = wezterm.font_with_fallback({ "Monaspace Neon" })
+config.font = wezterm.font_with_fallback({ "TX-02" })
 
 config.line_height = 1.2
 

@@ -1,22 +1,11 @@
-local opts = {
-  theme = "dark",
-  styles = {
-    type = { bold = true },
-    lsp = { underline = true },
-    match_paren = { underline = true },
-  },
-}
-
-local function config()
-  local plugin = require("no-clown-fiesta")
-  local loaded_state = plugin.load(opts)
-  vim.cmd([[colorscheme no-clown-fiesta]])
-  return loaded_state
-end
-
 return {
-  "aktersnurra/no-clown-fiesta.nvim",
-  priority = 1000,
-  config = config,
-  lazy = false,
+  -- Using lazy.nvim
+  {
+    "deparr/tairiki.nvim",
+    lazy = false,
+    priority = 1000, -- recommended if you use tairiki as your default theme
+    config = function()
+      vim.cmd([[colorscheme tairiki]])
+    end,
+  },
 }
