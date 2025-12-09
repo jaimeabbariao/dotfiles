@@ -92,7 +92,7 @@ multiplier = 3  # Default: 3
 [font]
 
 # Normal font style
-normal = { family = "MonaspiceKr Nerd Font", style = "Regular" }  # Default for Linux/BSD: "monospace", Regular
+normal = { family = "TX-02", style = "Regular" }  # Default for Linux/BSD: "monospace", Regular
 
 # Bold font style
 bold = { style = "Bold" }  # Inherits family from normal, Default style: Bold

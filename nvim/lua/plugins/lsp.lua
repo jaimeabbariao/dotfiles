@@ -6,9 +6,7 @@ return {
         enabled = false,
       },
       servers = {
-        ruby_lsp = {
-          cmd = { os.getenv("HOME") .. "/.rbenv/shims/ruby-lsp" },
-        },
+        sorbet = {},
       },
     },
   },
