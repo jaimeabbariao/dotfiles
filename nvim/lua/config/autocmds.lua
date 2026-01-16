@@ -10,6 +10,14 @@ vim.api.nvim_create_user_command("CopyRelPath", function()
 end, {})
 vim.api.nvim_create_user_command("CopyAbsPath", "call setreg('+', expand('%:p'))", {})
 
+vim.api.nvim_create_user_command("CopyClaudePath", function()
+  local filepath = vim.fn.expand("%:p")
+  local cwd = vim.fn.getcwd()
+  local line = vim.fn.line(".")
+  local relative_path = vim.fn.fnamemodify("@" .. filepath .. ":" .. line, ":s?" .. cwd .. "/??")
+  vim.fn.setreg("+", relative_path)
+end, {})
+
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.orig", "MERGE_*", "COMMIT_EDITMSG" },
   callback = function()
