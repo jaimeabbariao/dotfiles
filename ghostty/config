@@ -1,4 +1,4 @@
-theme = Catppuccin Mocha
+theme = Builtin Dark
 font-family = TX-02
 font-family = Noto Color Emoji
 font-feature = -calt
@@ -28,11 +28,11 @@ macos-option-as-alt = true
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 
-#background-opacity = 0.93
-#background-blur-radius = 30
+background-opacity = 0.9
+background-blur-radius = 30
 
-#window-padding-x = 0
-#window-padding-y = 0
+window-padding-x = 0
+window-padding-y = 0
 window-padding-balance = true
 
 clipboard-read = allow
