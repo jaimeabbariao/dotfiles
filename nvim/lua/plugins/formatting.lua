@@ -19,7 +19,6 @@ return {
           javascriptreact = { "biome", "prettier" },
           javascript = { "biome", "prettier" },
           ruby = { "prettier" },
-          json = { "jq", "prettier" },
           erb = { "erb_format" },
         },
         -- The options you set here will be merged with the builtin formatters.
