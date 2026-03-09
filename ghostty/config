@@ -1,14 +1,5 @@
-theme = evergarden-fall-green
-font-family = Monaspace Krypton
-font-family = Noto Color Emoji
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
-font-thicken = true
-font-size = 12
-
-adjust-cell-height = 12
-adjust-cursor-height = 12
+theme = koda-dark
+font-family = PlemolJP Console NF
 
 alpha-blending = linear-corrected
 
@@ -28,11 +19,11 @@ macos-option-as-alt = true
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 
-#background-opacity = 0.9
+#background-opacity = 0.95
 #background-blur-radius = 30
 
-window-padding-x = 0
-window-padding-y = 0
+#window-padding-x = 5
+#window-padding-y = 5
 window-padding-balance = true
 
 clipboard-read = allow
