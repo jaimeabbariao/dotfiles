@@ -132,7 +132,7 @@ echo "Detected package manager: $PKG_MANAGER"
 echo ""
 
 REQUIRED_TOOLS=(git nvim gcc make node npm rg fd fzf stylua shfmt)
-OPTIONAL_TOOLS=(lazygit tree-sitter)
+OPTIONAL_TOOLS=(lazygit)
 
 missing=()
 for tool in "${REQUIRED_TOOLS[@]}"; do
@@ -203,7 +203,73 @@ else
 fi
 
 # -------------------------------------------------------
-# 3. Symlink dotfiles
+# 3. Install libclang-dev (needed for tree-sitter and other native builds)
+# -------------------------------------------------------
+echo ""
+echo "=== Installing libclang-dev ==="
+case "$PKG_MANAGER" in
+  brew)
+    if brew list llvm &>/dev/null; then
+      green "  [ok] llvm (provides libclang) already installed"
+    else
+      echo "Installing llvm (provides libclang)..."
+      brew install llvm || red "  Failed to install llvm."
+    fi
+    ;;
+  apt)
+    if dpkg -s libclang-dev &>/dev/null 2>&1; then
+      green "  [ok] libclang-dev already installed"
+    else
+      echo "Installing libclang-dev..."
+      sudo apt-get install -y libclang-dev || red "  Failed to install libclang-dev."
+    fi
+    ;;
+  dnf)
+    if rpm -q clang-devel &>/dev/null 2>&1; then
+      green "  [ok] clang-devel already installed"
+    else
+      echo "Installing clang-devel..."
+      sudo dnf install -y clang-devel || red "  Failed to install clang-devel."
+    fi
+    ;;
+  pacman)
+    if pacman -Qi clang &>/dev/null 2>&1; then
+      green "  [ok] clang already installed"
+    else
+      echo "Installing clang..."
+      sudo pacman -S --noconfirm clang || red "  Failed to install clang."
+    fi
+    ;;
+  *)
+    red "  No supported package manager found. Install libclang-dev manually."
+    ;;
+esac
+
+# -------------------------------------------------------
+# 4. Install tree-sitter-cli via cargo
+# -------------------------------------------------------
+echo ""
+echo "=== Installing tree-sitter-cli ==="
+if command -v tree-sitter &>/dev/null; then
+  green "  [ok] tree-sitter-cli already installed"
+else
+  if ! command -v cargo &>/dev/null; then
+    yellow "  Rust/Cargo not found. Installing via rustup..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    # shellcheck disable=SC1091
+    source "$HOME/.cargo/env"
+  fi
+  echo "Installing tree-sitter-cli via cargo..."
+  cargo install tree-sitter-cli || red "  Failed to install tree-sitter-cli via cargo."
+  if command -v tree-sitter &>/dev/null; then
+    green "  [ok] tree-sitter-cli installed successfully"
+  else
+    red "  tree-sitter-cli not found after install — check your PATH includes ~/.cargo/bin"
+  fi
+fi
+
+# -------------------------------------------------------
+# 5. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
