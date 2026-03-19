@@ -269,7 +269,28 @@ else
 fi
 
 # -------------------------------------------------------
-# 5. Symlink dotfiles
+# 5. Install Graphite CLI
+# -------------------------------------------------------
+echo ""
+echo "=== Installing Graphite ==="
+if command -v gt &>/dev/null; then
+  green "  [ok] graphite (gt) already installed"
+else
+  if command -v npm &>/dev/null; then
+    echo "Installing @withgraphite/graphite-cli via npm..."
+    npm install -g @withgraphite/graphite-cli || red "  Failed to install graphite-cli."
+    if command -v gt &>/dev/null; then
+      green "  [ok] graphite (gt) installed successfully"
+    else
+      red "  gt not found after install."
+    fi
+  else
+    red "  npm not found — install Node.js/npm first, then run: npm install -g @withgraphite/graphite-cli"
+  fi
+fi
+
+# -------------------------------------------------------
+# 6. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
