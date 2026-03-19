@@ -292,7 +292,7 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
   green "  [ok] Oh My Zsh already installed"
 else
   echo "Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || red "  Failed to install Oh My Zsh."
+  CHSH=no RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || red "  Failed to install Oh My Zsh."
   if [ -d "$HOME/.oh-my-zsh" ]; then
     green "  [ok] Oh My Zsh installed successfully"
   else
