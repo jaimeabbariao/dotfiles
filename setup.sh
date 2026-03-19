@@ -22,7 +22,7 @@ link() {
 }
 
 # -------------------------------------------------------
-# 1. Detect package manager
+# 1. Detect package manager & install helpers
 # -------------------------------------------------------
 detect_pkg_manager() {
   if command -v brew &>/dev/null; then
@@ -51,196 +51,61 @@ install_pkg() {
   esac
 }
 
-# Maps a tool name to the correct package name per package manager
-pkg_name() {
-  local tool="$1"
-  case "$tool" in
-    nvim)
-      case "$PKG_MANAGER" in
-        brew) echo "neovim" ;;
-        apt|dnf) echo "neovim" ;;
-        pacman) echo "neovim" ;;
-        *) echo "neovim" ;;
-      esac
-      ;;
-    gcc)
-      case "$PKG_MANAGER" in
-        brew) echo "gcc" ;;
-        apt) echo "build-essential" ;;
-        dnf) echo "gcc" ;;
-        pacman) echo "base-devel" ;;
-        *) echo "gcc" ;;
-      esac
-      ;;
-    make)
-      case "$PKG_MANAGER" in
-        brew) echo "make" ;;
-        apt) echo "build-essential" ;;
-        dnf) echo "make" ;;
-        pacman) echo "base-devel" ;;
-        *) echo "make" ;;
-      esac
-      ;;
-    node)
-      case "$PKG_MANAGER" in
-        brew) echo "node" ;;
-        apt) echo "nodejs" ;;
-        dnf) echo "nodejs" ;;
-        pacman) echo "nodejs" ;;
-        *) echo "nodejs" ;;
-      esac
-      ;;
-    npm)
-      case "$PKG_MANAGER" in
-        apt) echo "npm" ;;
-        *) echo "" ;; # npm comes with node on brew/dnf/pacman
-      esac
-      ;;
-    rg)
-      case "$PKG_MANAGER" in
-        brew) echo "ripgrep" ;;
-        apt) echo "ripgrep" ;;
-        dnf) echo "ripgrep" ;;
-        pacman) echo "ripgrep" ;;
-        *) echo "ripgrep" ;;
-      esac
-      ;;
-    fd)
-      case "$PKG_MANAGER" in
-        brew) echo "fd" ;;
-        apt) echo "fd-find" ;;
-        dnf) echo "fd-find" ;;
-        pacman) echo "fd" ;;
-        *) echo "fd" ;;
-      esac
-      ;;
-    lazygit)
-      case "$PKG_MANAGER" in
-        brew) echo "lazygit" ;;
-        *) echo "lazygit" ;;
-      esac
-      ;;
-    *) echo "$tool" ;;
-  esac
-}
-
 # -------------------------------------------------------
-# 2. Install dependencies
+# 2. Install LazyVim dependencies
 # -------------------------------------------------------
-echo "=== Installing Dependencies ==="
+echo "=== Installing LazyVim Dependencies ==="
 echo "Detected package manager: $PKG_MANAGER"
 echo ""
 
-REQUIRED_TOOLS=(git nvim gcc make node npm rg fd fzf stylua shfmt)
-OPTIONAL_TOOLS=(lazygit)
+# Package names differ per manager: tool -> package
+declare -A PACKAGES
+PACKAGES=(
+  [git]=git
+  [nvim]=neovim
+  [lazygit]=lazygit
+  [rg]=ripgrep
+  [curl]=curl
+  [node]=node
+  [npm]=npm
+)
 
-missing=()
-for tool in "${REQUIRED_TOOLS[@]}"; do
-  if command -v "$tool" &>/dev/null; then
-    green "  [ok] $tool"
-  else
-    yellow "  [missing] $tool"
-    missing+=("$tool")
-  fi
-done
-
-# Also check for a C compiler via cc/clang if gcc is missing
-if [[ " ${missing[*]} " == *" gcc "* ]]; then
-  if command -v cc &>/dev/null || command -v clang &>/dev/null; then
-    green "  [ok] C compiler found (cc/clang)"
-    missing=("${missing[@]/gcc/}")
-  fi
-fi
-
-echo ""
-echo "Optional tools:"
-for tool in "${OPTIONAL_TOOLS[@]}"; do
-  if command -v "$tool" &>/dev/null; then
-    green "  [ok] $tool"
-  else
-    yellow "  [missing] $tool"
-    missing+=("$tool")
-  fi
-done
-
-echo ""
-
-if [ ${#missing[@]} -gt 0 ]; then
-  # Filter out empty entries
-  filtered=()
-  for m in "${missing[@]}"; do
-    [ -n "$m" ] && filtered+=("$m")
-  done
-
-  if [ ${#filtered[@]} -gt 0 ]; then
-    echo "The following tools will be installed: ${filtered[*]}"
-
-    if [ "$PKG_MANAGER" = "apt" ]; then
-      echo "Updating package index..."
-      sudo apt-get update -qq
-    fi
-
-    for tool in "${filtered[@]}"; do
-      pkg="$(pkg_name "$tool")"
-      if [ -z "$pkg" ]; then
-        continue # e.g. npm on non-apt (comes with node)
-      fi
-      echo "Installing $tool ($pkg)..."
-      install_pkg "$pkg" || red "  Failed to install $tool — install it manually."
-    done
-
-    echo ""
-    green "Installation complete."
-  fi
-else
-  green "All dependencies are already installed."
-fi
-
-# -------------------------------------------------------
-# 3. Install libclang-dev (needed for tree-sitter and other native builds)
-# -------------------------------------------------------
-echo ""
-echo "=== Installing libclang-dev ==="
+# Override package names per manager
 case "$PKG_MANAGER" in
-  brew)
-    if brew list llvm &>/dev/null; then
-      green "  [ok] llvm (provides libclang) already installed"
-    else
-      echo "Installing llvm (provides libclang)..."
-      brew install llvm || red "  Failed to install llvm."
-    fi
-    ;;
   apt)
-    if dpkg -s libclang-dev &>/dev/null 2>&1; then
-      green "  [ok] libclang-dev already installed"
-    else
-      echo "Installing libclang-dev..."
-      sudo apt-get install -y libclang-dev || red "  Failed to install libclang-dev."
-    fi
+    PACKAGES[fd]=fd-find
+    PACKAGES[node]=nodejs
     ;;
-  dnf)
-    if rpm -q clang-devel &>/dev/null 2>&1; then
-      green "  [ok] clang-devel already installed"
-    else
-      echo "Installing clang-devel..."
-      sudo dnf install -y clang-devel || red "  Failed to install clang-devel."
-    fi
-    ;;
-  pacman)
-    if pacman -Qi clang &>/dev/null 2>&1; then
-      green "  [ok] clang already installed"
-    else
-      echo "Installing clang..."
-      sudo pacman -S --noconfirm clang || red "  Failed to install clang."
-    fi
-    ;;
-  *)
-    red "  No supported package manager found. Install libclang-dev manually."
+  brew)
+    PACKAGES[fd]=fd
     ;;
 esac
 
+# Update package index on apt
+if [ "$PKG_MANAGER" = "apt" ]; then
+  echo "Updating package index..."
+  sudo apt-get update -qq
+
+  # Add lazygit PPA
+  if ! command -v lazygit &>/dev/null; then
+    echo "Adding lazygit PPA..."
+    sudo add-apt-repository -y ppa:lazygit-team/release
+    sudo apt-get update -qq
+  fi
+fi
+
+for tool in "${!PACKAGES[@]}"; do
+  pkg="${PACKAGES[$tool]}"
+  if command -v "$tool" &>/dev/null; then
+    green "  [ok] $tool"
+  else
+    echo "  Installing $tool ($pkg)..."
+    install_pkg "$pkg" || red "  Failed to install $tool — install it manually."
+  fi
+done
+
 # -------------------------------------------------------
-# 4. Install tree-sitter-cli via cargo
+# 3. Install tree-sitter-cli via cargo
 # -------------------------------------------------------
 echo ""
 echo "=== Installing tree-sitter-cli ==="
@@ -253,76 +118,42 @@ else
     # shellcheck disable=SC1091
     source "$HOME/.cargo/env"
   fi
-  echo "Installing tree-sitter-cli via cargo..."
+  echo "  Installing tree-sitter-cli via cargo..."
   cargo install tree-sitter-cli || red "  Failed to install tree-sitter-cli via cargo."
-  if command -v tree-sitter &>/dev/null; then
-    green "  [ok] tree-sitter-cli installed successfully"
-  else
-    red "  tree-sitter-cli not found after install — check your PATH includes ~/.cargo/bin"
-  fi
+  green "  [ok] tree-sitter-cli installed"
 fi
 
 # -------------------------------------------------------
-# 5. Install Graphite CLI
-# -------------------------------------------------------
-echo ""
-echo "=== Installing Graphite ==="
-if command -v gt &>/dev/null; then
-  green "  [ok] graphite (gt) already installed"
-else
-  if command -v npm &>/dev/null; then
-    echo "Installing @withgraphite/graphite-cli via npm..."
-    npm install -g @withgraphite/graphite-cli || red "  Failed to install graphite-cli."
-    if command -v gt &>/dev/null; then
-      green "  [ok] graphite (gt) installed successfully"
-    else
-      red "  gt not found after install."
-    fi
-  else
-    red "  npm not found — install Node.js/npm first, then run: npm install -g @withgraphite/graphite-cli"
-  fi
-fi
-
-# -------------------------------------------------------
-# 6. Install Oh My Zsh
+# 4. Install Oh My Zsh
 # -------------------------------------------------------
 echo ""
 echo "=== Installing Oh My Zsh ==="
 if [ -d "$HOME/.oh-my-zsh" ]; then
   green "  [ok] Oh My Zsh already installed"
 else
-  echo "Installing Oh My Zsh..."
+  echo "  Installing Oh My Zsh..."
   CHSH=no RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || red "  Failed to install Oh My Zsh."
-  if [ -d "$HOME/.oh-my-zsh" ]; then
-    green "  [ok] Oh My Zsh installed successfully"
-  else
-    red "  Oh My Zsh not found after install."
-  fi
+  green "  [ok] Oh My Zsh installed"
 fi
 
 # -------------------------------------------------------
-# 7. Symlink dotfiles
+# 5. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
-echo "Source: $DOTFILES_DIR"
-echo ""
 
-# --- Neovim ---
 echo "Setting up Neovim..."
 link "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
-# --- Lazygit ---
-if [ -d "$DOTFILES_DIR/lazygit" ]; then
-  echo "Setting up Lazygit..."
-  link "$DOTFILES_DIR/lazygit" "$HOME/.config/lazygit"
-fi
-
-# --- Zsh ---
 if [ -f "$DOTFILES_DIR/zsh/.zshrc" ]; then
   echo "Setting up Zsh..."
   link "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
 fi
 
+if [ -d "$DOTFILES_DIR/ghostty" ]; then
+  echo "Setting up Ghostty..."
+  link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
+fi
+
 echo ""
-green "Done! All dotfiles have been symlinked."
+green "Done! All set up."
