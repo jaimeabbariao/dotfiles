@@ -174,29 +174,23 @@ if [ ${#missing[@]} -gt 0 ]; then
 
   if [ ${#filtered[@]} -gt 0 ]; then
     echo "The following tools will be installed: ${filtered[*]}"
-    read -rp "Proceed? [Y/n] " answer
-    answer="${answer:-Y}"
 
-    if [[ "$answer" =~ ^[Yy]$ ]]; then
-      if [ "$PKG_MANAGER" = "apt" ]; then
-        echo "Updating package index..."
-        sudo apt-get update -qq
-      fi
-
-      for tool in "${filtered[@]}"; do
-        pkg="$(pkg_name "$tool")"
-        if [ -z "$pkg" ]; then
-          continue # e.g. npm on non-apt (comes with node)
-        fi
-        echo "Installing $tool ($pkg)..."
-        install_pkg "$pkg" || red "  Failed to install $tool — install it manually."
-      done
-
-      echo ""
-      green "Installation complete."
-    else
-      yellow "Skipping installation. Some tools may be missing."
+    if [ "$PKG_MANAGER" = "apt" ]; then
+      echo "Updating package index..."
+      sudo apt-get update -qq
     fi
+
+    for tool in "${filtered[@]}"; do
+      pkg="$(pkg_name "$tool")"
+      if [ -z "$pkg" ]; then
+        continue # e.g. npm on non-apt (comes with node)
+      fi
+      echo "Installing $tool ($pkg)..."
+      install_pkg "$pkg" || red "  Failed to install $tool — install it manually."
+    done
+
+    echo ""
+    green "Installation complete."
   fi
 else
   green "All dependencies are already installed."
