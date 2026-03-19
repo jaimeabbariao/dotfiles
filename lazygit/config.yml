@@ -1,4 +1,0 @@
-customCommands:
-  - key: '<c-P>'
-    context: 'graphite submit'
-    command: 'gt submit'
