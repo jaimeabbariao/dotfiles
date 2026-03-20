@@ -135,7 +135,31 @@ else
 fi
 
 # -------------------------------------------------------
-# 5. Symlink dotfiles
+# 5. Install Oh My Zsh custom plugins
+# -------------------------------------------------------
+echo ""
+echo "=== Installing Oh My Zsh Plugins ==="
+
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+
+declare -A OMZ_PLUGINS
+OMZ_PLUGINS=(
+  [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
+)
+
+for plugin in "${!OMZ_PLUGINS[@]}"; do
+  dest="$ZSH_CUSTOM/plugins/$plugin"
+  if [ -d "$dest" ]; then
+    green "  [ok] $plugin already installed"
+  else
+    echo "  Cloning $plugin..."
+    git clone --depth=1 "${OMZ_PLUGINS[$plugin]}" "$dest" || red "  Failed to clone $plugin"
+    green "  [ok] $plugin installed"
+  fi
+done
+
+# -------------------------------------------------------
+# 6. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
