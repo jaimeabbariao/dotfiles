@@ -155,9 +155,3 @@ fi
 
 echo ""
 green "Done! All set up."
-
-# Source the new zshrc to apply changes in the current shell
-if [ -f "$HOME/.zshrc" ] && [ -n "${ZSH_VERSION:-}" ]; then
-  echo "Reloading .zshrc..."
-  source "$HOME/.zshrc"
-fi
