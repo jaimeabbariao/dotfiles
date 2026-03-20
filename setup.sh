@@ -43,11 +43,14 @@ PKG_MANAGER="$(detect_pkg_manager)"
 install_pkg() {
   local name="$1"
   case "$PKG_MANAGER" in
-    brew) brew install "$name" ;;
-    apt) sudo apt-get install -y "$name" ;;
-    dnf) sudo dnf install -y "$name" ;;
-    pacman) sudo pacman -S --noconfirm "$name" ;;
-    *) red "  No supported package manager found. Install '$name' manually."; return 1 ;;
+  brew) brew install "$name" ;;
+  apt) sudo apt-get install -y "$name" ;;
+  dnf) sudo dnf install -y "$name" ;;
+  pacman) sudo pacman -S --noconfirm "$name" ;;
+  *)
+    red "  No supported package manager found. Install '$name' manually."
+    return 1
+    ;;
   esac
 }
 
@@ -72,27 +75,14 @@ PACKAGES=(
 
 # Override package names per manager
 case "$PKG_MANAGER" in
-  apt)
-    PACKAGES[fd]=fd-find
-    PACKAGES[node]=nodejs
-    ;;
-  brew)
-    PACKAGES[fd]=fd
-    ;;
+apt)
+  PACKAGES[fd]=fd-find
+  PACKAGES[node]=nodejs
+  ;;
+brew)
+  PACKAGES[fd]=fd
+  ;;
 esac
-
-# Update package index on apt
-if [ "$PKG_MANAGER" = "apt" ]; then
-  echo "Updating package index..."
-  sudo apt-get update -qq
-
-  # Add lazygit PPA
-  if ! command -v lazygit &>/dev/null; then
-    echo "Adding lazygit PPA..."
-    sudo add-apt-repository -y ppa:lazygit-team/release
-    sudo apt-get update -qq
-  fi
-fi
 
 for tool in "${!PACKAGES[@]}"; do
   pkg="${PACKAGES[$tool]}"
@@ -118,6 +108,14 @@ else
     # shellcheck disable=SC1091
     source "$HOME/.cargo/env"
   fi
+  # libclang-dev is required to build tree-sitter-cli
+  case "$PKG_MANAGER" in
+  apt) sudo apt-get install -y libclang-dev ;;
+  dnf) sudo dnf install -y clang-devel ;;
+  pacman) sudo pacman -S --noconfirm clang ;;
+  brew) ;; # macOS includes libclang via Xcode/CommandLineTools
+  esac
+
   echo "  Installing tree-sitter-cli via cargo..."
   cargo install tree-sitter-cli || red "  Failed to install tree-sitter-cli via cargo."
   green "  [ok] tree-sitter-cli installed"
