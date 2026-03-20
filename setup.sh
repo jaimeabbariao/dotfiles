@@ -148,10 +148,5 @@ if [ -f "$DOTFILES_DIR/zsh/.zshrc" ]; then
   link "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
 fi
 
-if [ -d "$DOTFILES_DIR/ghostty" ]; then
-  echo "Setting up Ghostty..."
-  link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
-fi
-
 echo ""
 green "Done! All set up."
