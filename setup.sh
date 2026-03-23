@@ -66,7 +66,6 @@ declare -A PACKAGES
 PACKAGES=(
   [git]=git
   [nvim]=neovim
-  [lazygit]=lazygit
   [rg]=ripgrep
   [curl]=curl
   [node]=node
@@ -93,6 +92,15 @@ for tool in "${!PACKAGES[@]}"; do
     install_pkg "$pkg" || red "  Failed to install $tool — install it manually."
   fi
 done
+
+# -------------------------------------------------------
+# 2.5 Install lazygit manually
+# -------------------------------------------------------
+
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit -D -t /usr/local/bin/
 
 # -------------------------------------------------------
 # 3. Install tree-sitter-cli via cargo
