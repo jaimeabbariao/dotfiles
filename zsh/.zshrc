@@ -4,11 +4,8 @@ plugins=(git z zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
-# ~/.zshrc
-
 export PATH="$HOME/.cargo/bin:$PATH"
-
+export PATH="$HOME/.local/bin:$PATH"
 
 eval "$(mise activate zsh)"
-
-export PATH="$HOME/.local/bin:$PATH"
+eval "$(starship init zsh)"

@@ -166,6 +166,9 @@ for plugin in "${!OMZ_PLUGINS[@]}"; do
   fi
 done
 
+# install starship
+curl -sS https://starship.rs/install.sh | sh
+
 # -------------------------------------------------------
 # 6. Symlink dotfiles
 # -------------------------------------------------------
