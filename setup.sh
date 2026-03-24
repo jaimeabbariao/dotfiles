@@ -94,15 +94,6 @@ for tool in "${!PACKAGES[@]}"; do
 done
 
 # -------------------------------------------------------
-# 2.5 Install lazygit manually
-# -------------------------------------------------------
-
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit -D -t /usr/local/bin/
-
-# -------------------------------------------------------
 # 3. Install tree-sitter-cli via cargo
 # -------------------------------------------------------
 echo ""
@@ -167,7 +158,7 @@ for plugin in "${!OMZ_PLUGINS[@]}"; do
 done
 
 # install starship
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # -------------------------------------------------------
 # 6. Symlink dotfiles
