@@ -40,8 +40,7 @@ return {
   },
   {
     "EdenEast/nightfox.nvim",
-    lazy = false,
-    priority = 1000,
+    enabled = false,
     opts = {
       options = {
         -- Compiled file's destination location
@@ -87,9 +86,14 @@ return {
     },
   }, -- lazy
   {
+    "oskarnurm/koda.nvim",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "dayfox",
+      colorscheme = "koda-glade",
     },
   },
 }
