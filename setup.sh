@@ -158,7 +158,13 @@ for plugin in "${!OMZ_PLUGINS[@]}"; do
 done
 
 # install starship
-curl -sS https://starship.rs/install.sh | sh -s -- -y
+if command -v starship &>/dev/null; then
+  green "  [ok] starship already installed"
+else
+  echo "  Installing starship..."
+  curl -sS https://starship.rs/install.sh | sh -s -- -y || red "  Failed to install starship."
+  green "  [ok] starship installed"
+fi
 
 # -------------------------------------------------------
 # 6. Symlink dotfiles
@@ -191,3 +197,6 @@ fi
 
 echo ""
 green "Done! All set up."
+echo ""
+yellow "Remember to source your zshrc to apply changes:"
+yellow "  source ~/.zshrc"
