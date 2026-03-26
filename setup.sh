@@ -167,7 +167,51 @@ else
 fi
 
 # -------------------------------------------------------
-# 6. Install tmux & Oh My Tmux
+# 6. Install lazygit
+# -------------------------------------------------------
+echo ""
+echo "=== Installing lazygit ==="
+if command -v lazygit &>/dev/null; then
+  green "  [ok] lazygit already installed"
+else
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  if [ -z "$LAZYGIT_VERSION" ]; then
+    red "  Failed to fetch latest lazygit version."
+  else
+    echo "  Installing lazygit v${LAZYGIT_VERSION}..."
+    LAZYGIT_DIR="$HOME/lazygit"
+    mkdir -p "$LAZYGIT_DIR"
+
+    # Detect OS and arch
+    case "$(uname -s)" in
+    Darwin) LAZYGIT_OS="Darwin" ;;
+    Linux) LAZYGIT_OS="Linux" ;;
+    *) red "  Unsupported OS for lazygit install."; LAZYGIT_OS="" ;;
+    esac
+
+    case "$(uname -m)" in
+    x86_64) LAZYGIT_ARCH="x86_64" ;;
+    arm64 | aarch64) LAZYGIT_ARCH="arm64" ;;
+    *) red "  Unsupported architecture for lazygit install."; LAZYGIT_ARCH="" ;;
+    esac
+
+    if [ -n "$LAZYGIT_OS" ] && [ -n "$LAZYGIT_ARCH" ]; then
+      LAZYGIT_TAR="lazygit_${LAZYGIT_VERSION}_${LAZYGIT_OS}_${LAZYGIT_ARCH}.tar.gz"
+      curl -Lo "$LAZYGIT_DIR/$LAZYGIT_TAR" "https://github.com/jesseduffield/lazygit/releases/latest/download/$LAZYGIT_TAR"
+      tar xf "$LAZYGIT_DIR/$LAZYGIT_TAR" -C "$LAZYGIT_DIR" lazygit
+      rm "$LAZYGIT_DIR/$LAZYGIT_TAR"
+
+      # Add to PATH via ~/bin symlink
+      mkdir -p "$HOME/bin"
+      ln -sf "$LAZYGIT_DIR/lazygit" "$HOME/bin/lazygit"
+      green "  [ok] lazygit installed to $LAZYGIT_DIR/lazygit"
+      yellow "  Ensure ~/bin is in your PATH (e.g. export PATH=\"\$HOME/bin:\$PATH\" in .zshrc)"
+    fi
+  fi
+fi
+
+# -------------------------------------------------------
+# 7. Install tmux & Oh My Tmux
 # -------------------------------------------------------
 echo ""
 echo "=== Installing tmux ==="
@@ -189,7 +233,7 @@ else
 fi
 
 # -------------------------------------------------------
-# 7. Symlink dotfiles
+# 8. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
@@ -207,7 +251,7 @@ link "$HOME/.tmux/.tmux.conf" "$HOME/.tmux.conf"
 link "$DOTFILES_DIR/tmux/.tmux.conf.local" "$HOME/.tmux.conf.local"
 
 # -------------------------------------------------------
-# 8. Set up ~/figma/figma
+# 9. Set up ~/figma/figma
 # -------------------------------------------------------
 echo ""
 echo "=== Setting up ~/figma/figma ==="
