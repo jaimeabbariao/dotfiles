@@ -57,7 +57,7 @@ set -g history-limit 10000
 set -g mouse on
 
 # allow OSC 52 to set the clipboard (needed for vim yank over SSH)
-set -g set-clipboard on
+set -g set-clipboard external
 # force Vi mode
 # set -g default-terminal "tmux-256color"
 
