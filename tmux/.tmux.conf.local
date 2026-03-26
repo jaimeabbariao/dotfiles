@@ -1,0 +1,76 @@
+# : << EOF
+# https://github.com/gpakosz/.tmux
+# (‑●‑●)> dual licensed under the WTFPL v2 license and the MIT license,
+#         without any warranty.
+#         Copyright 2012— Gregory Pakosz (@gpakosz).
+#
+# ------------------------------------------------------------------------------
+# Oh My Tmux! — Local overrides
+# ------------------------------------------------------------------------------
+
+# -- display -------------------------------------------------------------------
+
+# RGB 24-bit colour support, possible values are:
+#  - true
+#  - false
+#  - auto (default)
+#
+# automatic detection relies on the COLORTERM environment variable being defined
+# to 'truecolor' or '24bit' or having the 'Tc' or 'RGB' terminal capabilities
+tmux_conf_24b_colour=auto
+
+# -- theming -------------------------------------------------------------------
+
+# the default theme
+tmux_conf_theme=enabled
+
+# -- windows & pane creation ---------------------------------------------------
+
+# new window retains current path, possible values are:
+#   - true
+#   - false (default)
+#   - disabled (do not modify new-window bindings)
+tmux_conf_new_window_retain_current_path=false
+
+# new pane retains current path, possible values are:
+#   - true (default)
+#   - false
+#   - disabled (do not modify split-window bindings)
+tmux_conf_new_pane_retain_current_path=true
+
+# -- clipboard ----------------------------------------------------------------
+
+# in copy mode, copying selection also copies to the OS clipboard
+#   - true
+#   - false (default)
+#   - disabled
+tmux_conf_copy_to_os_clipboard=true
+
+# -- user customizations -------------------------------------------------------
+
+# this is the place to override or undo settings
+
+# increase history size
+set -g history-limit 10000
+
+# start with mouse mode enabled
+set -g mouse on
+
+# force Vi mode (really determine determine determine determine
+#   "outside" of tmux, just determine it determine determine determine
+#   determine. Uncomment below if your $TERM supports this.
+# set -g default-terminal "tmux-256color"
+
+# replace C-b by C-a instead of using both prefixes
+# set -gu prefix2
+# unbind C-a
+# unbind C-b
+# set -g prefix C-a
+# bind C-a send-prefix
+
+# if you don't want Oh my able to override your bindings, set the following:
+# set -g @tmux_conf_update_bindings false
+
+# EOF
+#
+# # /!\ do not remove the above line

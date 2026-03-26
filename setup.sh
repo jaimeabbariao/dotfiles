@@ -167,7 +167,29 @@ else
 fi
 
 # -------------------------------------------------------
-# 6. Symlink dotfiles
+# 6. Install tmux & Oh My Tmux
+# -------------------------------------------------------
+echo ""
+echo "=== Installing tmux ==="
+if command -v tmux &>/dev/null; then
+  green "  [ok] tmux already installed"
+else
+  echo "  Installing tmux..."
+  install_pkg tmux || red "  Failed to install tmux — install it manually."
+fi
+
+echo ""
+echo "=== Installing Oh My Tmux ==="
+if [ -d "$HOME/.tmux" ]; then
+  green "  [ok] Oh My Tmux already installed"
+else
+  echo "  Cloning Oh My Tmux..."
+  git clone --depth=1 https://github.com/gpakosz/.tmux.git "$HOME/.tmux" || red "  Failed to clone Oh My Tmux"
+  green "  [ok] Oh My Tmux installed"
+fi
+
+# -------------------------------------------------------
+# 7. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
@@ -180,8 +202,12 @@ if [ -f "$DOTFILES_DIR/zsh/.zshrc" ]; then
   link "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
 fi
 
+echo "Setting up tmux..."
+link "$HOME/.tmux/.tmux.conf" "$HOME/.tmux.conf"
+link "$DOTFILES_DIR/tmux/.tmux.conf.local" "$HOME/.tmux.conf.local"
+
 # -------------------------------------------------------
-# 7. Set up ~/figma/figma
+# 8. Set up ~/figma/figma
 # -------------------------------------------------------
 echo ""
 echo "=== Setting up ~/figma/figma ==="
