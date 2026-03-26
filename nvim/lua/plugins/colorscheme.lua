@@ -1,9 +1,9 @@
 return {
   {
     "craftzdog/solarized-osaka.nvim",
-    -- enabled = false,
-    lazy = false,
-    priority = 1000,
+    enabled = false,
+    -- lazy = false,
+    -- priority = 1000,
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings

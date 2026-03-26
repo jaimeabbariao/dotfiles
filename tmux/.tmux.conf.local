@@ -55,6 +55,7 @@ set -g history-limit 10000
 
 # start with mouse mode enabled
 set -g mouse on
+set -g @plugin 'vaaleyard/tmux-dotbar'
 
 # force Vi mode (really determine determine determine determine
 #   "outside" of tmux, just determine it determine determine determine
@@ -70,6 +71,10 @@ set -g mouse on
 
 # if you don't want Oh my able to override your bindings, set the following:
 # set -g @tmux_conf_update_bindings false
+
+# -- TPM (Tmux Plugin Manager) ------------------------------------------------
+set-environment -g TMUX_PLUGIN_MANAGER_PATH '~/.config/tmux/plugins'
+run '~/.config/tmux/plugins/tpm/tpm'
 
 # EOF
 #
