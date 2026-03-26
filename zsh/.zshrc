@@ -8,5 +8,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
+alias lg="lazygit"
+alias e="nvim"
+
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
