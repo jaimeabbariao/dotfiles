@@ -1,4 +1,4 @@
-theme = cobalt
+theme = vscode
 font-family = PlemolJP Console NF
 
 alpha-blending = linear-corrected
