@@ -61,6 +61,9 @@ set -g set-clipboard on
 # force Vi mode
 # set -g default-terminal "tmux-256color"
 
+set -s extended-keys on
+set -as terminal-features 'xterm*:extkeys'
+
 # replace C-b by C-a instead of using both prefixes
 # set -gu prefix2
 # unbind C-a
