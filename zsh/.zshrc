@@ -10,6 +10,7 @@ export PATH="$HOME/bin:$PATH"
 
 alias lg="lazygit"
 alias e="nvim"
+alias kami="claude --dangerously-skip-permissions"
 
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
