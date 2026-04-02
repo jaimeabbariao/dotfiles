@@ -59,11 +59,7 @@ set -g mouse on
 # allow OSC 52 to set the clipboard (needed for vim yank over SSH)
 set -g set-clipboard on
 # force Vi mode
-set -g default-terminal "tmux-256color"
 set -ag terminal-overrides ",xterm-256color:RGB"
-
-set -s extended-keys always
-set -as terminal-features 'xterm*:extkeys'
 
 # replace C-b by C-a instead of using both prefixes
 # set -gu prefix2
