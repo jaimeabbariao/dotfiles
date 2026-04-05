@@ -1,9 +1,13 @@
 return {
-  { "rose-pine/neovim", name = "rose-pine" },
+  {
+    "sainnhe/gruvbox-material",
+    lazy = false,
+    priority = 1000,
+  },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = "gruvbox-material",
     },
   },
 }
