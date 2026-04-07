@@ -1,3 +1,3 @@
 return {
-  { "nvim-lualine/lualine.nvim", disabled = true },
+  { "nvim-lualine/lualine.nvim", enabled = false },
 }
