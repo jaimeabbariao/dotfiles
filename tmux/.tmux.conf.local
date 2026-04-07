@@ -62,11 +62,11 @@ set -g set-clipboard on
 set -ag terminal-overrides ",xterm-256color:RGB"
 
 # replace C-b by C-a instead of using both prefixes
-# set -gu prefix2
-# unbind C-a
+set -gu prefix2
+unbind C-a
 # unbind C-b
-# set -g prefix C-a
-# bind C-a send-prefix
+set -g prefix C-b
+bind C-b send-prefix
 
 # EOF
 #
