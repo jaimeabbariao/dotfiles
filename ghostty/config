@@ -1,4 +1,5 @@
-theme = Poimandres
+theme = Breadog
+background = #FBF2EB
 font-family = PlemolJP Console NF
 
 alpha-blending = linear-corrected
