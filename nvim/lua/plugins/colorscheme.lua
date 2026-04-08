@@ -88,9 +88,17 @@ return {
     end,
   },
   {
+    "Yazeed1s/minimal.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.minimal_transparent_background = false
+    end,
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "cyberdream",
+      colorscheme = "minimal",
     },
   },
 }
