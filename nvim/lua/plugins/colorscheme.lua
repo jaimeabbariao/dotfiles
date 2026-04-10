@@ -7,7 +7,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "koda-dark",
+      colorscheme = "koda-moss",
     },
   },
 }
