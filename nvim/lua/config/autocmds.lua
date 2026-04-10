@@ -49,3 +49,10 @@ function _G.set_terminal_keymaps()
   vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
   vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})

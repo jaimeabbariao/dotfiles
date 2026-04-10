@@ -1,5 +1,4 @@
-theme = Breadog
-background = #FBF2EB
+theme = koda-dark
 font-family = PlemolJP Console NF
 
 alpha-blending = linear-corrected
