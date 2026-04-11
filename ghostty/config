@@ -1,5 +1,5 @@
-theme = koda-dark
-background = #0E1415 
+theme = solarized_osaka
+background = #000
 font-family = PlemolJP Console NF
 
 alpha-blending = linear-corrected
