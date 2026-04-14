@@ -1,5 +1,6 @@
-theme = Tomorrow Night
+theme = Melange
 font-family = PlemolJP Console NF
+font-thicken = true
 
 alpha-blending = linear-corrected
 
