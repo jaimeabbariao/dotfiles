@@ -1,5 +1,5 @@
-theme = Monokai Classic
-background = #25292C
+theme = carbonfox
+#background = #25292C
 font-family = PlemolJP Console NF
 #font-family = TX-02
 font-thicken = true
