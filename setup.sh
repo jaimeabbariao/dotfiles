@@ -143,7 +143,7 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
 declare -A OMZ_PLUGINS
 OMZ_PLUGINS=(
-  [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
+  [zsh - autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
 )
 
 for plugin in "${!OMZ_PLUGINS[@]}"; do
@@ -186,13 +186,19 @@ else
     case "$(uname -s)" in
     Darwin) LAZYGIT_OS="Darwin" ;;
     Linux) LAZYGIT_OS="Linux" ;;
-    *) red "  Unsupported OS for lazygit install."; LAZYGIT_OS="" ;;
+    *)
+      red "  Unsupported OS for lazygit install."
+      LAZYGIT_OS=""
+      ;;
     esac
 
     case "$(uname -m)" in
     x86_64) LAZYGIT_ARCH="x86_64" ;;
     arm64 | aarch64) LAZYGIT_ARCH="arm64" ;;
-    *) red "  Unsupported architecture for lazygit install."; LAZYGIT_ARCH="" ;;
+    *)
+      red "  Unsupported architecture for lazygit install."
+      LAZYGIT_ARCH=""
+      ;;
     esac
 
     if [ -n "$LAZYGIT_OS" ] && [ -n "$LAZYGIT_ARCH" ]; then
@@ -249,6 +255,9 @@ fi
 echo "Setting up tmux..."
 link "$HOME/.tmux/.tmux.conf" "$HOME/.tmux.conf"
 link "$DOTFILES_DIR/tmux/.tmux.conf.local" "$HOME/.tmux.conf.local"
+
+echo "Setting up Zellij..."
+link "$DOTFILES_DIR/zellij" "$HOME/.config/zellij"
 
 # -------------------------------------------------------
 # 9. Set up ~/figma/figma
