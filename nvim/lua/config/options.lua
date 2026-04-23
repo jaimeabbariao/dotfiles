@@ -4,9 +4,10 @@
 
 vim.opt.clipboard = "unnamedplus"
 
--- Over SSH there's no pbcopy/xclip; route the + and * registers through
--- OSC 52 so yanks reach the host terminal's clipboard. Locally, leave the
--- default provider alone (pbcopy/pbpaste is faster and avoids OSC prompts).
+-- Over SSH, make the Mac's system clipboard the single source of truth:
+-- copy writes via OSC 52, paste reads via OSC 52. Requires every layer
+-- between nvim and Ghostty to pass OSC 52 reads through — notably, do
+-- NOT run zellij on the remote host (it's write-only for OSC 52).
 if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
   local osc52 = require("vim.ui.clipboard.osc52")
   vim.g.clipboard = {
