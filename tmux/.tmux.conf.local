@@ -60,6 +60,7 @@ set -g mouse on
 set -g set-clipboard on
 # force Vi mode
 set -ag terminal-overrides ",xterm-256color:RGB"
+set -as terminal-features ',*:clipboard'
 
 # replace C-b by C-a instead of using both prefixes
 set -gu prefix2
