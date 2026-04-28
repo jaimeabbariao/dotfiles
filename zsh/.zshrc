@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(git z zsh-autosuggestions)
+plugins=(git z)
 
 source $ZSH/oh-my-zsh.sh
 
