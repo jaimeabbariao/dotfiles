@@ -7,3 +7,6 @@ option_as_alt = "OnlyLeft"
 [font]
 normal = { family = "MonaspiceKr Nerd Font" }
 size = 12
+
+[colors.primary]
+background = "#101010"
