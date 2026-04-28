@@ -90,8 +90,6 @@ bind -n M-7 select-window -t :7
 bind -n M-8 select-window -t :8
 bind -n M-9 select-window -t :9
 
-set -g @plugin 'niksingh710/minimal-tmux-status'
-
 # EOF
 #
 # # /!\ do not remove the above line
