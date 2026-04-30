@@ -259,6 +259,9 @@ link "$DOTFILES_DIR/tmux/.tmux.conf.local" "$HOME/.tmux.conf.local"
 echo "Setting up Zellij..."
 link "$DOTFILES_DIR/zellij" "$HOME/.config/zellij"
 
+echo "Setting up claude skills.."
+link "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
+
 # -------------------------------------------------------
 # 9. Set up ~/figma/figma
 # -------------------------------------------------------
