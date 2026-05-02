@@ -1,7 +1,5 @@
 theme = nightfox
-#background = #25292C
 font-family = PlemolJP Console NF
-#font-family = TX-02
 font-thicken = true
 
 alpha-blending = linear-corrected
@@ -30,3 +28,25 @@ window-padding-balance = true
 
 clipboard-read = allow
 clipboard-write = allow
+
+# Keybinds
+keybind = alt+p>n=new_split:right
+keybind = alt+p>shift+n=new_split:left
+keybind = alt+p>d=new_split:down
+keybind = alt+p>shift+d=new_split:up
+
+keybind = alt+l=goto_split:right
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:bottom
+keybind = alt+k=goto_split:top
+
+keybind = alt+r>shift+l=resize_split:right,50
+keybind = alt+r>shift+h=resize_split:left,50
+keybind = alt+r>shift+j=resize_split:down,50
+keybind = alt+r>shift+k=resize_split:up,50
+
+keybind = alt+t>l=next_tab
+keybind = alt+t>h=previous_tab
+
+keybind = alt+r>equal=equalize_splits
+keybind = shift+enter=text:\n
