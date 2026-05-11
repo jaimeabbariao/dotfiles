@@ -32,3 +32,14 @@ vim.keymap.set("n", "<leader>km", function()
     end,
   })
 end, { desc = "Run maintainers on current file" })
+
+vim.keymap.set("n", "<leader>uL", function()
+  vim.g.lsp_enabled = not vim.g.lsp_enabled
+  if vim.g.lsp_enabled then
+    vim.cmd("LspStart")
+    vim.notify("LSP enabled")
+  else
+    vim.cmd("LspStop")
+    vim.notify("LSP disabled")
+  end
+end, { desc = "Toggle LSP" })
