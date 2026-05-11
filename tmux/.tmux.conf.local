@@ -90,6 +90,14 @@ bind -n M-7 select-window -t :7
 bind -n M-8 select-window -t :8
 bind -n M-9 select-window -t :9
 
+set -g @plugin 'niksingh710/minimal-tmux-status'
+
+# set -g @minimal-tmux-bg "#${config.stylix.base16Scheme.base01}" (or you can use it with pywal)
+set -g @minimal-tmux-use-arrow true
+set -g @minimal-tmux-right-arrow ""
+set -g @minimal-tmux-left-arrow ""
+set -g @minimal-tmux-status "top"
+
 # EOF
 #
 # # /!\ do not remove the above line
