@@ -18,5 +18,3 @@ vim.opt.clipboard = "unnamedplus"
 --     ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
 --   },
 -- }
-
-vim.g.lsp_enabled = false
