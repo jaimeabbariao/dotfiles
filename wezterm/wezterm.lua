@@ -9,6 +9,8 @@ config.font_size = 13
 config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 
+config.freetype_render_target = "HorizontalLcd"
+
 config.keys = {
 	-- Pane navigation
 	{ key = "h", mods = "ALT", action = act.ActivatePaneDirection("Left") },
