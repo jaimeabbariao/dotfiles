@@ -240,7 +240,7 @@ load_plugins {
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "default"
+theme "pencil-light"
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -250,7 +250,7 @@ default_layout "default"
 // Choose the mode that zellij uses when starting up.
 // Default: normal
 //
-default_mode "normal"
+default_mode "locked"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
