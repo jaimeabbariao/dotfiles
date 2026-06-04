@@ -46,7 +46,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "modus_operandi",
+      colorscheme = "modus_vivendi",
     },
   },
 }
