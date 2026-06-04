@@ -6,8 +6,9 @@ local config = wezterm.config_builder()
 
 local scheme = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/modus_vivendi.toml")
 
-config.font = wezterm.font("MonoLisa")
-config.line_height = 1.2
+config.font = wezterm.font("PlemolJP Console NF")
+config.font_size = 14
+config.line_height = 1.4
 config.color_scheme_dirs = { wezterm.config_dir .. "/colors" }
 config.color_scheme = "Modus Vivendi"
 config.window_decorations = "RESIZE"
