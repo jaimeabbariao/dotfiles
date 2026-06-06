@@ -1,5 +1,5 @@
-theme = modus_vivendi
-font-family = PlemolJP Console NF
+theme = "TokyoNight Moon"
+font-family = TX-02
 font-thicken = true
 
 alpha-blending = linear-corrected
