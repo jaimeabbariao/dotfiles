@@ -1,5 +1,5 @@
 theme = "TokyoNight Moon"
-font-family = TX-02
+font-family = PlemolJP Console NF
 font-thicken = true
 
 alpha-blending = linear-corrected
@@ -22,11 +22,11 @@ keybind = alt+right=unbind
 background-opacity = 0.95
 background-blur-radius = 30
 
-window-padding-x = 5
-window-padding-y = 5
+#window-padding-x = 5
+#window-padding-y = 5
 window-padding-balance = true
-adjust-cell-height = 6
-font-size = 13
+adjust-cell-height = 8
+font-size = 12
 
 clipboard-read = allow
 clipboard-write = allow
