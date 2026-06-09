@@ -1,4 +1,4 @@
-theme = "TokyoNight Moon"
+theme = "cyberdream"
 font-family = PlemolJP Console NF
 font-thicken = true
 
@@ -19,7 +19,7 @@ macos-option-as-alt = true
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 
-background-opacity = 0.95
+background-opacity = 0.8
 background-blur-radius = 30
 
 #window-padding-x = 5
