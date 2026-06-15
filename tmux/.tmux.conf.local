@@ -385,8 +385,7 @@ tmux_conf_urlscan_options="--compact --dedupe"
 # ghostty terminal integration: prevent terminal-query responses (XTVERSION,
 # kitty keyboard protocol) from leaking into neovim/snacks pickers as input
 set -g default-terminal "tmux-256color"
-set -ga terminal-overrides ",xterm-ghostty:Tc"
-set -as terminal-features 'xterm-ghostty:RGB:hyperlinks:ccolour:cstyle:focus:title:overline:strikethrough:usstyle:sync:extkeys'
+set -ag terminal-overrides ",xterm*:Tc"
 set -s extended-keys always
 set -as terminal-features 'xterm*:extkeys'
 set -as terminal-features 'alacritty*:extkeys'
