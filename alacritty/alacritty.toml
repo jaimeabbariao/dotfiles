@@ -3,46 +3,51 @@ live_config_reload = true
 
 [window]
 option_as_alt = "OnlyLeft"
+opacity = 0.9
+blur = true
+padding = { y = 3 }
 
 [font]
 normal = { family = "PlemolJP Console NF" }
 size = 13
 offset = { x = 1, y = 0 }
 
-# Modus Themes for Alacritty
-# Auto generated with https://github.com/miikanissi/modus-themes.nvim/blob/master/lua/modus-themes/extras/alacritty.lua
+[terminal]
+osc52 = "CopyPaste"
+
+# solarized-osaka Alacritty Colors
 
 # Default colors
 [colors.primary]
-background   = '0xffffff'
-foreground   = '0x000000'
+background = '0x001419'
+foreground = '0x839395'
 
 # Normal colors
 [colors.normal]
-black     = '0x000000'
-red       = '0xa60000'
-green     = '0x006800'
-yellow    = '0x6f5500'
-blue      = '0x0031a9'
-magenta   = '0x721045'
-cyan      = '0x005e8b'
-white     = '0xa6a6a6'
+black   = '0x001014'
+red     = '0xdb302d'
+green   = '0x849900'
+yellow  = '0xb28500'
+blue    = '0x268bd3'
+magenta = '0xd23681'
+cyan    = '0x29a298'
+white   = '0x9eabac'
 
 # Bright colors
 [colors.bright]
-black     = '0x595959'
-red       = '0x972500'
-green     = '0x00663f'
-yellow    = '0x884900'
-blue      = '0x3548cf'
-magenta   = '0x8f0075'
-cyan      = '0x005f5f'
-white     = '0xffffff'
+black   = '0x001419'
+red     = '0xdb302d'
+green   = '0x849900'
+yellow  = '0xb28500'
+blue    = '0x268bd3'
+magenta = '0xd23681'
+cyan    = '0x29a298'
+white   = '0x839395'
 
 [[colors.indexed_colors]]
-index     = 16
-color     = '0x884900'
+index = 16
+color = '0xc94c16'
 
 [[colors.indexed_colors]]
-index     = 17
-color     = '0x7f0000'
+index = 17
+color = '0xf55350'
