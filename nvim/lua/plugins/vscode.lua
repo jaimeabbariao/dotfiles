@@ -50,6 +50,13 @@ return {
         end,
         desc = "Find files (alt)",
       },
+      {
+        "<leader>e",
+        function()
+          vscode.call("workbench.action.toggleSidebarVisibility")
+        end,
+        desc = "Toggle explorer",
+      },
     },
   },
 }

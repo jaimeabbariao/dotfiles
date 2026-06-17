@@ -3,6 +3,8 @@ live_config_reload = true
 
 [window]
 option_as_alt = "OnlyLeft"
+opacity = 0.9
+blur = true
 padding = { y = 3 }
 
 [font]
