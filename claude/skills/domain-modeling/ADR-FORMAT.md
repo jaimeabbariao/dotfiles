@@ -1,14 +1,14 @@
 # ADR Format
 
-ADRs live in `internal-docs/orgs/growth/teams/adoption/docs/adr/` and use the following naming scheme:
-`jabbariao-2026q2-[xp|feat]-<project-name>.md`
+Each project gets its own folder under `internal-docs/orgs/growth/teams/adoption/docs/adr/`, holding the project's ADR alongside its `CONTEXT.md`. The ADR is named:
+`internal-docs/orgs/growth/teams/adoption/docs/adr/<project-name>/jabbariao-2026q2-[xp|feat]-<project-name>.md`
 
 - Engineer handle
 - Year and Quarter
 - Experiment or Feature
 - Project name
 
-Create the `internal-docs/orgs/growth/teams/adoption/docs/adr/` directory lazily — only when the first ADR is needed.
+Create the project's folder lazily — only when the first ADR is needed.
 
 ## Template
 
@@ -28,9 +28,9 @@ Only include these when they add genuine value. Most ADRs won't need them.
 - **Considered Options** — only when the rejected alternatives are worth remembering
 - **Consequences** — only when non-obvious downstream effects need to be called out
 
-## Numbering
+## Naming
 
-Scan `internal-docs/orgs/growth/teams/adoption/docs/adr/` for the highest existing number and increment by one.
+Name the ADR by project, matching its folder: `jabbariao-2026q2-[xp|feat]-<project-name>.md`. Use `xp` for experiments and `feat` for features — one primary ADR per project folder.
 
 ## When to offer an ADR
 
