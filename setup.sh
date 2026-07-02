@@ -70,6 +70,8 @@ PACKAGES=(
   [curl]=curl
   [node]=node
   [npm]=npm
+  [hx]=helix
+  [yazi]=yazi
 )
 
 # Override package names per manager
@@ -258,6 +260,12 @@ link "$DOTFILES_DIR/tmux/.tmux.conf.local" "$HOME/.tmux.conf.local"
 
 echo "Setting up Zellij..."
 link "$DOTFILES_DIR/zellij" "$HOME/.config/zellij"
+
+echo "Setting up Helix..."
+link "$DOTFILES_DIR/helix" "$HOME/.config/helix"
+
+echo "Setting up Yazi..."
+link "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 
 echo "Setting up claude skills.."
 link "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
