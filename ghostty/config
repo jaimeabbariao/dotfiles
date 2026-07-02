@@ -22,10 +22,7 @@ keybind = alt+right=unbind
 background-opacity = 0.90
 background-blur-radius = 30
 
-#window-padding-x = 5
-#window-padding-y = 5
 window-padding-balance = true
-adjust-cell-height = 6
 
 clipboard-read = allow
 clipboard-write = allow
