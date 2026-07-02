@@ -1,4 +1,4 @@
-theme = "onedark"
+theme = "solarized_osaka"
 
 [editor]
 line-number = "relative"
