@@ -1,6 +1,13 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+
+-- Prevent terminal query responses from leaking as input in tmux + SSH
+if os.getenv("SSH_TTY") then
+  vim.o.termsync = false
+  vim.g.terminfo_guicolors = false
+end
+
 vim.opt.list = false
 
 vim.opt.mousescroll = "ver:1,hor:0"
