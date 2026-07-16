@@ -9,7 +9,7 @@ local scheme = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/modus_op
 config.font = wezterm.font("Monaspace Krypton")
 config.line_height = 1.4
 config.color_scheme_dirs = { wezterm.config_dir .. "/colors" }
-config.color_scheme = "Modus Vivendi"
+config.color_scheme = "Material Darker (base16)"
 config.window_decorations = "RESIZE"
 
 -- Performance settings
