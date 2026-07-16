@@ -1,16 +1,14 @@
 return {
   {
-    "marko-cerovac/material.nvim",
+    "embark-theme/vim",
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.g.material_style = "darker"
-    end,
+    name = "embark",
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "material",
+      colorscheme = "embark",
     },
   },
 }
