@@ -270,21 +270,6 @@ link "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 echo "Setting up claude skills.."
 link "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
 
-# -------------------------------------------------------
-# 9. Set up ~/figma/figma
-# -------------------------------------------------------
-echo ""
-echo "=== Setting up ~/figma/figma ==="
-if [ -d "$HOME/figma/figma" ]; then
-  echo "  Running pnpm install..."
-  (cd "$HOME/figma/figma" && pnpm i) || red "  Failed to run pnpm i"
-  echo "  Running bazel build_deps..."
-  (cd "$HOME/figma/figma" && bazel run //web:build_deps) || red "  Failed to run bazel run //web:build_deps"
-  green "  [ok] ~/figma/figma set up"
-else
-  yellow "  ~/figma/figma not found — skipping."
-fi
-
 echo ""
 green "Done! All set up."
 echo ""
