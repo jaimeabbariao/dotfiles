@@ -270,23 +270,31 @@ link "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 echo "Setting up claude skills.."
 link "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
 
-# --- tmux-agent-sidebar: build from source if prebuilt binary is incompatible ---
-# The TPM-installed prebuilt binary needs GLIBC 2.39 (Ubuntu 24.04+). On older
-# devboxes (e.g. Ubuntu 22.04 / glibc 2.35) it fails to run, so build locally.
+# --- tmux-agent-sidebar: ensure a runnable binary ---
+# TPM installs this plugin lazily on first tmux launch, and its prebuilt binary
+# needs GLIBC 2.39 (Ubuntu 24.04+). On older devboxes (Ubuntu 22.04 / glibc 2.35)
+# it won't run, so clone the plugin now and build from source.
+echo ""
+echo "=== Installing tmux-agent-sidebar ==="
 sidebar_dir="$HOME/.tmux/plugins/tmux-agent-sidebar"
-if [ -d "$sidebar_dir" ]; then
-  if ! "$sidebar_dir/bin/tmux-agent-sidebar" version >/dev/null 2>&1; then
-    if command -v cargo >/dev/null 2>&1; then
-      echo "tmux-agent-sidebar: prebuilt binary won't run, building from source..."
-      (cd "$sidebar_dir" && cargo build --release) &&
-        cp -f "$sidebar_dir/target/release/tmux-agent-sidebar" "$sidebar_dir/bin/tmux-agent-sidebar" &&
-        echo "tmux-agent-sidebar: built $("$sidebar_dir/bin/tmux-agent-sidebar" version)"
-      # Wire into a running tmux server if one exists
-      command -v tmux >/dev/null 2>&1 && tmux run-shell "$sidebar_dir/tmux-agent-sidebar.tmux" 2>/dev/null || true
-    else
-      echo "tmux-agent-sidebar: binary incompatible and cargo not found — skipping" >&2
-    fi
+if [ ! -d "$sidebar_dir" ]; then
+  echo "  Cloning tmux-agent-sidebar..."
+  git clone --depth=1 https://github.com/hiroppy/tmux-agent-sidebar.git "$sidebar_dir" ||
+    red "  Failed to clone tmux-agent-sidebar"
+fi
+if [ -d "$sidebar_dir" ] && ! "$sidebar_dir/bin/tmux-agent-sidebar" version >/dev/null 2>&1; then
+  if command -v cargo &>/dev/null; then
+    echo "  Prebuilt binary won't run here — building from source..."
+    (cd "$sidebar_dir" && cargo build --release) &&
+      mkdir -p "$sidebar_dir/bin" &&
+      cp -f "$sidebar_dir/target/release/tmux-agent-sidebar" "$sidebar_dir/bin/tmux-agent-sidebar" &&
+      green "  [ok] built $("$sidebar_dir/bin/tmux-agent-sidebar" version)" ||
+      red "  Failed to build tmux-agent-sidebar"
+  else
+    red "  binary incompatible and cargo not found — install rust, then re-run"
   fi
+else
+  green "  [ok] tmux-agent-sidebar binary already runnable"
 fi
 # --- end tmux-agent-sidebar ---
 
