@@ -71,6 +71,7 @@ PACKAGES=(
   [node]=node
   [npm]=npm
   [hx]=helix
+  [fzf]=fzf
 )
 
 # Override package names per manager
