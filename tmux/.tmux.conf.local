@@ -418,7 +418,7 @@ set -g mode-keys vi
 # bind m run "cut -c3- '#{TMUX_CONF}' | sh -s _toggle_mouse" \; display 'mouse #{?#{mouse},on,off}'
 
 # move status line to top
-#set -g status-position top
+set -g status-position bottom
 
 set -g @plugin 'craftzdog/tmux-claude-session-manager'
 set -g @plugin 'ndyakov/pimux'
