@@ -95,19 +95,28 @@ for tool in "${!PACKAGES[@]}"; do
 done
 
 # -------------------------------------------------------
-# 3. Install tree-sitter-cli via cargo
+# 3. Install Rust toolchain
+# -------------------------------------------------------
+echo ""
+echo "=== Installing Rust toolchain ==="
+if command -v cargo &>/dev/null; then
+  green "  [ok] Rust/Cargo already installed"
+else
+  yellow "  Rust/Cargo not found. Installing via rustup..."
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y || red "  Failed to install Rust toolchain."
+  # shellcheck disable=SC1091
+  source "$HOME/.cargo/env"
+  green "  [ok] Rust toolchain installed"
+fi
+
+# -------------------------------------------------------
+# 3a. Install tree-sitter-cli via cargo
 # -------------------------------------------------------
 echo ""
 echo "=== Installing tree-sitter-cli ==="
 if command -v tree-sitter &>/dev/null; then
   green "  [ok] tree-sitter-cli already installed"
 else
-  if ! command -v cargo &>/dev/null; then
-    yellow "  Rust/Cargo not found. Installing via rustup..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    # shellcheck disable=SC1091
-    source "$HOME/.cargo/env"
-  fi
   # libclang-dev is required to build tree-sitter-cli
   case "$PKG_MANAGER" in
   apt) sudo apt-get install -y libclang-dev ;;
@@ -133,12 +142,6 @@ elif [ "$PKG_MANAGER" = "brew" ]; then
   install_pkg yazi || red "  Failed to install yazi — install it manually."
 else
   # On Linux, install from crates.io (distro packages are often missing/outdated)
-  if ! command -v cargo &>/dev/null; then
-    yellow "  Rust/Cargo not found. Installing via rustup..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    # shellcheck disable=SC1091
-    source "$HOME/.cargo/env"
-  fi
   # yazi-build requires make and gcc to build yazi-fm/yazi-cli from source
   case "$PKG_MANAGER" in
   apt) sudo apt-get install -y make gcc ;;
