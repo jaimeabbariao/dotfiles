@@ -99,11 +99,19 @@ done
 # -------------------------------------------------------
 echo ""
 echo "=== Installing Rust toolchain ==="
-if command -v cargo &>/dev/null; then
-  green "  [ok] Rust/Cargo already installed"
+# Key on rustup, not cargo: a distro-packaged cargo is often too old to build
+# yazi-build, so ensure a rustup-managed latest-stable toolchain regardless.
+if command -v rustup &>/dev/null; then
+  green "  [ok] rustup already installed"
 else
-  yellow "  Rust/Cargo not found. Installing via rustup..."
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y || red "  Failed to install Rust toolchain."
+  if command -v cargo &>/dev/null; then
+    yellow "  cargo found but rustup missing — installing rustup for a latest-stable toolchain..."
+  else
+    yellow "  Rust/Cargo not found. Installing via rustup..."
+  fi
+  # -y: non-interactive; --no-modify-path since we source cargo env ourselves.
+  # Proceeds even if a distro rustc is present; rustup's ~/.cargo/bin wins on PATH.
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path || red "  Failed to install Rust toolchain."
   # shellcheck disable=SC1091
   source "$HOME/.cargo/env"
   green "  [ok] Rust toolchain installed"
