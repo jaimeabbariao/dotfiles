@@ -418,10 +418,12 @@ set -g mode-keys vi
 # bind m run "cut -c3- '#{TMUX_CONF}' | sh -s _toggle_mouse" \; display 'mouse #{?#{mouse},on,off}'
 
 # move status line to top
-set -g status-position bottom
 
 set -g @plugin 'craftzdog/tmux-claude-session-manager'
 set -g @plugin 'ndyakov/pimux'
+
+set -g status-position bottom
+
 # set -g @plugin 'niksingh710/minimal-tmux-status'
 
 # These are the default values used inside the plugin to achieve the preview shown above.
