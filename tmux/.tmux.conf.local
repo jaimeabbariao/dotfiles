@@ -420,9 +420,6 @@ set -g mode-keys vi
 # move status line to top
 
 set -g @plugin 'craftzdog/tmux-claude-session-manager'
-set -g @plugin 'ndyakov/pimux'
-
-set -g status-position bottom
 
 # set -g @plugin 'niksingh710/minimal-tmux-status'
 
