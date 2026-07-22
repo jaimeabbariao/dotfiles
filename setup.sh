@@ -71,7 +71,6 @@ PACKAGES=(
   [node]=node
   [npm]=npm
   [hx]=helix
-  [yazi]=yazi
 )
 
 # Override package names per manager
@@ -120,6 +119,35 @@ else
   echo "  Installing tree-sitter-cli via cargo..."
   cargo install tree-sitter-cli || red "  Failed to install tree-sitter-cli via cargo."
   green "  [ok] tree-sitter-cli installed"
+fi
+
+# -------------------------------------------------------
+# 3b. Install yazi
+# -------------------------------------------------------
+echo ""
+echo "=== Installing yazi ==="
+if command -v yazi &>/dev/null; then
+  green "  [ok] yazi already installed"
+elif [ "$PKG_MANAGER" = "brew" ]; then
+  echo "  Installing yazi via brew..."
+  install_pkg yazi || red "  Failed to install yazi — install it manually."
+else
+  # On Linux, install from crates.io (distro packages are often missing/outdated)
+  if ! command -v cargo &>/dev/null; then
+    yellow "  Rust/Cargo not found. Installing via rustup..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    # shellcheck disable=SC1091
+    source "$HOME/.cargo/env"
+  fi
+  # yazi-build requires make and gcc to build yazi-fm/yazi-cli from source
+  case "$PKG_MANAGER" in
+  apt) sudo apt-get install -y make gcc ;;
+  dnf) sudo dnf install -y make gcc ;;
+  pacman) sudo pacman -S --noconfirm make gcc ;;
+  esac
+  echo "  Installing yazi via cargo (yazi-build)..."
+  cargo install --force yazi-build || red "  Failed to install yazi via cargo."
+  green "  [ok] yazi installed"
 fi
 
 # -------------------------------------------------------
@@ -261,42 +289,11 @@ link "$DOTFILES_DIR/tmux/.tmux.conf.local" "$HOME/.tmux.conf.local"
 echo "Setting up Zellij..."
 link "$DOTFILES_DIR/zellij" "$HOME/.config/zellij"
 
-echo "Setting up Helix..."
-link "$DOTFILES_DIR/helix" "$HOME/.config/helix"
-
 echo "Setting up Yazi..."
 link "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 
 echo "Setting up claude skills.."
 link "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
-
-# --- tmux-agent-sidebar: ensure a runnable binary ---
-# TPM installs this plugin lazily on first tmux launch, and its prebuilt binary
-# needs GLIBC 2.39 (Ubuntu 24.04+). On older devboxes (Ubuntu 22.04 / glibc 2.35)
-# it won't run, so clone the plugin now and build from source.
-echo ""
-echo "=== Installing tmux-agent-sidebar ==="
-sidebar_dir="$HOME/.tmux/plugins/tmux-agent-sidebar"
-if [ ! -d "$sidebar_dir" ]; then
-  echo "  Cloning tmux-agent-sidebar..."
-  git clone --depth=1 https://github.com/hiroppy/tmux-agent-sidebar.git "$sidebar_dir" ||
-    red "  Failed to clone tmux-agent-sidebar"
-fi
-if [ -d "$sidebar_dir" ] && ! "$sidebar_dir/bin/tmux-agent-sidebar" version >/dev/null 2>&1; then
-  if command -v cargo &>/dev/null; then
-    echo "  Prebuilt binary won't run here — building from source..."
-    (cd "$sidebar_dir" && cargo build --release) &&
-      mkdir -p "$sidebar_dir/bin" &&
-      cp -f "$sidebar_dir/target/release/tmux-agent-sidebar" "$sidebar_dir/bin/tmux-agent-sidebar" &&
-      green "  [ok] built $("$sidebar_dir/bin/tmux-agent-sidebar" version)" ||
-      red "  Failed to build tmux-agent-sidebar"
-  else
-    red "  binary incompatible and cargo not found — install rust, then re-run"
-  fi
-else
-  green "  [ok] tmux-agent-sidebar binary already runnable"
-fi
-# --- end tmux-agent-sidebar ---
 
 echo ""
 green "Done! All set up."

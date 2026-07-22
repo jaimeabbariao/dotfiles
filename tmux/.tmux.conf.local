@@ -420,7 +420,7 @@ set -g mode-keys vi
 # move status line to top
 #set -g status-position top
 
-set -g @plugin 'hiroppy/tmux-agent-sidebar'
+set -g @plugin 'craftzdog/tmux-claude-session-manager'
 set -g @plugin 'niksingh710/minimal-tmux-status'
 
 # These are the default values used inside the plugin to achieve the preview shown above.

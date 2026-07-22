@@ -8,9 +8,7 @@ blur = true
 padding = { y = 3 }
 
 [font]
-normal = { family = "PlemolJP Console NF" }
-size = 13
-offset = { x = 1, y = 0 }
+normal = { family = "Monaspace Krypton" }
 
 [terminal]
 osc52 = "CopyPaste"
