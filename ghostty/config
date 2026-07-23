@@ -1,5 +1,4 @@
-theme = koda-dark
-background = #1E1C31
+theme = solarized_osaka
 font-family = Monaspace Krypton
 font-thicken = true
 
