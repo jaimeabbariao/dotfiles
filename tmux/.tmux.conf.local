@@ -69,7 +69,9 @@ tmux_conf_new_pane_reconnect_ssh=false
 # automatic detection relies on the COLORTERM environment variable being defined
 # to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
 # see https://github.com/termstandard/colors
-tmux_conf_24b_colour=auto
+# mosh/SSH often does not forward COLORTERM, so auto-detection incorrectly
+# downgrades remote tmux sessions to 256 colours.
+tmux_conf_24b_colour=true
 
 # -- theming -------------------------------------------------------------------
 
@@ -382,14 +384,19 @@ tmux_conf_urlscan_options="--compact --dedupe"
 
 # this is the place to override or undo settings
 
-# ghostty terminal integration: prevent terminal-query responses (XTVERSION,
-# kitty keyboard protocol) from leaking into neovim/snacks pickers as input
+# Keep true colour working when the outer terminal is presented as xterm by
+# mosh/SSH. terminal-overrides covers older tmux; terminal-features is the
+# preferred spelling on modern tmux.
 set -g default-terminal "tmux-256color"
 set -ag terminal-overrides ",xterm*:Tc"
+set -as terminal-features ',xterm*:RGB'
+
+# ghostty terminal integration: prevent terminal-query responses (XTVERSION,
+# kitty keyboard protocol) from leaking into neovim/snacks pickers as input
 set -g allow-passthrough off
 set -s extended-keys on
-set -as terminal-features 'xterm*:extkeys'
-set -as terminal-features 'alacritty*:extkeys'
+set -as terminal-features ',xterm*:extkeys'
+set -as terminal-features ',alacritty*:extkeys'
 set -sg escape-time 50
 set -g focus-events on
 
