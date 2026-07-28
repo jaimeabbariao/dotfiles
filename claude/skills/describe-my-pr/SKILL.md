@@ -24,6 +24,8 @@ Then scope the diff to that base (e.g. `git diff <baseRefName>...HEAD`). Only de
 branch adds on top of its base; work that landed in a parent/base branch belongs to that branch's
 PR, not this one.
 
+Make sure that the output is terse and clear. Don't say more than is necessary to explain the changes.
+
 ## Update PR
 
 After describing the changes in the PR, make sure to update the PR title and description 

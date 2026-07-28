@@ -78,10 +78,6 @@ The shift window is `[start, start + 7 days]`.
 ```markdown
 # Oncall Handoff — {start} to {end}
 
-## Executive summary
-
-2–4 sentences covering the shift's main themes, outcomes, and most important remaining risks.
-
 ## Topics
 
 ### {Initiative, incident, or product area}
