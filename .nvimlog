@@ -1,0 +1,7 @@
+WRN 2026-07-30T14:18:45.260 ?.10053    server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/9sDMXK/nvim.10053.0
+WRN 2026-07-30T14:18:57.766 ?.10255    server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/kQdhrw/nvim.10255.0
+WRN 2026-07-30T14:20:16.966 ?.10935    server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/Kd4cR4/nvim.10935.0
+WRN 2026-07-30T14:20:25.766 ?.11030    server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/eJcZJk/nvim.11030.0
+WRN 2026-07-30T14:20:35.363 ?.11086    server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/Ptq0QO/nvim.11086.0
+WRN 2026-07-30T14:20:43.049 ?.11133    server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/vCfFhQ/nvim.11133.0
+WRN 2026-07-30T14:20:51.226 ?.11192    server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/SLdQ0T/nvim.11192.0

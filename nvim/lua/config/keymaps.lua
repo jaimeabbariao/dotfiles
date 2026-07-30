@@ -33,13 +33,36 @@ vim.keymap.set("n", "<leader>km", function()
   })
 end, { desc = "Run maintainers on current file" })
 
+local plain_text_lsp_configs = {}
+local inline_completion_was_enabled = false
+
 vim.keymap.set("n", "<leader>uL", function()
-  vim.g.lsp_enabled = not vim.g.lsp_enabled
-  if vim.g.lsp_enabled then
-    vim.cmd("LspStart")
-    vim.notify("LSP enabled")
+  vim.g.plain_text_mode = not vim.g.plain_text_mode
+
+  if vim.g.plain_text_mode then
+    plain_text_lsp_configs = vim.tbl_keys(vim.lsp._enabled_configs)
+    table.sort(plain_text_lsp_configs)
+    inline_completion_was_enabled = vim.lsp.inline_completion.is_enabled()
+
+    if #plain_text_lsp_configs > 0 then
+      vim.lsp.enable(plain_text_lsp_configs, false)
+    end
+    vim.lsp.inline_completion.enable(false)
+
+    if package.loaded["blink.cmp"] then
+      require("blink.cmp").cancel()
+      require("blink.cmp").hide_signature()
+    end
+
+    vim.notify("Plain text mode enabled")
   else
-    vim.cmd("LspStop")
-    vim.notify("LSP disabled")
+    if #plain_text_lsp_configs > 0 then
+      vim.lsp.enable(plain_text_lsp_configs)
+    end
+    if inline_completion_was_enabled then
+      vim.lsp.inline_completion.enable()
+    end
+
+    vim.notify("Plain text mode disabled")
   end
-end, { desc = "Toggle LSP" })
+end, { desc = "Toggle plain text mode" })
