@@ -36,7 +36,7 @@ end, { desc = "Run maintainers on current file" })
 local plain_text_lsp_configs = {}
 local inline_completion_was_enabled = false
 
-vim.keymap.set("n", "<leader>uL", function()
+vim.keymap.set("n", "<leader>up", function()
   vim.g.plain_text_mode = not vim.g.plain_text_mode
 
   if vim.g.plain_text_mode then
