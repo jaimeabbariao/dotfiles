@@ -281,7 +281,23 @@ else
 fi
 
 # -------------------------------------------------------
-# 8. Symlink dotfiles
+# 8. Install Herdr
+# -------------------------------------------------------
+echo ""
+echo "=== Installing Herdr ==="
+if command -v herdr &>/dev/null; then
+  green "  [ok] Herdr already installed"
+else
+  echo "  Installing Herdr..."
+  if curl -fsSL https://herdr.dev/install.sh | sh; then
+    green "  [ok] Herdr installed"
+  else
+    red "  Failed to install Herdr."
+  fi
+fi
+
+# -------------------------------------------------------
+# 9. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
