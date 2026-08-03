@@ -323,6 +323,9 @@ link "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 echo "Setting up claude skills.."
 link "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
 
+echo "Setting up herdr..."
+link $"DOTFILES_DIR/herdr" "$HOME/.config/herdr"
+
 echo ""
 green "Done! All set up."
 echo ""
