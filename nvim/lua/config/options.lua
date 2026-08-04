@@ -16,8 +16,40 @@ vim.opt.wrap = false
 vim.opt.clipboard = "unnamedplus"
 
 -- A remote host cannot access the desktop clipboard directly. OSC 52 sends
--- clipboard operations through SSH (and Herdr) to the local terminal instead.
--- Ghostty permits OSC 52 reads and writes in ghostty/config.
+-- yanks through SSH (and Herdr) to the local terminal instead. Do not use the
+-- OSC 52 paste/query operation: some terminals prompt with "Waiting for OSC 52"
+-- while Neovim waits for a clipboard response. Cache our own yanks for `p`, and
+-- use the terminal's normal paste shortcut for text copied outside Neovim.
 if os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION") then
-  vim.g.clipboard = "osc52"
+  local osc52 = require("vim.ui.clipboard.osc52")
+  local cache = {
+    ["+"] = { {}, "v" },
+    ["*"] = { {}, "v" },
+  }
+
+  local function copy(reg)
+    local osc52_copy = osc52.copy(reg)
+    return function(lines, regtype)
+      cache[reg] = { vim.deepcopy(lines), regtype }
+      osc52_copy(lines, regtype)
+    end
+  end
+
+  local function paste(reg)
+    return function()
+      return cache[reg]
+    end
+  end
+
+  vim.g.clipboard = {
+    name = "OSC 52 (copy only)",
+    copy = {
+      ["+"] = copy("+"),
+      ["*"] = copy("*"),
+    },
+    paste = {
+      ["+"] = paste("+"),
+      ["*"] = paste("*"),
+    },
+  }
 end
