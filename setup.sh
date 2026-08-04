@@ -79,6 +79,9 @@ case "$PKG_MANAGER" in
 apt)
   PACKAGES[fd]=fd-find
   PACKAGES[node]=nodejs
+  # Used by Neovim and terminal apps when Ubuntu has an X11 display.
+  # Headless SSH sessions use Neovim's OSC 52 provider instead.
+  PACKAGES[xclip]=xclip
   ;;
 brew)
   PACKAGES[fd]=fd

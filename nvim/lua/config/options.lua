@@ -14,14 +14,10 @@ vim.opt.mousescroll = "ver:1,hor:0"
 vim.opt.wrap = false
 
 vim.opt.clipboard = "unnamedplus"
--- vim.g.clipboard = {
---   name = "OSC 52",
---   copy = {
---     ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
---     ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
---   },
---   paste = {
---     ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
---     ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
---   },
--- }
+
+-- A remote host cannot access the desktop clipboard directly. OSC 52 sends
+-- clipboard operations through SSH (and Herdr) to the local terminal instead.
+-- Ghostty permits OSC 52 reads and writes in ghostty/config.
+if os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION") then
+  vim.g.clipboard = "osc52"
+end
