@@ -11,3 +11,11 @@ nvim/*.log
 nvim/data
 
 zellij/zjstatus-releases
+
+herdr/herdr-client.log
+herdr/herdr-client.sock
+herdr/herdr-server.log
+herdr/herdr.sock
+herdr/release-notes.json
+herdr/session.json
+herdr/.plugins.lock
