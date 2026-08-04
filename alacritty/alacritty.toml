@@ -8,7 +8,7 @@ blur = true
 padding = { y = 3 }
 
 [font]
-normal = { family = "Monaspace Krypton" }
+normal = { family = "TX-02" }
 
 [terminal]
 osc52 = "CopyPaste"
