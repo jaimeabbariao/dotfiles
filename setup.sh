@@ -323,8 +323,13 @@ link "$DOTFILES_DIR/zellij" "$HOME/.config/zellij"
 echo "Setting up Yazi..."
 link "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 
-echo "Setting up claude skills.."
-link "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
+echo "Setting up agent skills..."
+for skills_dir in \
+  "$HOME/.claude/skills" \
+  "$HOME/.codex/skills" \
+  "$HOME/.cursor/skills"; do
+  link "$DOTFILES_DIR/claude/skills" "$skills_dir"
+done
 
 echo "Setting up herdr..."
 link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"

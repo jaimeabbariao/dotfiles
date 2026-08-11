@@ -10,7 +10,9 @@ return {
       -- refer to the configuration section below
       bigfile = { enabled = true },
       dashboard = { enabled = false },
-      explorer = { enabled = true },
+      -- Yazi owns directory buffers via open_for_directories. Keep the Snacks
+      -- explorer available without letting both plugins replace netrw.
+      explorer = { enabled = true, replace_netrw = false },
       indent = { enabled = false },
       input = { enabled = true },
       picker = { enabled = true },
