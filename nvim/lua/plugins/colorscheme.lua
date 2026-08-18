@@ -20,7 +20,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "cobalt",
+      colorscheme = "embark",
     },
   },
 }
