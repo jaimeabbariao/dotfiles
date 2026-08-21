@@ -334,6 +334,19 @@ done
 echo "Setting up herdr..."
 link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"
 
+# Zed is linked file-by-file, not as a directory: Zed keeps mutable state
+# (conversations/, embeddings/, themes/, telemetry temp files) in the same
+# directory as its config, and we don't want that in the repo.
+#
+# The same settings.json is used on both sides of a remote/SSH session. Zed
+# reads local settings for UI and *server* settings for language servers, and
+# neither side sees the other's file -- so the toolchain bits (languages, lsp)
+# only take effect on a Coder box if this file is present there too. Settings
+# that don't apply to a given side are simply ignored.
+echo "Setting up Zed..."
+link "$DOTFILES_DIR/zed/settings.json" "$HOME/.config/zed/settings.json"
+link "$DOTFILES_DIR/zed/keymap.json" "$HOME/.config/zed/keymap.json"
+
 echo ""
 green "Done! All set up."
 echo ""

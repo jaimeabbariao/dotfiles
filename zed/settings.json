@@ -1,0 +1,118 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "markdown_preview_font_size": 12.0,
+  "agent_servers": {
+    "cursor": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "default_config_options": {
+        "mode": "agent-full-access"
+      },
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
+  "edit_predictions": {
+    "provider": "copilot",
+  },
+  "project_panel": {
+    "dock": "right",
+  },
+  "outline_panel": {
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    "dock": "right",
+  },
+  "git_panel": {
+    "dock": "right",
+  },
+  "icon_theme": {
+    "mode": "light",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)",
+  },
+  "show_wrap_guides": true,
+  "indent_guides": {
+    "enabled": false,
+    "active_line_width": 1,
+    "line_width": 1,
+  },
+  "agent_buffer_font_size": 11.0,
+  "agent_ui_font_size": 13.0,
+  "agent": {
+    "expand_terminal_card": false,
+    "dock": "left",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-3-5-sonnet",
+    },
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "Modus Operandi Tritanopia",
+    "dark": "GitHub Dark",
+  },
+  "vim_mode": true,
+  "ui_font_size": 11.0,
+  "buffer_font_size": 11.0,
+  "buffer_font_family": "TX-02",
+  "ui_font_family": ".ZedMono",
+  "terminal": {
+    "font_family": "PlemolJP Console NF",
+    "font_size": 12.0,
+  },
+  "cursor_blink": false,
+  "relative_line_numbers": "enabled",
+  "scrollbar": { "show": "never" },
+  "languages": {
+    "Ruby": {
+      "language_servers": ["ruby-lsp", "!rubocop", "!solargraph"],
+    },
+    // Deny-list rather than allow-list: enables the tsgo extension's
+    // `typescript-ls` plus eslint/oxlint, without running vtsls alongside it
+    // (duplicate hovers + wasted CPU).
+    "TypeScript": {
+      "language_servers": ["!vtsls", "!typescript-language-server", "..."],
+    },
+    "TSX": {
+      "language_servers": ["!vtsls", "!typescript-language-server", "..."],
+    },
+    "JavaScript": {
+      "language_servers": ["!vtsls", "!typescript-language-server", "..."],
+    },
+    "JSX": {
+      "language_servers": ["!vtsls", "!typescript-language-server", "..."],
+    },
+  },
+  "auto_install_extensions": {
+    "tsgo": true,
+    "oxc": true,
+    "ruby": true,
+    "proto": true,
+    "swift": true,
+    "kotlin": true,
+  },
+  "lsp": {
+    "ruby-lsp": {
+      "initialization_options": {
+        "enabledFeatures": {
+          "diagnostics": false,
+          "formatting": true,
+        },
+        "formatter": "rubocop",
+      },
+    },
+  },
+  "buffer_line_height": "comfortable",
+}
