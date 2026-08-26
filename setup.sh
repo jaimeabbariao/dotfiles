@@ -328,7 +328,7 @@ for skills_dir in \
   "$HOME/.claude/skills" \
   "$HOME/.codex/skills" \
   "$HOME/.cursor/skills"; do
-  link "$DOTFILES_DIR/claude/skills" "$skills_dir"
+  link "$DOTFILES_DIR/agent-skills" "$skills_dir"
 done
 
 echo "Setting up herdr..."

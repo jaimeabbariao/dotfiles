@@ -8,7 +8,7 @@ local scheme = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/modus_op
 
 -- WezTerm's font scanner does not discover these user-installed fonts on macOS.
 config.font_dirs = { wezterm.home_dir .. "/Library/Fonts" }
-config.font = wezterm.font("TX-02")
+config.font = wezterm.font("PlemolJP Console NF")
 -- TX-02's descenders (y j g p q) clear its cell floor by only 0.025em, so the cell
 -- height must land on whole pixels or they clip on 1x displays. Cell is font_size
 -- * 1.2, so keep this a multiple of 5 -- 15.0 gives an exact 18px cell. Do not
