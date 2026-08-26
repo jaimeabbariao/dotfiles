@@ -19,3 +19,6 @@ herdr/herdr.sock
 herdr/release-notes.json
 herdr/session.json
 herdr/.plugins.lock
+
+warp/settings.toml
+warp/themes/rose-pine-warp

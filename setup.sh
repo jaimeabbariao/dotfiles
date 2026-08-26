@@ -343,6 +343,9 @@ link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"
 # neither side sees the other's file -- so the toolchain bits (languages, lsp)
 # only take effect on a Coder box if this file is present there too. Settings
 # that don't apply to a given side are simply ignored.
+echo "Setting up Warp..."
+link "$DOTFILES_DIR/warp" "$HOME/.warp"
+
 echo "Setting up Zed..."
 link "$DOTFILES_DIR/zed/settings.json" "$HOME/.config/zed/settings.json"
 link "$DOTFILES_DIR/zed/keymap.json" "$HOME/.config/zed/keymap.json"
