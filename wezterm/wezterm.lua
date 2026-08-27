@@ -4,7 +4,7 @@ local opacity = 1
 local transparent_bg = "rgba(22, 24, 26, " .. opacity .. ")"
 local config = wezterm.config_builder()
 
-local scheme = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/modus_operandi.toml")
+local scheme = wezterm.color.load_scheme(wezterm.config_dir .. "/colors/embark.toml")
 
 -- WezTerm's font scanner does not discover these user-installed fonts on macOS.
 config.font_dirs = { wezterm.home_dir .. "/Library/Fonts" }
@@ -13,7 +13,7 @@ config.font = wezterm.font("PlemolJP Console NF")
 -- height must land on whole pixels or they clip on 1x displays. Cell is font_size
 -- * 1.2, so keep this a multiple of 5 -- 15.0 gives an exact 18px cell. Do not
 -- "fix" clipping with line_height; that shifts the baseline and clips the bottom.
--- config.font_size = 15.0
+config.font_size = 15.0
 config.color_scheme_dirs = { wezterm.config_dir .. "/colors" }
 config.color_scheme = "embark"
 config.window_decorations = "RESIZE"
