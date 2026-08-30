@@ -70,7 +70,6 @@ PACKAGES=(
   [curl]=curl
   [node]=node
   [npm]=npm
-  [hx]=helix
   [fzf]=fzf
 )
 
@@ -188,7 +187,7 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
 declare -A OMZ_PLUGINS
 OMZ_PLUGINS=(
-  [zsh - autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
+  [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
 )
 
 for plugin in "${!OMZ_PLUGINS[@]}"; do
@@ -262,29 +261,7 @@ else
 fi
 
 # -------------------------------------------------------
-# 7. Install tmux & Oh My Tmux
-# -------------------------------------------------------
-echo ""
-echo "=== Installing tmux ==="
-if command -v tmux &>/dev/null; then
-  green "  [ok] tmux already installed"
-else
-  echo "  Installing tmux..."
-  install_pkg tmux || red "  Failed to install tmux — install it manually."
-fi
-
-echo ""
-echo "=== Installing Oh My Tmux ==="
-if [ -d "$HOME/.tmux" ]; then
-  green "  [ok] Oh My Tmux already installed"
-else
-  echo "  Cloning Oh My Tmux..."
-  git clone --depth=1 https://github.com/gpakosz/.tmux.git "$HOME/.tmux" || red "  Failed to clone Oh My Tmux"
-  green "  [ok] Oh My Tmux installed"
-fi
-
-# -------------------------------------------------------
-# 8. Install Herdr
+# 7. Install Herdr
 # -------------------------------------------------------
 echo ""
 echo "=== Installing Herdr ==="
@@ -300,7 +277,7 @@ else
 fi
 
 # -------------------------------------------------------
-# 9. Symlink dotfiles
+# 8. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
@@ -308,20 +285,25 @@ echo "=== Symlinking Dotfiles ==="
 echo "Setting up Neovim..."
 link "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
-if [ -f "$DOTFILES_DIR/zsh/.zshrc" ]; then
-  echo "Setting up Zsh..."
-  link "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
-fi
-
-echo "Setting up tmux..."
-link "$HOME/.tmux/.tmux.conf" "$HOME/.tmux.conf"
-link "$DOTFILES_DIR/tmux/.tmux.conf.local" "$HOME/.tmux.conf.local"
-
-echo "Setting up Zellij..."
-link "$DOTFILES_DIR/zellij" "$HOME/.config/zellij"
-
 echo "Setting up Yazi..."
 link "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
+
+echo "Setting up Ghostty..."
+link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
+
+echo "Setting up WezTerm..."
+link "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
+
+echo "Setting up herdr..."
+link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"
+
+# Claude and Codex are linked file-by-file, not as directories: both keep
+# mutable state (history, sessions, projects, logs) alongside their config.
+echo "Setting up Claude..."
+link "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
+echo "Setting up Codex..."
+link "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
 
 echo "Setting up agent skills..."
 for skills_dir in \
@@ -330,25 +312,6 @@ for skills_dir in \
   "$HOME/.cursor/skills"; do
   link "$DOTFILES_DIR/agent-skills" "$skills_dir"
 done
-
-echo "Setting up herdr..."
-link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"
-
-# Zed is linked file-by-file, not as a directory: Zed keeps mutable state
-# (conversations/, embeddings/, themes/, telemetry temp files) in the same
-# directory as its config, and we don't want that in the repo.
-#
-# The same settings.json is used on both sides of a remote/SSH session. Zed
-# reads local settings for UI and *server* settings for language servers, and
-# neither side sees the other's file -- so the toolchain bits (languages, lsp)
-# only take effect on a Coder box if this file is present there too. Settings
-# that don't apply to a given side are simply ignored.
-echo "Setting up Warp..."
-link "$DOTFILES_DIR/warp" "$HOME/.warp"
-
-echo "Setting up Zed..."
-link "$DOTFILES_DIR/zed/settings.json" "$HOME/.config/zed/settings.json"
-link "$DOTFILES_DIR/zed/keymap.json" "$HOME/.config/zed/keymap.json"
 
 echo ""
 green "Done! All set up."

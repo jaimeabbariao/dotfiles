@@ -1,5 +1,5 @@
-theme = Catppuccin Mocha
-font-family = PlemolJP Console NF
+theme = Gruvbox Dark Hard
+font-family = MonoLisa
 font-thicken = true
 
 alpha-blending = linear-corrected
