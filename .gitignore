@@ -22,3 +22,6 @@ herdr/.plugins.lock
 
 warp/settings.toml
 warp/themes/rose-pine-warp
+
+# ponytail skills are symlinked in by setup.sh
+agent-skills/ponytail*
