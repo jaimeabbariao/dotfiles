@@ -69,10 +69,11 @@ case "$PKG_MANAGER" in
 apt)
   # Used by Neovim and terminal apps when Ubuntu has an X11 display.
   # Headless SSH sessions use Neovim's OSC 52 provider instead.
-  PACKAGES="${PACKAGES/node:node/node:nodejs} fd:fd-find xclip:xclip"
+  PACKAGES="${PACKAGES/node:node/node:nodejs} xclip:xclip"
+  PACKAGES="${PACKAGES/fd:fd/fd:fd-find}"
   ;;
 dnf)
-  PACKAGES="$PACKAGES fd:fd-find"
+  PACKAGES="${PACKAGES/fd:fd/fd:fd-find}"
   ;;
 esac
 
@@ -86,6 +87,14 @@ for pair in $PACKAGES; do
     install_pkg "$pkg" || red "  Failed to install $tool — install it manually."
   fi
 done
+
+# Debian/Ubuntu ship fd-find's binary as `fdfind` to avoid colliding with
+# fdclone, so tools looking for `fd` (Telescope, fzf configs) never find it.
+if ! command -v fd &>/dev/null && command -v fdfind &>/dev/null; then
+  mkdir -p "$HOME/bin"
+  ln -sf "$(command -v fdfind)" "$HOME/bin/fd"
+  green "  [ok] linked fd -> fdfind in ~/bin"
+fi
 
 # -------------------------------------------------------
 # 3. Install Rust toolchain
@@ -330,6 +339,10 @@ fi
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
+
+# Must come after Oh My Zsh: its installer writes its own template to ~/.zshrc.
+echo "Setting up Zsh..."
+link "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
 
 echo "Setting up Neovim..."
 link "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
