@@ -25,3 +25,6 @@ warp/themes/rose-pine-warp
 
 # ponytail skills are symlinked in by setup.sh
 agent-skills/ponytail*
+
+# caveman skill is symlinked in by setup.sh
+agent-skills/caveman

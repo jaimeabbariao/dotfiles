@@ -61,34 +61,24 @@ echo "=== Installing LazyVim Dependencies ==="
 echo "Detected package manager: $PKG_MANAGER"
 echo ""
 
-# Package names differ per manager: tool -> package
-declare -A PACKAGES
-PACKAGES=(
-  [git]=git
-  [nvim]=neovim
-  [rg]=ripgrep
-  [curl]=curl
-  [node]=node
-  [npm]=npm
-  [fzf]=fzf
-)
+# No associative arrays: macOS ships bash 3.2. "tool:package" pairs instead.
+PACKAGES="git:git nvim:neovim rg:ripgrep curl:curl node:node npm:npm fzf:fzf fd:fd"
 
 # Override package names per manager
 case "$PKG_MANAGER" in
 apt)
-  PACKAGES[fd]=fd-find
-  PACKAGES[node]=nodejs
   # Used by Neovim and terminal apps when Ubuntu has an X11 display.
   # Headless SSH sessions use Neovim's OSC 52 provider instead.
-  PACKAGES[xclip]=xclip
+  PACKAGES="${PACKAGES/node:node/node:nodejs} fd:fd-find xclip:xclip"
   ;;
-brew)
-  PACKAGES[fd]=fd
+dnf)
+  PACKAGES="$PACKAGES fd:fd-find"
   ;;
 esac
 
-for tool in "${!PACKAGES[@]}"; do
-  pkg="${PACKAGES[$tool]}"
+for pair in $PACKAGES; do
+  tool="${pair%%:*}"
+  pkg="${pair#*:}"
   if command -v "$tool" &>/dev/null; then
     green "  [ok] $tool"
   else
@@ -185,21 +175,15 @@ echo "=== Installing Oh My Zsh Plugins ==="
 
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
-declare -A OMZ_PLUGINS
-OMZ_PLUGINS=(
-  [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions"
-)
-
-for plugin in "${!OMZ_PLUGINS[@]}"; do
-  dest="$ZSH_CUSTOM/plugins/$plugin"
-  if [ -d "$dest" ]; then
-    green "  [ok] $plugin already installed"
-  else
-    echo "  Cloning $plugin..."
-    git clone --depth=1 "${OMZ_PLUGINS[$plugin]}" "$dest" || red "  Failed to clone $plugin"
-    green "  [ok] $plugin installed"
-  fi
-done
+plugin=zsh-autosuggestions
+dest="$ZSH_CUSTOM/plugins/$plugin"
+if [ -d "$dest" ]; then
+  green "  [ok] $plugin already installed"
+else
+  echo "  Cloning $plugin..."
+  git clone --depth=1 "https://github.com/zsh-users/$plugin" "$dest" || red "  Failed to clone $plugin"
+  green "  [ok] $plugin installed"
+fi
 
 # install starship
 if command -v starship &>/dev/null; then
@@ -301,6 +285,31 @@ if [ -d "$PONYTAIL_DIR/skills" ]; then
   done
 else
   red "  No ponytail skills found at $PONYTAIL_DIR/skills — skipping."
+fi
+
+# -------------------------------------------------------
+# 8b. Install caveman skill
+# -------------------------------------------------------
+echo ""
+echo "=== Installing caveman skill ==="
+
+# Same pattern as ponytail: track upstream, symlink in. Skill only — the proxy
+# and CLI need a global npm install and an agent wrapper. Linked after ponytail
+# on purpose: both ship a `caveman` skill, upstream's wins.
+CAVEMAN_DIR="$HOME/.local/share/caveman"
+if [ -d "$CAVEMAN_DIR/.git" ]; then
+  echo "  Updating caveman..."
+  git -C "$CAVEMAN_DIR" pull --ff-only -q || yellow "  Failed to update caveman — using the existing checkout."
+else
+  echo "  Cloning caveman..."
+  mkdir -p "$(dirname "$CAVEMAN_DIR")"
+  git clone --depth=1 -q https://github.com/JuliusBrussee/caveman "$CAVEMAN_DIR" || red "  Failed to clone caveman."
+fi
+
+if [ -d "$CAVEMAN_DIR/skills/caveman" ]; then
+  link "$CAVEMAN_DIR/skills/caveman" "$DOTFILES_DIR/agent-skills/caveman"
+else
+  red "  No caveman skill found at $CAVEMAN_DIR/skills/caveman — skipping."
 fi
 
 # -------------------------------------------------------
