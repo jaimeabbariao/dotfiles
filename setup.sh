@@ -92,22 +92,35 @@ done
 # -------------------------------------------------------
 echo ""
 echo "=== Installing Rust toolchain ==="
+# Own our toolchain dirs: images that ship a system rustup point these at
+# root-owned paths, where `cargo install` fails with a permissions error.
+export CARGO_HOME="$HOME/.cargo" RUSTUP_HOME="$HOME/.rustup"
+# A rustup may already be installed but absent from this shell's PATH, since
+# ~/.cargo/bin is only added by an interactive rc file. Look there first.
+[ -d "$CARGO_HOME/bin" ] && PATH="$CARGO_HOME/bin:$PATH"
 # Key on rustup, not cargo: a distro-packaged cargo is often too old to build
 # yazi-build, so ensure a rustup-managed latest-stable toolchain regardless.
 if command -v rustup &>/dev/null; then
-  green "  [ok] rustup already installed"
+  # Idempotent, and installs stable if this RUSTUP_HOME has no toolchain yet.
+  rustup default stable >/dev/null && green "  [ok] rustup already installed" ||
+    red "  rustup found but no usable toolchain — cargo-based tools will be skipped."
 else
   if command -v cargo &>/dev/null; then
     yellow "  cargo found but rustup missing — installing rustup for a latest-stable toolchain..."
   else
     yellow "  Rust/Cargo not found. Installing via rustup..."
   fi
-  # -y: non-interactive; --no-modify-path since we source cargo env ourselves.
-  # Proceeds even if a distro rustc is present; rustup's ~/.cargo/bin wins on PATH.
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path || red "  Failed to install Rust toolchain."
-  # shellcheck disable=SC1091
-  source "$HOME/.cargo/env"
-  green "  [ok] Rust toolchain installed"
+  # -y: non-interactive; --no-modify-path since we manage PATH ourselves.
+  # RUSTUP_INIT_SKIP_PATH_CHECK: without it rustup-init aborts with "cannot
+  # install while Rust is installed" when a distro rustc/cargo is on PATH.
+  # rustup's ~/.cargo/bin wins on PATH anyway, so that check is unwanted here.
+  if curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs |
+    RUSTUP_INIT_SKIP_PATH_CHECK=yes sh -s -- -y --no-modify-path; then
+    PATH="$CARGO_HOME/bin:$PATH"
+    green "  [ok] Rust toolchain installed"
+  else
+    red "  Failed to install Rust toolchain — cargo-based tools will be skipped."
+  fi
 fi
 
 # -------------------------------------------------------
