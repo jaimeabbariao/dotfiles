@@ -7,25 +7,45 @@ codex_hooks = true
 js_repl = false
 
 [desktop]
-appearanceDarkCodeThemeId = "codex"
+appearanceTheme = "dark"
+appearanceDarkCodeThemeId = "github"
 followUpQueueMode = "queue"
 conversationDetailMode = "STEPS_COMMANDS"
+appearanceLightCodeThemeId = "gruvbox"
 
 [desktop.appearanceDarkChromeTheme]
-accent = "#0169cc"
-contrast = 31
-ink = "#fcfcfc"
+accent = "#1f6feb"
+accentSource = "custom"
+contrast = 59
+ink = "#e6edf3"
 opaqueWindows = true
-surface = "#111111"
+surface = "#0d1117"
 
 [desktop.appearanceDarkChromeTheme.fonts]
 code = '"TX-02"'
-ui = "Inter"
+ui = '"PlemolJP35 Console NF"'
 
 [desktop.appearanceDarkChromeTheme.semanticColors]
-diffAdded = "#00a240"
-diffRemoved = "#e02e2a"
-skill = "#b06dff"
+diffAdded = "#3fb950"
+diffRemoved = "#f85149"
+skill = "#bc8cff"
+
+[desktop.appearanceLightChromeTheme]
+accent = "#458588"
+accentSource = "custom"
+contrast = 45
+ink = "#3c3836"
+opaqueWindows = false
+surface = "#fbf1c7"
+
+[desktop.appearanceLightChromeTheme.fonts]
+code = '"TX-02"'
+ui = '"PlemolJP Console NF"'
+
+[desktop.appearanceLightChromeTheme.semanticColors]
+diffAdded = "#3c3836"
+diffRemoved = "#cc241d"
+skill = "#b16286"
 
 [marketplaces.openai-bundled]
 source_type = "local"
