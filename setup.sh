@@ -335,6 +335,23 @@ else
 fi
 
 # -------------------------------------------------------
+# 8c. Install leaf
+# -------------------------------------------------------
+
+echo ""
+echo "=== Installing leaf ==="
+if command -v leaf &>/dev/null; then
+  green "  [ok] leaf already installed"
+else
+  echo "  Installing leaf..."
+  if curl -fsSL https://raw.githubusercontent.com/RivoLink/leaf/main/scripts/install.sh | sh; then
+    green "  [ok] leaf installed"
+  else
+    red "  Failed to install leaf."
+  fi
+fi
+
+# -------------------------------------------------------
 # 9. Symlink dotfiles
 # -------------------------------------------------------
 echo ""

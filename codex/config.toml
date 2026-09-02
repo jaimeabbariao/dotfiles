@@ -23,7 +23,6 @@ surface = "#0d1117"
 
 [desktop.appearanceDarkChromeTheme.fonts]
 code = '"TX-02"'
-ui = '"PlemolJP35 Console NF"'
 
 [desktop.appearanceDarkChromeTheme.semanticColors]
 diffAdded = "#3fb950"
@@ -60,6 +59,9 @@ enabled = true
 [plugins."visualize@openai-bundled"]
 enabled = true
 
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
 [mcp_servers.node_repl]
 args = []
 command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
@@ -72,17 +74,13 @@ NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/jabbariao/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 CODEX_HOME = "/Users/jabbariao/.codex"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-BROWSER_USE_TINYSKY_ENABLED = "0"
-NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
-NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.825.51511"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.825.51511/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.831.20005"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.831.20005/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
-
-[mcp_servers.cua_repl]
-command = "/Applications/ChatGPT.app/Contents/MacOS/ChatGPT"
-enabled = false
 
 [projects."/Users/jabbariao/Documents/Codex/2026-09-01/https-app-notion-com-p-figma"]
 trust_level = "trusted"
