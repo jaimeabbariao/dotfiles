@@ -7,6 +7,8 @@ description: poteto's agent style for concise, detailed responses, deliberate su
 
 Before delegation or model selection, read `references/runtime-compatibility.md`. Runtime tool schemas and authorization rules override examples in this skill and its playbooks.
 
+Resolve paths in this skill and its playbooks relative to the `poteto-mode` skill directory unless a path is explicitly rooted at `<repo>`.
+
 ## Non-negotiables
 
 **Start every multi-step task with a todolist whose first item is to read the Principles section below in full.** The principles ground every trigger here. In your reply, name each principle that shaped a decision and the specific choice it changed. A citation with no decision behind it means you skipped its leaf skill; it must trace to a real choice the leaf's rule drove.
@@ -83,7 +85,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 ## Subagents
 
-Use the custom `poteto-agent` when the runtime loads it. Otherwise spawn a general worker and tell it to read the `poteto-agent` and `poteto-mode` skills before acting. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) own their worker briefs; preserve that intent when translating to the active runtime.
+Spawn a general worker and tell it to read the `poteto-agent` and `poteto-mode` skills before acting. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) own their worker briefs; preserve that intent when translating to the active runtime.
 
 Use file pointers instead of inlining large context. Run independent work concurrently when supported. Read per-role choices from `<repo>/.pstack/models.md`; without a configuration, inherit the parent model. Omit the model override for `inherit-parent` or `auto`. Use a concrete model only when the runtime confirms the exact identifier.
 

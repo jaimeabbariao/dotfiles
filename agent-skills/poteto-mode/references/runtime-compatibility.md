@@ -20,7 +20,7 @@ Use the runtime's native subagent or task mechanism. Translate the intent, not C
 - Keep the parent responsible for reviewing changes and synthesizing results.
 - If subagents are unavailable, execute the same slices sequentially and preserve independent passes.
 
-Claude Code can load the custom agents in `agents/`. Codex does not load that directory, so a Codex parent should spawn a general worker and instruct it to read the relevant pstack skill before acting. Cursor may use either behavior depending on its active plugin runtime.
+These are standalone skills. Spawn a general worker and instruct it to read the relevant worker skill, such as `poteto-agent` or `comment-sicko`, before acting.
 
 Never pass unsupported fields copied from another runtime. Examples include Cursor's `subagent_type`, `environment`, `run_in_background`, and `cloud_base_branch`. Use only fields present in the active tool schema.
 
@@ -29,7 +29,7 @@ Never pass unsupported fields copied from another runtime. Examples include Curs
 Treat host conveniences as optional accelerators:
 
 - Cursor `/loop`, cloud agents, Bugbot, and `cursor-team-kit` are optional.
-- Claude Code custom agents and plugin hooks are optional.
+- Claude Code subagents and hooks are optional.
 - Codex collaboration agents, app task coordination, goals, and automations are optional.
 
 When a named feature is absent, keep the workflow's outcome and use the closest native mechanism. Do not block a core workflow on an optional integration.
