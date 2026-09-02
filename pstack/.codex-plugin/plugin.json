@@ -1,0 +1,30 @@
+{
+  "name": "pstack",
+  "version": "0.14.6-universal.1",
+  "description": "Rigorous, model-neutral engineering workflows for Claude and Codex.",
+  "author": {
+    "name": "Lauren Tan"
+  },
+  "homepage": "https://github.com/cursor/plugins/tree/main/pstack",
+  "repository": "https://github.com/cursor/plugins",
+  "license": "MIT",
+  "keywords": [
+    "pstack",
+    "poteto-mode",
+    "workflow",
+    "principles",
+    "subagents",
+    "claude",
+    "codex"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "pstack",
+    "shortDescription": "Rigorous workflows for Claude and Codex.",
+    "longDescription": "Model-neutral pstack skills for deliberate engineering, parallel review, and evidence-backed verification in Claude and Codex runtimes.",
+    "developerName": "Lauren Tan",
+    "category": "Developer Tools",
+    "capabilities": [],
+    "defaultPrompt": "Use poteto-mode for this engineering task."
+  }
+}

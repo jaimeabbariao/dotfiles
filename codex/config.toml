@@ -1,4 +1,6 @@
 notify = ["/Users/jabbariao/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+model = "gpt-5.6-sol"
+model_reasoning_effort = "xhigh"
 
 [features]
 codex_hooks = true
@@ -6,6 +8,8 @@ js_repl = false
 
 [desktop]
 appearanceDarkCodeThemeId = "codex"
+followUpQueueMode = "queue"
+conversationDetailMode = "STEPS_COMMANDS"
 
 [desktop.appearanceDarkChromeTheme]
 accent = "#0169cc"
@@ -30,13 +34,13 @@ source = "/Users/jabbariao/.codex/.tmp/bundled-marketplaces/openai-bundled"
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
 
-[plugins."sites@openai-bundled"]
-enabled = true
-
 [plugins."browser@openai-bundled"]
 enabled = true
 
 [plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."pstack@personal"]
 enabled = true
 
 [mcp_servers.node_repl]
@@ -55,6 +59,19 @@ BROWSER_USE_TINYSKY_ENABLED = "0"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.820.60940"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.820.60940/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.825.51511"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.825.51511/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
+
+[mcp_servers.cua_repl]
+command = "/Applications/ChatGPT.app/Contents/MacOS/ChatGPT"
+enabled = false
+
+[projects."/Users/jabbariao/Documents/Codex/2026-09-01/https-app-notion-com-p-figma"]
+trust_level = "trusted"
+
+[projects."/Users/jabbariao/Documents/Codex/2026-09-01/fatal-master-is-already-used-by"]
+trust_level = "trusted"
+
+[projects."/Users/jabbariao/db"]
+trust_level = "trusted"
