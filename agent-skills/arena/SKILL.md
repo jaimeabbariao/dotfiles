@@ -7,7 +7,7 @@ description: "Spawn N parallel candidates at the same task, pick a base, graft t
 
 Fan out N parallel attempts at the same task. Read every candidate end to end. Pick the strongest as the base. Graft the best ideas from the others into it. Verify the synthesized result.
 
-Read `../poteto-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
+Read `../jimmy-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
 
 ## Start
 

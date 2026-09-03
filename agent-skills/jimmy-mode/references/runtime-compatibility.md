@@ -20,7 +20,7 @@ Use the runtime's native subagent or task mechanism. Translate the intent, not C
 - Keep the parent responsible for reviewing changes and synthesizing results.
 - If subagents are unavailable, execute the same slices sequentially and preserve independent passes.
 
-These are standalone skills. Spawn a general worker and instruct it to read the relevant worker skill, such as `poteto-agent` or `comment-sicko`, before acting.
+These are standalone skills. Spawn a general worker and instruct it to read the relevant worker skill, such as `jimmy-agent` or `comment-sicko`, before acting.
 
 Never pass unsupported fields copied from another runtime. Examples include Cursor's `subagent_type`, `environment`, `run_in_background`, and `cloud_base_branch`. Use only fields present in the active tool schema.
 

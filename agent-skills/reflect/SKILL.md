@@ -7,7 +7,7 @@ description: Spawn three parallel review subagents over the active transcript, s
 
 Mine the current conversation for durable learnings, then route them into skill edits.
 
-Read `../poteto-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
+Read `../jimmy-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
 
 ## When to invoke
 

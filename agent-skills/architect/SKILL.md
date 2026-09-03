@@ -7,7 +7,7 @@ description: "Sketch types, signatures, and module structure before code, then s
 
 Design before implementing. Sketch types, function signatures, class shapes, and module boundaries with `not implemented` bodies and pseudocode. Synthesize across multiple model perspectives, then fill in code against the chosen sketch. If implementation proves the sketch wrong, throw it out and redesign.
 
-Read `../poteto-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
+Read `../jimmy-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
 
 ## Start
 

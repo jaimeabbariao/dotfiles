@@ -7,7 +7,7 @@ description: "Fan out N parallel workers, drain them, and return one report. Use
 
 Fan out N parallel workers. They may cover separate slices, race the same brief, or mix both. The parent waits, aggregates, and returns one report.
 
-Read `../poteto-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
+Read `../jimmy-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
 
 ## Start
 

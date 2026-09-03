@@ -7,7 +7,7 @@ description: "Use for \"how does X work\", code walkthroughs before changing som
 
 Explore the codebase to answer "how does X work?" questions. Produce clear architectural explanations at the level of a senior engineer onboarding onto a subsystem. Enough to build a working mental model, not annotated source code.
 
-Read `../poteto-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
+Read `../jimmy-mode/references/runtime-compatibility.md` before selecting models or spawning workers.
 
 Two modes:
 

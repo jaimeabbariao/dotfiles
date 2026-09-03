@@ -7,7 +7,7 @@ description: "Use for \"interrogate\", \"adversarial review\", \"multi-model rev
 
 Spawn independent reviewers to adversarially review code changes. Each gets the same prompt and rubric. Model-family diversity adds useful disagreement when the host supports it; isolated passes on one family still provide coverage. Agreement across reviewers is high-confidence signal; lone-reviewer findings are worth reading but lower confidence.
 
-Read `../poteto-mode/references/runtime-compatibility.md` before selecting models or spawning reviewers.
+Read `../jimmy-mode/references/runtime-compatibility.md` before selecting models or spawning reviewers.
 
 The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 

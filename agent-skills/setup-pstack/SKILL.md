@@ -11,7 +11,7 @@ Create a project-local model configuration that every pstack skill can read. The
 
 Resolve the project root with `git rev-parse --show-toplevel`. Outside Git, use the current working directory. The configuration path is `<repo>/.pstack/models.md`.
 
-Identify the active host from the available tools and system context. Record one of `claude`, `codex`, `cursor`, or `other`. Read `../poteto-mode/references/runtime-compatibility.md` before mapping models.
+Identify the active host from the available tools and system context. Record one of `claude`, `codex`, `cursor`, or `other`. Read `../jimmy-mode/references/runtime-compatibility.md` before mapping models.
 
 ## 2. Detect available models
 

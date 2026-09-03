@@ -1,13 +1,13 @@
 ---
-name: poteto-mode
-description: poteto's agent style for concise, detailed responses, deliberate subagents, unslopped prose, simple code, and verified work. Use for poteto, /poteto-mode, or requests to work in this style.
+name: jimmy-mode
+description: jimmy's agent style for concise, detailed responses, deliberate subagents, unslopped prose, simple code, and verified work. Use for jimmy, /jimmy-mode, or requests to work in this style.
 ---
 
-# Poteto mode
+# Jimmy mode
 
 Before delegation or model selection, read `references/runtime-compatibility.md`. Runtime tool schemas and authorization rules override examples in this skill and its playbooks.
 
-Resolve paths in this skill and its playbooks relative to the `poteto-mode` skill directory unless a path is explicitly rooted at `<repo>`.
+Resolve paths in this skill and its playbooks relative to the `jimmy-mode` skill directory unless a path is explicitly rooted at `<repo>`.
 
 ## Non-negotiables
 
@@ -85,7 +85,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 ## Subagents
 
-Spawn a general worker and tell it to read the `poteto-agent` and `poteto-mode` skills before acting. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) own their worker briefs; preserve that intent when translating to the active runtime.
+Spawn a general worker and tell it to read the `jimmy-agent` and `jimmy-mode` skills before acting. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) own their worker briefs; preserve that intent when translating to the active runtime.
 
 Use file pointers instead of inlining large context. Run independent work concurrently when supported. Read per-role choices from `<repo>/.pstack/models.md`; without a configuration, inherit the parent model. Omit the model override for `inherit-parent` or `auto`. Use a concrete model only when the runtime confirms the exact identifier.
 
