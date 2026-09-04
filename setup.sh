@@ -380,6 +380,9 @@ link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"
 # mutable state (history, sessions, projects, logs) alongside their config.
 echo "Setting up Claude..."
 link "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link "$DOTFILES_DIR/claude/banned-words.txt" "$HOME/.claude/banned-words.txt"
+mkdir -p "$HOME/.claude/hooks"
+link "$DOTFILES_DIR/claude/hooks/banned-words.py" "$HOME/.claude/hooks/banned-words.py"
 
 echo "Setting up Codex..."
 link "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"

@@ -117,11 +117,16 @@ The shift window is `[start, start + 7 days]`.
 4. Write the complete evidence file.
 5. Read the saved evidence file from disk.
 6. Identify repeated entities and themes across sources, then draft the contextual report.
-7. Audit coverage before writing:
-   - Every handoff item from evidence appears in a topic or **Other items to hand off**.
-   - Every topic cites at least one evidence link.
-   - No report claim depends on context absent from the evidence file.
-8. Write the report and return both paths.
+7. Write the report.
+8. Verify coverage, and fix the report until the check passes:
+
+```
+~/.claude/skills/oncall-report/scripts/check_coverage.py {evidence_path} {report_path}
+```
+
+   The check fails when a handoff item's links appear nowhere in the report. Every failing item belongs in a topic or under **Other items to hand off**.
+9. Read the report once for two things the check cannot see: every topic cites at least one evidence link, and no claim depends on context absent from the evidence file.
+10. Return both paths.
 
 ## Source: GitHub
 
@@ -162,6 +167,8 @@ Escape any `$` in task names (Obsidian/markdown renders `$...$` as LaTeX).
 Two streams, searched across all public + private channels via `mcp__plugin_slack_slack__slack_search_public_and_private`.
 
 Parameters: `channel_types: public_channel,private_channel`, `sort: timestamp`, `sort_dir: asc`, `response_format: concise`, `limit: 20`. Paginate through all results.
+
+Leave `include_bots` off. Enabling it buries the shift in `#who-is-oncall` rotation posts, so bot-posted alert pages never surface here. Group mentions index as their plain handle text; searching the raw `<!subteam^...>` form returns nothing.
 
 ### Stream 1 — my messages → Worked on
 

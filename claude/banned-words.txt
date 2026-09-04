@@ -1,0 +1,4 @@
+# Words that must never appear in documents. One per line, '#' comments ignored.
+# Matching is case-insensitive; spaces match spaces or hyphens.
+seam
+load bearing
