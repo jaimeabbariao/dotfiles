@@ -17,7 +17,7 @@ Remaining triggers:
 
 - Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
 - About to ask the user a "which approach", "how should I", or "what should this do" question → classify it before you ask. If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf, even whether an eval separates), it is not the human's to answer. Sketch it via the Prototype playbook (`playbooks/prototype.md`) and let the result decide. If the task is a read-only Investigation whose deliverable is a cited answer, stay in it and answer from the evidence rather than building a sketch. Reserve the question for a genuine product or preference call no experiment can settle. The ask is the slow path. A throwaway probe usually answers faster, and it hands the human a result to react to instead of a decision to make.
-- Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
+- Any code → the **ponytail** skill at `full` unless the user names a level. Climb its ladder before you write, then name the data shape and choose its organizing structure per **principle-model-the-domain**. **Laziness precedence** below resolves how ponytail composes with the rest of this skill.
 - Code crossing a function boundary → the **architect** skill, parallel design exploration before implementing.
 - Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
 - Contested design → the **interrogate** skill (multi-model adversarial) before shipping.
@@ -72,6 +72,15 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 **Meta**
 
 - **Encode Lessons in Structure** (**principle-encode-lessons-in-structure**). You catch yourself writing the same instruction a second time. Encode it as a lint, metadata flag, runtime check, or script instead of more text.
+
+## Laziness precedence
+
+The **ponytail** skill decides whether and how much to build. The Core principles above shape what you build once its ladder reaches the last rung. Four overlaps resolve as follows.
+
+- **Ladder before architect.** Climb the ladder first. The `architect` trigger fires only when the ladder reaches its last rung and new code crosses a function boundary. Designing a change that rung 1 through 5 would have deleted is the expensive failure.
+- **`ponytail:` comments stay.** Each one names a known ceiling and its upgrade path, so it is a non-obvious *why* and **Comments** keeps it. `no-comments` and comment-sicko leave them alone. **ponytail-debt** harvests them.
+- **This skill owns the reply.** ponytail's three-line output cap governs code, not prose, as its own Boundaries section says. **Writing the reply** and the matched playbook's reply section win.
+- **Both stay.** ponytail covers YAGNI, dependency choice, and stdlib-first. **principle-laziness-protocol** and **principle-subtract-before-you-add** cover call-hierarchy depth, signal threading, and repeated decisions. Neither replaces the other.
 
 ## Autonomy
 
