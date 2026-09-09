@@ -3,7 +3,7 @@ model = "gpt-5.6-sol"
 model_reasoning_effort = "xhigh"
 
 [features]
-codex_hooks = true
+hooks = true
 js_repl = false
 
 [desktop]
