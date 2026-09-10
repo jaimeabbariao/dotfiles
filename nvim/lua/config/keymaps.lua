@@ -34,19 +34,45 @@ vim.keymap.set("n", "<leader>km", function()
 end, { desc = "Run maintainers on current file" })
 
 local plain_text_lsp_configs = {}
-local inline_completion_was_enabled = false
+local inline_completion_was_enabled = true
+local mason_automatic_enable
 
-vim.keymap.set("n", "<leader>up", function()
+local function start_buffer_lsp(buf)
+  if vim.g.plain_text_mode then
+    return
+  end
+  if vim.bo[buf].filetype == "rust" then
+    require("lazy").load({ plugins = { "rustaceanvim" } })
+    require("rustaceanvim.lsp").start(buf)
+  elseif vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t") == "Cargo.toml" then
+    require("lazy").load({ plugins = { "crates.nvim" } })
+    vim.api.nvim_buf_call(buf, function()
+      require("crates.lsp").start_server()
+    end)
+  end
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "rust", "toml" },
+  callback = function(event)
+    start_buffer_lsp(event.buf)
+  end,
+})
+
+local function toggle_lsp()
   vim.g.plain_text_mode = not vim.g.plain_text_mode
 
   if vim.g.plain_text_mode then
     plain_text_lsp_configs = vim.tbl_keys(vim.lsp._enabled_configs)
     table.sort(plain_text_lsp_configs)
     inline_completion_was_enabled = vim.lsp.inline_completion.is_enabled()
+    mason_automatic_enable = require("mason-lspconfig.settings").current.automatic_enable
+    require("mason-lspconfig").setup({ automatic_enable = false })
 
     if #plain_text_lsp_configs > 0 then
       vim.lsp.enable(plain_text_lsp_configs, false)
     end
+    vim.lsp.stop_client(vim.lsp.get_clients({ _uninitialized = true }))
     vim.lsp.inline_completion.enable(false)
 
     if package.loaded["blink.cmp"] then
@@ -56,8 +82,17 @@ vim.keymap.set("n", "<leader>up", function()
 
     vim.notify("Plain text mode enabled")
   else
+    vim.api.nvim_exec_autocmds("User", { pattern = "LspEnabled" })
+    if mason_automatic_enable then
+      require("mason-lspconfig").setup({ automatic_enable = mason_automatic_enable })
+    end
     if #plain_text_lsp_configs > 0 then
       vim.lsp.enable(plain_text_lsp_configs)
+    end
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_is_loaded(buf) then
+        start_buffer_lsp(buf)
+      end
     end
     if inline_completion_was_enabled then
       vim.lsp.inline_completion.enable()
@@ -65,4 +100,7 @@ vim.keymap.set("n", "<leader>up", function()
 
     vim.notify("Plain text mode disabled")
   end
-end, { desc = "Toggle plain text mode" })
+end
+
+vim.keymap.set("n", "<leader>up", toggle_lsp, { desc = "Toggle plain text mode" })
+vim.api.nvim_create_user_command("LspToggle", toggle_lsp, { desc = "Toggle LSP and completion" })

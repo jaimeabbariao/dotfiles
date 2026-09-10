@@ -1,6 +1,9 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    event = function()
+      return { "User LspEnabled" }
+    end,
     opts = {
       inlay_hints = {
         enabled = false,
@@ -29,6 +32,35 @@ return {
           enabled = true,
         },
       },
+    },
+  },
+  {
+    "mrcjkb/rustaceanvim",
+    lazy = true,
+    ft = function()
+      return {}
+    end,
+    opts = {
+      server = {
+        auto_attach = function()
+          return not vim.g.plain_text_mode
+        end,
+      },
+    },
+  },
+  {
+    "Saecki/crates.nvim",
+    lazy = true,
+    event = function()
+      return {}
+    end,
+    opts = {
+      lsp = { enabled = false },
+      on_attach = function()
+        if not vim.g.plain_text_mode then
+          require("crates.lsp").start_server()
+        end
+      end,
     },
   },
 }

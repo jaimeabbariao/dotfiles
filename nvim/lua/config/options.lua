@@ -9,6 +9,7 @@ if os.getenv("SSH_TTY") then
 end
 
 vim.opt.list = false
+vim.g.plain_text_mode = true
 
 vim.opt.mousescroll = "ver:1,hor:0"
 vim.opt.wrap = false
