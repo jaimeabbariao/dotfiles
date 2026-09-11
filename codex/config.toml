@@ -100,4 +100,4 @@ trust_level = "trusted"
 trusted_hash = "sha256:7e6474affb961de1dd45eb3e74f693f7776df98bd373e0b08868b977a40bb74d"
 
 [tui.model_availability_nux]
-gpt-6-astra = 3
+gpt-6-astra = 4
