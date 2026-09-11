@@ -82,6 +82,16 @@ The **ponytail** skill decides whether and how much to build. The Core principle
 - **This skill owns the reply.** ponytail's three-line output cap governs code, not prose, as its own Boundaries section says. **Writing the reply** and the matched playbook's reply section win.
 - **Both stay.** ponytail covers YAGNI, dependency choice, and stdlib-first. **principle-laziness-protocol** and **principle-subtract-before-you-add** cover call-hierarchy depth, signal threading, and repeated decisions. Neither replaces the other.
 
+## Version control
+
+Use Graphite (`gt`) as the default workflow for Git branches, commits, stacks, restacking, and PR submission. This rule applies to every playbook and delegated worker. Use Git for read-only inspection and operations Graphite does not cover.
+
+Before changing branches or submitting work, check that `gt` is available and inspect its local help and repository tracking. Keep parent relationships in Graphite and submit PRs through Graphite. Do not substitute raw Git rebases and pushes or forge PR creation for the Graphite workflow.
+
+Use `gh` for GitHub checks, review threads, and merge operations that Graphite does not cover. Use `origin pr` for those operations only when the user or repository selects Origin. Forge commands in playbooks describe those supporting operations or an explicitly selected fallback; they do not override Graphite for stack management and submission.
+
+If Graphite is unavailable or cannot manage the repository, report the blocker and continue independent work. Do not silently switch workflows. Use another workflow only when the user or repository instructions explicitly select it.
+
 ## Autonomy
 
 **Just do in-scope work.** Read, inspect, edit authorized local files, and run proportionate checks without unnecessary confirmation. External writes require the user's request or other explicit authorization. Follow the runtime's permission and approval rules.
@@ -136,7 +146,7 @@ A large or cross-cutting effort (a migration across many call sites, an ambitiou
 - **Authoring or modifying a skill.** Writing or editing a SKILL.md. `playbooks/authoring-a-skill.md`.
 - **Eval.** Testing how a skill, structure, or prompt change affects agent behavior before promoting it. `playbooks/eval.md`.
 - **Babysit.** Driving a PR or a stack to merge-ready: conflicts, review threads, CI. `playbooks/babysit.md`.
-- **Shipping.** The half after Babysit. Independently verifying a green stack, then landing the contiguous verified run bottom-up through `gh` by default or Origin when its CLI is available. `playbooks/shipping.md`.
+- **Shipping.** The half after Babysit. Independently verifying a green stack, then landing the contiguous verified run bottom-up through the version-control workflow above. `playbooks/shipping.md`.
 - **Autonomous run.** A long task to drive to completion without stopping ("run until done", "continue until X"). `playbooks/autonomous-run.md`.
 - **Orchestrate.** A standing project handed to one coordinator chat: multi-day, many stacked PRs, dozens to hundreds of subagents, minimal human turns ("run this whole project", "own this migration until it lands"). Distinct from Autonomous run, which drives one task to a predicate; work one agent could finish inside the session's budget routes there, not here, however program-shaped the phrasing sounds. `playbooks/orchestrate.md`.
 - **Autopilot-full.** A queue of independent PRs run to merged with full autonomy: one owner per PR carries build through merge, and the root swarm-verifies each merge-ready head before its owner merges ("autopilot this queue", "full autopilot", one-owner-per-PR programs). `playbooks/autopilot-full.md`.
