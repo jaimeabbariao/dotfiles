@@ -10,7 +10,7 @@ js_repl = false
 appearanceTheme = "dark"
 appearanceDarkCodeThemeId = "github"
 followUpQueueMode = "queue"
-conversationDetailMode = "STEPS_PROSE"
+conversationDetailMode = "STEPS_COMMANDS"
 appearanceLightCodeThemeId = "gruvbox"
 
 [desktop.appearanceDarkChromeTheme]
@@ -50,6 +50,10 @@ skill = "#b16286"
 source_type = "local"
 source = "/Users/jabbariao/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "/Users/jabbariao/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
 
@@ -60,6 +64,21 @@ enabled = true
 enabled = true
 
 [plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
 enabled = true
 
 [mcp_servers.node_repl]
@@ -78,8 +97,8 @@ BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.901.41123"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.901.41123/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.903.71938"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.903.71938/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [projects."/Users/jabbariao/Documents/Codex/2026-09-01/https-app-notion-com-p-figma"]

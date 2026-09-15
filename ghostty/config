@@ -1,6 +1,8 @@
-theme = vscode
+theme = vscode-light
 font-family = "PlemolJP Console NF"
 font-thicken = true
+
+font-size = 15
 
 alpha-blending = linear-corrected
 
