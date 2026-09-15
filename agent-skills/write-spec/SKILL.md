@@ -1,46 +1,76 @@
 ---
 name: write-spec
-description: Interview the user using jimmy-mode and draft a technical spec from the bundled template. Use for "interview me into a spec", "help me spec this", or an interactive spec-writing session. A request to review an existing spec alone does not start an interview.
+description: Investigate the codebase, interview the user using jimmy-mode, and develop a technical proposal with concrete mechanisms and tradeoffs. Use for "interview me into a spec", "help me spec this", or an interactive spec-writing session. A request to review an existing spec alone does not start an interview.
 ---
 
 # Write Spec
 
-Turn an idea into a local, reviewable spec through investigation and an interview. Keep the draft aligned with decisions as they settle.
+Turn an idea into a concise local technical proposal an engineer can review and implement without rediscovering the architecture. Explain what changes in the system, how it works, and why the approach fits the constraints. Keep routine coding choices open.
+
+For an ordinary feature, aim for roughly 1,000 to 2,000 words in the main spec; small changes need much less. This is a drafting target, not a quota or hard limit. Expand for decisions the reviewer needs or depth the user requests, not to reproduce the investigation. Keep the technical solution as the majority of the document.
 
 ## Ground the session
 
-Read and apply [jimmy-mode](../jimmy-mode/SKILL.md) and [grilling](../grilling/SKILL.md). Use jimmy-mode's Investigation playbook for research. This workflow owns the interview and document output. Writing the spec does not include implementing the feature or publishing it.
+Read and apply [jimmy-mode](../jimmy-mode/SKILL.md) and [grilling](../grilling/SKILL.md). Use jimmy-mode's Investigation playbook for research. This workflow owns the interview, document structure, and stopping condition. Writing the spec does not include implementing the feature or publishing it.
 
 Read the bundled [spec template](assets/template.md), or a different template explicitly chosen by the user. Resolve asset paths from this skill's directory. Use the selected template throughout the interview and draft. Do not duplicate its sections in these instructions.
 
 Read the existing conversation, supplied brief, and any spec being revised. Inspect relevant project guidance and enough source material to distinguish current behavior from the proposal. Reuse settled answers. If the idea itself is missing, ask what the user wants to spec before exploring a codebase.
 
-## Interview
+## Investigate and interview
 
-Use the template's required core and applicable optional sections to track coverage. For each gap, distinguish a fact to investigate, a user decision, and a nonblocking assumption. Start with decisions that change the goal, scope, or downstream choices.
+Start with the problem and scope, then identify the engineering uncertainties that could change feasibility or architecture. Investigate those early. Use the template to check coverage without turning every heading or possible edge case into an interview question.
+
+For each gap, distinguish an observable fact, a technical choice to develop, and a user decision about desired behavior or an accepted tradeoff. Investigate facts through source, documentation, or proportionate read-only checks. Develop technical recommendations from that evidence. Ask the user about desired behavior, priorities, and consequential tradeoffs; do not ask them to supply facts or routine engineering choices you can work out.
 
 Follow grilling's one-question-at-a-time loop. Give a recommended answer with its main tradeoff. Use the runtime's question tool when available. Wait for the answer before asking the next question. Independent research can continue while a question is pending.
-
-Investigate observable facts through source, documentation, or proportionate read-only checks. Do not ask the user to guess existing behavior. If evidence is unavailable, record the limitation. Ask the user when the unresolved choice concerns desired behavior, priorities, or an accepted tradeoff.
 
 Test answers against concrete scenarios and earlier decisions. When answers conflict, explain the consequence and resolve that conflict before dependent choices. Cover materially different user states and recovery outcomes where they affect the proposal. Skip branches that do not apply.
 
 Record recommendations as proposals until the user chooses them. Label delegated judgment and assumptions so they cannot be mistaken for user decisions or verified facts.
 
+## Develop the technical proposal
+
+Outline the technical solution before expanding the document. Name the existing components being changed and clearly identify proposed additions, their responsibilities, and the connections between them. Establish that structure before expanding supporting detail.
+
+For changes spanning components or introducing a workflow, include diagrams as part of the technical explanation. Use a component diagram for boundaries, a sequence diagram for ordering, or a state diagram for lifecycle. Choose the fewest views that explain the solution, often one or two. Each must answer a distinct question; do not add every kind or repeat the diagram step by step in prose. Prefer editable Mermaid unless the user chooses another format. A small local change may need only a short explanation or code sketch.
+
+Use concrete component names and label what is existing, changed, or proposed. Explain the design choices shown in each diagram, then connect them to the relevant contracts and failure behavior. Check that the diagrams agree with the prose. Generic boxes such as "frontend → backend → database" do not explain the proposed change.
+
+Trace execution through the proposed responsibilities, including where data moves and who owns state. Define changed contracts with concrete fields, states, signatures, or examples where needed to explain the design. Link unchanged contracts instead of copying them.
+
+For consequential choices, recommend an approach and explain why it fits better than credible alternatives. A recommendation can be ready for review before the user accepts it. Do not leave a central mechanism as "choose storage", "extend this path or add another", or "ensure recovery". Explain the mechanism that produces the required outcome. For example, a proposal to transfer a draft between screens must identify where it lives, how the destination finds it, and when it is consumed or removed.
+
+Trace failures through that same design. Where relevant, explain state after partial completion, retry behavior, and how concurrent actors or old and new versions interact. Keep the detail proportional to the change. A local behavior change may need only a function-level explanation; it does not need invented APIs, storage, or migrations.
+
+Check feasibility assumptions against the available evidence. If a central choice cannot yet be supported, identify the missing evidence and a bounded investigation that would decide it. Continue independent work, but mark the technical design incomplete. Moving an architectural question into Open questions does not make the design complete. Do not invent existing capabilities or claim verification to satisfy the template.
+
 ## Keep the draft current
 
 Once the problem and initial scope are clear, create `specs/<short-project-name>.md` in the active project unless the user names another destination. Update a named existing spec in place. Otherwise choose an unused filename and leave existing work intact.
 
-Keep status Draft during the interview. Record settled decisions, source evidence, and open questions in the document as they emerge. When an answer changes, reconcile affected requirements, design choices, and checks instead of appending contradictory notes. Keep the question queue in the open-questions section so a later session can resume.
+Keep status Draft during the interview. Record decisions, reasons, supporting evidence, and material open questions as they emerge. When an answer changes, reconcile the draft instead of appending contradictory notes. Keep unresolved decisions and their next action beside the affected design; collect them separately only when that helps review.
 
-Use the template's reading order and applicability rules. Remove unused optional sections and authoring prompts. Keep unanswered material questions explicit, with owners and deadlines only when known. Do not invent reviewers, approvals, measurements, estimates, or source revisions to fill cells.
+Use the template's reading order, merging or omitting sections that add no distinct information. Put current behavior, tradeoffs, and recovery beside the decisions they explain. Add an implementation plan only when sequencing itself needs review. Remove authoring prompts and empty metadata; do not invent owners, dates, approvals, measurements, or estimates.
 
-Apply [technical-writing](../technical-writing/SKILL.md) and [unslop](../unslop/SKILL.md). Keep requirements distinct from implementation choices, and product hypotheses distinct from correctness checks. Link source claims to their revision and observations to dated evidence.
+Write for an engineering reviewer who has not seen the conversation. State each requirement once. Keep validation to a short explanation of how to test the risky technical claims, usually one or two paragraphs. Do not generate a requirement-by-requirement acceptance matrix by default. Detailed QA belongs in implementation tasks or supporting material when requested or needed; do not create an appendix merely to retain everything cut. Label proposals without narrating interview progress or repeating confirmation disclaimers.
+
+Apply [technical-writing](../technical-writing/SKILL.md) and [unslop](../unslop/SKILL.md). A spec combines a design argument with the contracts needed to review it; do not split those apart merely to satisfy a documentation-mode rule. Keep requirements distinct from implementation choices, and product hypotheses distinct from correctness checks. Link source claims to their revision and observations to dated evidence.
 
 ## Finish
 
-Stop interviewing when the core is coherent, each required behavior has an observable acceptance check, and remaining questions can be deferred explicitly. Do not require every implementation detail or optional section to be settled. If the user asks to draft now or stop, save the current draft and expose the unresolved decisions.
+Stop interviewing when the material user decisions are settled. Continue the engineering investigation and synthesis needed to make the proposal reviewable. Read the saved file against the template, evidence, and user's answers. Check that:
 
-Read the saved file against the actual template and the user's answers. Check for contradictions, unsupported claims, missing behavior variants, and checks that would pass despite violating a requirement. Distinguish planned verification from checks already run. Keep status Draft unless the requested lifecycle transition is supported by an actual review or delivery evidence.
+- The solution outline and diagrams show the proposed structure and behavior. A reviewer can trace the main flow through named components and understand what changes in each. For a small local change, a direct explanation can suffice.
+- State ownership, changed contracts, and relevant recovery mechanisms are concrete and consistent with the required behavior.
+- Consequential choices have recommendations, reasons, and credible alternatives where applicable.
+- Validation identifies the method and observable evidence for the risky technical claims, without restating the behavior section or becoming a full QA plan.
+- Remaining questions are identified as architectural blockers or details that can be deferred without invalidating the approach.
 
-Return the spec link, the consequential decisions, and any blockers to review or implementation. State that acceptance checks are planned unless they were run. Do not ask for another confirmation merely to save or hand back the draft.
+Do not require every implementation detail or optional section to be settled. If the user asks to draft now or stop, save what is available. If architectural blockers remain, say the technical design is incomplete in the Summary and handoff, and name the investigation or decision needed. Interview completion alone does not establish a reviewable design.
+
+Render diagrams with available tooling and inspect the output for syntax errors, unreadable labels, and inconsistencies with the prose. Fix defects before handing back the spec. If rendering is unavailable, say the diagrams are unverified in the handoff.
+
+Before handoff, make a compression pass: remove repeated requirements, redundant diagrams, routine implementation instructions, and checklists that do not change a design decision. Preserve the mechanisms, consequential recovery behavior, tradeoffs, product success criteria, and architectural blockers. Check for contradictions and unsupported claims. Distinguish planned verification from checks already run. Keep status Draft unless actual review or delivery evidence supports a transition.
+
+Return the spec link, the consequential decisions, and any blockers to review or implementation. State which validation remains planned. Do not ask for another confirmation merely to save or hand back the draft.
