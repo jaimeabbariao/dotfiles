@@ -39,6 +39,8 @@ Use concrete component names and label what is existing, changed, or proposed. E
 
 Trace execution through the proposed responsibilities, including where data moves and who owns state. Define changed contracts with concrete fields, states, signatures, or examples where needed to explain the design. Link unchanged contracts instead of copying them.
 
+For changes that need tracking, inspect existing analytics and operational instrumentation in the affected flow. Cite what already records the behavior and state the gaps. Prefer extending existing events or flows. For additions, name the trigger and necessary fields, and distinguish proposed tracking from verified coverage. Keep this account short and beside the relevant design.
+
 For consequential choices, recommend an approach and explain why it fits better than credible alternatives. A recommendation can be ready for review before the user accepts it. Do not leave a central mechanism as "choose storage", "extend this path or add another", or "ensure recovery". Explain the mechanism that produces the required outcome. For example, a proposal to transfer a draft between screens must identify where it lives, how the destination finds it, and when it is consumed or removed.
 
 Trace failures through that same design. Where relevant, explain state after partial completion, retry behavior, and how concurrent actors or old and new versions interact. Keep the detail proportional to the change. A local behavior change may need only a function-level explanation; it does not need invented APIs, storage, or migrations.
@@ -51,9 +53,9 @@ Once the problem and initial scope are clear, create `specs/<short-project-name>
 
 Keep status Draft during the interview. Record decisions, reasons, supporting evidence, and material open questions as they emerge. When an answer changes, reconcile the draft instead of appending contradictory notes. Keep unresolved decisions and their next action beside the affected design; collect them separately only when that helps review.
 
-Use the template's reading order, merging or omitting sections that add no distinct information. Put current behavior, tradeoffs, and recovery beside the decisions they explain. Add an implementation plan only when sequencing itself needs review. Remove authoring prompts and empty metadata; do not invent owners, dates, approvals, measurements, or estimates.
+Use the template's reading order, merging or omitting sections that add no distinct information. Put current behavior, tradeoffs, and recovery beside the decisions they explain. Keep experiment assignment and exposure behavior with the design decisions they affect. Add an implementation plan only when sequencing itself needs review. Remove authoring prompts and empty metadata; do not invent owners, dates, approvals, measurements, or estimates.
 
-Write for an engineering reviewer who has not seen the conversation. State each requirement once. Keep validation to a short explanation of how to test the risky technical claims, usually one or two paragraphs. Do not generate a requirement-by-requirement acceptance matrix by default. Detailed QA belongs in implementation tasks or supporting material when requested or needed; do not create an appendix merely to retain everything cut. Label proposals without narrating interview progress or repeating confirmation disclaimers.
+Write for an engineering reviewer who has not seen the conversation. State each requirement once. Label proposals without narrating interview progress or repeating confirmation disclaimers.
 
 Apply [technical-writing](../technical-writing/SKILL.md) and [unslop](../unslop/SKILL.md). A spec combines a design argument with the contracts needed to review it; do not split those apart merely to satisfy a documentation-mode rule. Keep requirements distinct from implementation choices, and product hypotheses distinct from correctness checks. Link source claims to their revision and observations to dated evidence.
 
@@ -64,13 +66,12 @@ Stop interviewing when the material user decisions are settled. Continue the eng
 - The solution outline and diagrams show the proposed structure and behavior. A reviewer can trace the main flow through named components and understand what changes in each. For a small local change, a direct explanation can suffice.
 - State ownership, changed contracts, and relevant recovery mechanisms are concrete and consistent with the required behavior.
 - Consequential choices have recommendations, reasons, and credible alternatives where applicable.
-- Validation identifies the method and observable evidence for the risky technical claims, without restating the behavior section or becoming a full QA plan.
 - Remaining questions are identified as architectural blockers or details that can be deferred without invalidating the approach.
 
 Do not require every implementation detail or optional section to be settled. If the user asks to draft now or stop, save what is available. If architectural blockers remain, say the technical design is incomplete in the Summary and handoff, and name the investigation or decision needed. Interview completion alone does not establish a reviewable design.
 
 Render diagrams with available tooling and inspect the output for syntax errors, unreadable labels, and inconsistencies with the prose. Fix defects before handing back the spec. If rendering is unavailable, say the diagrams are unverified in the handoff.
 
-Before handoff, make a compression pass: remove repeated requirements, redundant diagrams, routine implementation instructions, and checklists that do not change a design decision. Preserve the mechanisms, consequential recovery behavior, tradeoffs, product success criteria, and architectural blockers. Check for contradictions and unsupported claims. Distinguish planned verification from checks already run. Keep status Draft unless actual review or delivery evidence supports a transition.
+Before handoff, make a compression pass: remove repeated requirements, redundant diagrams, routine implementation instructions, and checklists that do not change a design decision. Preserve the mechanisms, consequential recovery behavior, tradeoffs, and architectural blockers. Check for contradictions and unsupported claims. Distinguish planned verification from checks already run. Keep status Draft unless actual review or delivery evidence supports a transition.
 
-Return the spec link, the consequential decisions, and any blockers to review or implementation. State which validation remains planned. Do not ask for another confirmation merely to save or hand back the draft.
+Return the spec link, the consequential decisions, and any blockers to review or implementation. Do not ask for another confirmation merely to save or hand back the draft.

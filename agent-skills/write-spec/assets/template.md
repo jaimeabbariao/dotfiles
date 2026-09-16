@@ -25,14 +25,10 @@ Related work: <Brief, issue, or design, if available>
 
 <Organize subsections around this solution's mechanisms. Trace execution and data ownership through named components. Define changed contracts, state lifetime, and consequential recovery or concurrency behavior. Use a compact table or code sketch where it clarifies the contract; link unchanged APIs instead of copying them.>
 
-<Recommend consequential choices and explain the tradeoff beside each one. Link source claims to a revision. If feasibility is unverified, give the bounded investigation that would decide it. Keep remaining decisions with the affected design rather than repeating them in a separate risk register.>
+<Where tracking matters, show what already exists and what this change needs to add or extend. A short table comparing existing tracking with required changes can help.>
 
-## Validation
+<Recommend consequential choices and explain the tradeoff beside each one. Link source claims to a revision. If feasibility is unverified, give the bounded investigation that would decide it. Explain remaining decisions with the affected design.>
 
-<Usually one or two paragraphs: how to test the risky technical claims, and what observable evidence would establish that they work. Distinguish planned checks from completed observations, with dates and environments for actual results. Avoid a requirement-by-requirement acceptance matrix.>
+## Risks
 
-## Experiment and rollout (when relevant)
-
-<For experiments, state assignment, exposure, metrics, and the success rule. Define denominators and observation windows, including failed or abandoned attempts. Mark unset thresholds explicitly. Keep a detailed analysis plan separate only if needed.>
-
-<For rollout, explain important sequencing, production signals, stop conditions, and what disabling entry means for existing data or work in progress. Mention remaining launch decisions once. Omit experiment content for non-experiments; use a separate implementation plan only when dependencies or sequencing need review.>
+<Use a short bullet list of material risks or unresolved dependencies. Each bullet names the risk and its mitigation or next decision. Keep detailed reasoning in the design. Omit hypothetical edge cases and risks that do not affect the proposal.>
