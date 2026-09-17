@@ -1,17 +1,13 @@
 return {
-  { "datsfilipe/vesper.nvim", lazy = false, priority = 1000 },
   {
-    "Mofiqul/vscode.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.o.background = "light"
-    end,
+    "oskarnurm/koda.nvim",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "vscode",
+      colorscheme = "koda-light",
     },
   },
 }

@@ -7,11 +7,13 @@ hooks = true
 js_repl = false
 
 [desktop]
-appearanceTheme = "dark"
+appearanceTheme = "light"
 appearanceDarkCodeThemeId = "github"
 followUpQueueMode = "queue"
 conversationDetailMode = "STEPS_COMMANDS"
-appearanceLightCodeThemeId = "gruvbox"
+appearanceLightCodeThemeId = "vscode-plus"
+sansFontSize = 15
+codeFontSize = 14
 
 [desktop.appearanceDarkChromeTheme]
 accent = "#1f6feb"
@@ -30,21 +32,21 @@ diffRemoved = "#f85149"
 skill = "#bc8cff"
 
 [desktop.appearanceLightChromeTheme]
-accent = "#458588"
+accent = "#007acc"
 accentSource = "custom"
 contrast = 45
-ink = "#3c3836"
-opaqueWindows = false
-surface = "#fbf1c7"
+ink = "#000000"
+opaqueWindows = true
+surface = "#ffffff"
 
 [desktop.appearanceLightChromeTheme.fonts]
-code = '"TX-02"'
-ui = '"PlemolJP Console NF"'
+code = '"PlemolJP Console NF"'
+ui = "Inter"
 
 [desktop.appearanceLightChromeTheme.semanticColors]
-diffAdded = "#3c3836"
-diffRemoved = "#cc241d"
-skill = "#b16286"
+diffAdded = "#008000"
+diffRemoved = "#ee0000"
+skill = "#0000ff"
 
 [marketplaces.openai-bundled]
 source_type = "local"
@@ -97,8 +99,8 @@ BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.903.71938"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.903.71938/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.908.40834"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.908.40834/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [projects."/Users/jabbariao/Documents/Codex/2026-09-01/https-app-notion-com-p-figma"]
