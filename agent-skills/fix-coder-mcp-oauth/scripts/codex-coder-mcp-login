@@ -1,0 +1,198 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: codex-coder-mcp-login [options] SERVER [-- CODEX_LOGIN_OPTIONS]
+
+Options:
+  --callback-url URL   Coder URL that routes to the callback listener
+  --port PORT          Listener port (default: 32123)
+  --registration MODE  OAuth registration mode: auto, cimd, or dcr (default: dcr)
+  --loopback           Keep a loopback callback and print the required local tunnel
+  --dry-run            Print the callback and command without starting login
+  -h, --help           Show this help
+
+Environment:
+  CODER_MCP_CALLBACK_URL   Same as --callback-url
+  CODEX_MCP_CALLBACK_PORT Same as --port
+EOF
+}
+
+fail() {
+  printf 'codex-coder-mcp-login: %s\n' "$*" >&2
+  exit 1
+}
+
+callback_path() {
+  local url="${1%/}"
+  case "$url" in
+  */callback) printf '%s\n' "$url" ;;
+  *) printf '%s/callback\n' "$url" ;;
+  esac
+}
+
+replace_port_placeholder() {
+  local template="$1"
+  local port="$2"
+  printf '%s\n' "${template//\{\{port\}\}/$port}"
+}
+
+application_url_from_api() {
+  local port="$1"
+  local coder_url="${CODER_URL:-${CODER_AGENT_URL:-}}"
+  local coder_token="${CODER_SESSION_TOKEN:-${CODER_AGENT_TOKEN:-}}"
+  local owner="${CODER_WORKSPACE_OWNER_NAME:-}"
+  local workspace="${CODER_WORKSPACE_NAME:-}"
+  local agent="${CODER_WORKSPACE_AGENT_NAME:-${CODER_AGENT_NAME:-}}"
+  local response host label scheme
+
+  [[ -n "$coder_url" && -n "$coder_token" && -n "$owner" && -n "$workspace" && -n "$agent" ]] || return 1
+  command -v curl >/dev/null 2>&1 || return 1
+
+  response="$(curl -fsS \
+    -H 'Accept: application/json' \
+    -H "Coder-Session-Token: $coder_token" \
+    "${coder_url%/}/api/v2/applications/host" 2>/dev/null)" || return 1
+  host="$(printf '%s' "$response" | sed -nE 's/.*"host"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/p')"
+  [[ "$host" == *'*'* ]] || return 1
+
+  label="${port}--${agent}--${workspace}--${owner}"
+  if [[ "$host" == http://* || "$host" == https://* ]]; then
+    printf '%s\n' "${host/\*/$label}"
+    return
+  fi
+
+  scheme="${CODER_MCP_CALLBACK_SCHEME:-https}"
+  printf '%s://%s\n' "$scheme" "${host/\*/$label}"
+}
+
+discover_callback_url() {
+  local port="$1"
+  local proxy_template="${VSCODE_PROXY_URI:-}"
+  local external_url
+
+  if [[ -n "$proxy_template" && "$proxy_template" == *'{{port}}'* ]]; then
+    external_url="$(replace_port_placeholder "$proxy_template" "$port")"
+  else
+    external_url="$(application_url_from_api "$port")" || return 1
+  fi
+
+  callback_path "$external_url"
+}
+
+port_is_listening() {
+  local port="$1"
+  if command -v ss >/dev/null 2>&1; then
+    ss -ltnH 2>/dev/null | awk '{print $4}' | grep -Eq "(^|[:.])${port}$"
+  elif command -v lsof >/dev/null 2>&1; then
+    lsof -nP -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1
+  else
+    return 1
+  fi
+}
+
+print_command() {
+  printf 'Command:'
+  printf ' %q' "$@"
+  printf '\n'
+}
+
+port="${CODEX_MCP_CALLBACK_PORT:-32123}"
+callback_url="${CODER_MCP_CALLBACK_URL:-}"
+registration="dcr"
+mode="ingress"
+dry_run=false
+server=""
+login_options=()
+
+while (($#)); do
+  case "$1" in
+  --callback-url)
+    (($# >= 2)) || fail '--callback-url requires a value'
+    callback_url="$2"
+    shift 2
+    ;;
+  --port)
+    (($# >= 2)) || fail '--port requires a value'
+    port="$2"
+    shift 2
+    ;;
+  --registration)
+    (($# >= 2)) || fail '--registration requires a value'
+    registration="$2"
+    shift 2
+    ;;
+  --loopback)
+    mode="loopback"
+    shift
+    ;;
+  --dry-run)
+    dry_run=true
+    shift
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  --)
+    shift
+    login_options=("$@")
+    break
+    ;;
+  -*) fail "unknown option: $1" ;;
+  *)
+    [[ -z "$server" ]] || fail 'only one MCP server name may be provided before --'
+    server="$1"
+    shift
+    ;;
+  esac
+done
+
+[[ -n "$server" ]] || fail 'provide an MCP server name'
+if [[ ! "$port" =~ ^[0-9]+$ ]] || ((port < 1 || port > 65535)); then
+  fail "invalid port: $port"
+fi
+case "$registration" in
+auto | cimd | dcr) ;;
+*) fail "invalid registration mode: $registration" ;;
+esac
+
+if [[ "$mode" == "loopback" ]]; then
+  callback_url="http://127.0.0.1:${port}/callback"
+  workspace_ref="${CODER_WORKSPACE_NAME:-WORKSPACE}"
+  agent_name="${CODER_WORKSPACE_AGENT_NAME:-${CODER_AGENT_NAME:-}}"
+  [[ -z "$agent_name" ]] || workspace_ref="${workspace_ref}.${agent_name}"
+  printf 'On the browser machine, keep this running until login completes:\n'
+  printf '  coder port-forward %q --tcp %q\n' "$workspace_ref" "${port}:${port}"
+elif [[ -n "$callback_url" ]]; then
+  callback_url="$(callback_path "$callback_url")"
+else
+  callback_url="$(discover_callback_url "$port")" || fail 'cannot derive a Coder callback URL; set CODER_MCP_CALLBACK_URL or pass --callback-url'
+fi
+
+[[ "$callback_url" != *'"'* ]] || fail 'callback URL cannot contain a double quote'
+
+command=(
+  codex
+  -c "mcp_oauth_callback_port=${port}"
+  -c "mcp_oauth_callback_url=\"${callback_url}\""
+  mcp login "$server"
+  --oauth-client-registration "$registration"
+)
+if ((${#login_options[@]})); then
+  command+=("${login_options[@]}")
+fi
+
+printf 'OAuth callback: %s\n' "$callback_url"
+if "$dry_run"; then
+  print_command "${command[@]}"
+  exit 0
+fi
+
+command -v codex >/dev/null 2>&1 || fail 'codex is not installed or not on PATH'
+if port_is_listening "$port"; then
+  fail "port $port is already in use; pass --port with another port"
+fi
+
+exec "${command[@]}"
