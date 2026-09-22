@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "@cursor-skill/jimmy-tools",
+      "name": "@jimmy/plugin-tools",
       "dependencies": {
         "commander": "14.0.0",
       },

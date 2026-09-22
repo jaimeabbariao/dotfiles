@@ -5,7 +5,7 @@ description: "Generate a project-local verification skill that drives your app t
 
 # Create a verification skill
 
-Every serious project needs a scripted way to drive the real app and prove behavior: launch it, exercise a feature the way a user would, and capture evidence. This skill generates that as a project-local `verify-<app>` skill tailored to the repo. Resolve the active runtime's project skill directory first. Use `.claude/skills/` for Claude Code, `.agents/skills/` for Codex, and `.cursor/skills/` for Cursor. You write the output for the next agent, not for a human: it will be read cold, mid-task, by an agent that has never seen the app.
+Every serious project needs a scripted way to drive the real app and prove behavior: launch it, exercise a feature the way a user would, and capture evidence. This skill generates that as a project-local `verify-<app>` skill tailored to the repo. Write it under `.agents/skills/` for Codex. You write the output for the next agent, not for a human: it will be read cold, mid-task, by an agent that has never seen the app.
 
 ## 1. Interview the repo, not the user
 

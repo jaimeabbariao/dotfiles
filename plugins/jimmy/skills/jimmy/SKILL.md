@@ -31,7 +31,7 @@ Remaining triggers:
 - Shipping UI / IDE / CLI → use the runtime's matching browser, terminal, or simulator control capability. For bug fixes, reproduce first on the same surface yourself; hand to the user only under the narrow Bug fix step 1 exception.
 - Any PR-status request → the **Babysit** playbook (`playbooks/babysit.md`). That includes "babysit this", "get it green", "address the automated-review comments", and "check on PR X". Never trigger it merely because a PR opened. Declare its mode before polling.
 - Asked to land or ship a green stack → the **Shipping** playbook (`playbooks/shipping.md`). Green is not safe. Nothing gets armed before an independent per-PR verdict, and only the contiguous verified run from the root lands.
-- An automated code or security reviewer commented → skeptical posture. It can catch real bugs and also file non-issues and nitpicks, so assess each claim on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `references/bugbot-triage.md`.
+- An automated code or security reviewer commented → skeptical posture. It can catch real bugs and also file non-issues and nitpicks, so assess each claim on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `references/automated-review-triage.md`.
 - Broken skill mid-task → fix it in its own PR. Don't block. Don't silently work around it.
 - Long, autonomous, or multi-phase work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "run until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record; keep it local otherwise.
 
@@ -95,7 +95,7 @@ Resolve the version-control workflow in this order:
 
 Inspect local help before the first mutating command. Preserve stack parent relationships with Graphite when Graphite owns the repository. Do not replace a repository-mandated workflow because another tool is more familiar.
 
-For GitHub, prefer `gh` when it is installed and authenticated. Otherwise use an available GitHub connector or browser capability. Use `origin pr` only when the user or repository selects Origin. If no available capability can perform a required forge operation, report that specific operation as unavailable and continue independent work.
+For GitHub, prefer `gh` when it is installed and authenticated. Otherwise use an available GitHub connector or browser capability. If no available capability can perform a required forge operation, report that specific operation as unavailable and continue independent work.
 
 ## Autonomy
 

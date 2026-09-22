@@ -59,7 +59,7 @@ source = "/Users/jabbariao/.cache/codex-runtimes/codex-primary-runtime/plugins/o
 
 [marketplaces.jimmy-team]
 source_type = "local"
-source = "/Users/jabbariao/dotfiles"
+source = "/Users/jabbariao/jimmy"
 
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true

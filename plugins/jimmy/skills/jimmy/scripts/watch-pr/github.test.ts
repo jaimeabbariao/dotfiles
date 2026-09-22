@@ -192,7 +192,7 @@ describe("closed enum parsing", () => {
   });
 });
 
-it("annotates Bugbot threads with distinct review-pass counts", () => {
+it("returns unresolved review threads and filters resolved threads", () => {
   const response = {
     data: {
       repository: {
@@ -205,11 +205,11 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
                 comments: {
                   nodes: [
                     {
-                      body: "RUN_ID: run-1",
+                      body: "Please handle this edge case.",
                       createdAt: "now",
                       path: "a.ts",
                       line: 1,
-                      author: { login: "bugbot" },
+                      author: { login: "reviewer-one" },
                     },
                   ],
                 },
@@ -220,11 +220,11 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
                 comments: {
                   nodes: [
                     {
-                      body: "CURSOR_AUTOMATION_ID: run-2 severity high",
+                      body: "This branch needs a test.",
                       createdAt: "now",
                       path: null,
                       line: null,
-                      author: { login: "cursor" },
+                      author: { login: "reviewer-two" },
                     },
                   ],
                 },
@@ -235,11 +235,11 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
                 comments: {
                   nodes: [
                     {
-                      body: "RUN_ID: run-3",
+                      body: "Already addressed.",
                       createdAt: "now",
                       path: null,
                       line: null,
-                      author: { login: "bugbot" },
+                      author: { login: "reviewer-three" },
                     },
                   ],
                 },
@@ -251,9 +251,11 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
     },
   };
   const threads = parseReviewThreads(response);
-  expect(threads).toHaveLength(2);
-  expect(threads.map((thread) => thread.isBugbot)).toEqual([true, true]);
-  expect(threads.map((thread) => thread.bugbotReviewPasses)).toEqual([3, 3]);
+  expect(threads.map((thread) => thread.id)).toEqual(["one", "two"]);
+  expect(threads.map((thread) => thread.firstComment?.authorLogin)).toEqual([
+    "reviewer-one",
+    "reviewer-two",
+  ]);
 });
 
 describe("context and stack discovery", () => {

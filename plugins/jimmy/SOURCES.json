@@ -3,6 +3,9 @@
     "repository": "https://github.com/cursor/plugins",
     "revision": "82f1d4f49ba8f21e3315a89c97e82f7c02a48fba",
     "license": "./LICENSE.txt",
+    "excludedSkills": {
+      "make-bot-ui": "Cursor-only automation workflow; excluded from the ChatGPT/Codex plugin."
+    },
     "skills": [
       "architect",
       "arena",
@@ -17,7 +20,6 @@
       "jimmy",
       "jimmy-agent",
       "maintain-verification-skill",
-      "make-bot-ui",
       "no-comments",
       "principle-boundary-discipline",
       "principle-build-the-lever",

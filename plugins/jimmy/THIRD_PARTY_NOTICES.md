@@ -2,7 +2,7 @@
 
 ## pstack
 
-The plugin's pstack-derived skill suite adapts `cursor/plugins` at commit `82f1d4f49ba8f21e3315a89c97e82f7c02a48fba`. `SOURCES.json` records the complete adapted skill inventory. Lauren Tan's MIT license is included in `LICENSE.txt` and `skills/jimmy/LICENSE.txt`.
+The plugin's pstack-derived skill suite adapts `cursor/plugins` at commit `82f1d4f49ba8f21e3315a89c97e82f7c02a48fba`. `SOURCES.json` records the adapted inventory and the Cursor-only skill intentionally excluded from this ChatGPT/Codex package. Lauren Tan's MIT license is included in `LICENSE.txt` and `skills/jimmy/LICENSE.txt`.
 
 ## Ponytail
 

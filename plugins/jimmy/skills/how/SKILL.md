@@ -99,7 +99,7 @@ Run the full explain flow above (Steps 1-4). You must understand the architectur
 
 ### Step 2. Spawn Critics
 
-After the explanation is complete, spawn one architectural critic per entry in your configured how-critics list. Without configuration, run two independent critics that inherit the parent model. On a mixed-model host, prefer one confirmed Claude critic and one confirmed Codex critic.
+After the explanation is complete, spawn one architectural critic per entry in your configured how-critics list. Without configuration, run two independent critics that inherit the parent model. When multiple Codex models are configured, prefer distinct confirmed models for independent judgment.
 
 Keep every critic read-only. Use configured model identifiers only when confirmed by the active runtime.
 

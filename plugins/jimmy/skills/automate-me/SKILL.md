@@ -13,7 +13,7 @@ This skill orchestrates three parts: an inline mining pass, the runtime's skill-
 
 ### 0. Check for an existing skill
 
-Look in the active runtime's project and personal skill directories for `*-mode/SKILL.md` matching the user's handle. Common roots are `.claude/skills/`, `.agents/skills/`, `.cursor/skills/`, and their user-level equivalents. If one exists, confirm intent unless the user already said "update my skill" or similar:
+Look in the active runtime's project and personal skill directories for `*-mode/SKILL.md` matching the user's handle. For Codex, check `.agents/skills/` and the user-level skill directory. If one exists, confirm intent unless the user already said "update my skill" or similar:
 
 - Update the existing skill (default for repeat runs)
 - Start fresh (rare; ask why before doing it)

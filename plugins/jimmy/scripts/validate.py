@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from __future__ import annotations
+
 import json
 import re
 import sys
@@ -20,7 +22,6 @@ EXPECTED_SKILLS = (
     "jimmy",
     "jimmy-agent",
     "maintain-verification-skill",
-    "make-bot-ui",
     "no-comments",
     "ponytail",
     "ponytail-debt",
@@ -60,6 +61,9 @@ EXPECTED_SKILLS = (
 
 PONYTAIL_SKILLS = {"ponytail", "ponytail-debt"}
 PSTACK_SKILLS = set(EXPECTED_SKILLS) - PONYTAIL_SKILLS
+PSTACK_EXCLUDED_SKILLS = {
+    "make-bot-ui": "Cursor-only automation workflow; excluded from the ChatGPT/Codex plugin."
+}
 
 TEXT_SUFFIXES = {".json", ".md", ".mjs", ".sh", ".ts", ".txt", ".yaml", ".yml"}
 MARKDOWN_LINK = re.compile(r"\[[^]]*\]\(([^)]+)\)")
@@ -136,6 +140,12 @@ def validate_package(plugin_root: Path) -> list[str]:
                 f"{sources_path}: {source_name} skill provenance mismatch; "
                 f"missing={sorted(expected - declared)}, extra={sorted(declared - expected)}"
             )
+    excluded = sources.get("pstack", {}).get("excludedSkills", {})
+    if excluded != PSTACK_EXCLUDED_SKILLS:
+        errors.append(
+            f"{sources_path}: pstack excluded skill provenance mismatch; "
+            f"expected={PSTACK_EXCLUDED_SKILLS}, actual={excluded}"
+        )
 
     for skill_name in EXPECTED_SKILLS:
         skill_file = skills_root / skill_name / "SKILL.md"

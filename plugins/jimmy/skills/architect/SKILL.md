@@ -31,7 +31,7 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`: the caller's usage written first, then the type sketch, function signatures, module map, and prose rationale derived from it.
 
-Use your configured architect runners. Without configuration, run two independent candidates that inherit the parent model. On a mixed-model host, prefer one confirmed Claude candidate and one confirmed Codex candidate.
+Use your configured architect runners. Without configuration, run two independent candidates that inherit the parent model. When multiple Codex models are configured, prefer distinct confirmed models for independent judgment.
 
 Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. This is the **exhaust-the-design-space** principle skill made concrete. Whole-shape alternatives, not point fixes inside one shape.
 

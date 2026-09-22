@@ -21,7 +21,7 @@ Only edit the verification skill's own directory (its SKILL.md, features/, and a
 
 ## Pass
 
-0. **Locate the target.** Find the verification skill to maintain in the active runtime's project skill directory: the skill whose body has launch/drive sections and a feature map. Common roots are `.claude/skills/`, `.agents/skills/`, and `.cursor/skills/`. Several candidates → ask which one; none → stop and point at `create-verification-skill` instead of inventing a target.
+0. **Locate the target.** Find the verification skill to maintain in the Codex project skill directory, normally `.agents/skills/`: the skill whose body has launch/drive sections and a feature map. Several candidates → ask which one; none → stop and point at `create-verification-skill` instead of inventing a target.
 
 1. **Index hygiene.** Read the feature map README and glob its sibling files. Fix missing, extra, duplicate, or dead entries. Lightweight; no generated inventory.
 
