@@ -23,7 +23,7 @@ Open a todolist with one entry per phase before launching anything.
 1. State the done predicate and the artifact or report the swarm must return.
 2. Choose the shape. Partition into slices, race N workers on identical briefs, or mix both. For a race or mixed shape, declare `first pass`, `rank all`, or `best-of` before spawning.
 3. Set N from the user or derive it from the shape. N is total workers, not the cloud concurrency limit.
-4. Pick the worker model from `swarm workers` in `<repo>/.pstack/models.md` when present. Otherwise inherit the parent model. For a model race, name each confirmed arm up front. Do not claim a cross-family race when the host exposes only one family.
+4. Pick the worker model from `swarm workers` in `<repo>/.jimmy/models.md` when present. Otherwise inherit the parent model. For a model race, name each confirmed arm up front. Do not claim a cross-family race when the host exposes only one family.
 5. Give each worker its own writable output when it writes. Use a worktree, branch, or `/tmp/swarm-<slug>/worker-<n>/`.
 
 ## Phase B: Fan out

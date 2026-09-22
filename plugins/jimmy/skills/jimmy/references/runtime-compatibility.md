@@ -4,7 +4,7 @@ pstack runs in Claude, Codex, and Cursor. Treat the runtime's actual tool schema
 
 ## Model selection
 
-Read `<repo>/.pstack/models.md` when it exists. Resolve `<repo>` with `git rev-parse --show-toplevel`, falling back to the current working directory outside Git. A role value of `inherit-parent` or `auto` means to omit the model override. A concrete model identifier is valid only when the runtime exposes or accepts it.
+Read `<repo>/.jimmy/models.md` when it exists. Resolve `<repo>` with `git rev-parse --show-toplevel`, falling back to the current working directory outside Git. A role value of `inherit-parent` or `auto` means to omit the model override. A concrete model identifier is valid only when the runtime exposes or accepts it.
 
 If there is no configuration, inherit the parent model for every role. Do not guess model identifiers from documentation or examples. A runtime that exposes only Claude models or only Codex models still supports the workflow. It does not support a true cross-family panel; report that limitation instead of pretending otherwise.
 

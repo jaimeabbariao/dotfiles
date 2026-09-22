@@ -1,15 +1,15 @@
 ---
-name: setup-pstack
-description: Configure pstack's role-to-model mapping for Claude, Codex, Cursor, or a mixed-model host. Use for setup-pstack, "configure pstack models", or changing pstack's model choices.
+name: setup-jimmy
+description: Configure Jimmy's role-to-model mapping for Claude, Codex, Cursor, or a mixed-model host. Use for setup-jimmy, "configure Jimmy models", or changing Jimmy's model choices.
 ---
 
-# Setup pstack
+# Setup Jimmy
 
-Create a project-local model configuration that every pstack skill can read. The default is intentionally portable: inherit the parent model unless the active runtime confirms another exact identifier.
+Create a project-local model configuration that every Jimmy skill can read. The default is intentionally portable: inherit the parent model unless the active runtime confirms another exact identifier.
 
 ## 1. Find the project and runtime
 
-Resolve the project root with `git rev-parse --show-toplevel`. Outside Git, use the current working directory. The configuration path is `<repo>/.pstack/models.md`.
+Resolve the project root with `git rev-parse --show-toplevel`. Outside Git, use the current working directory. The configuration path is `<repo>/.jimmy/models.md`.
 
 Identify the active host from the available tools and system context. Record one of `claude`, `codex`, `cursor`, or `other`. Read `../jimmy/references/runtime-compatibility.md` before mapping models.
 
@@ -27,7 +27,7 @@ If the runtime exposes no list, use `inherit-parent` for every role. The user ca
 
 ## 3. Choose a profile
 
-Preserve an existing `<repo>/.pstack/models.md` as the current state. If it does not exist, optionally import values from the legacy `~/.cursor/rules/pstack-models.mdc`, but only after confirming each concrete identifier is still available.
+Preserve an existing `<repo>/.jimmy/models.md` as the current state. If it does not exist, import values from `<repo>/.pstack/models.md` when present. Otherwise, optionally import values from the older `~/.cursor/rules/pstack-models.mdc`. Confirm every concrete identifier is still available before importing it. Write the result only to `.jimmy/models.md`; leave legacy files unchanged.
 
 Offer these profiles when the runtime can support them:
 
@@ -44,14 +44,14 @@ Every concrete identifier must be present in the detected set. A mixed panel mus
 
 ## 5. Write the configuration
 
-Create `<repo>/.pstack/` when needed and overwrite `models.md` so setup stays idempotent. Use this shape:
+Create `<repo>/.jimmy/` when needed and overwrite `models.md` so setup stays idempotent. Use this shape:
 
 ```md
 ---
 runtime: codex
 profile: inherit
 ---
-# pstack model configuration
+# Jimmy model configuration
 # `inherit-parent` and `auto` mean: omit the subagent model override.
 feature, refactoring: inherit-parent
 bug-fix: inherit-parent

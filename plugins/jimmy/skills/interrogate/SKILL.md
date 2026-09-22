@@ -34,7 +34,7 @@ Write one clear paragraph. Reviewers challenge whether the work achieves the int
 
 ## Step 3, Spawn Reviewers
 
-Launch reviewers concurrently with the runtime's native delegation tool. Use the `interrogate reviewers` list from `<repo>/.pstack/models.md` when present, one reviewer per entry. Otherwise run two independent reviewers that inherit the parent model. On a mixed-model host, prefer one confirmed Claude reviewer and one confirmed Codex reviewer.
+Launch reviewers concurrently with the runtime's native delegation tool. Use the `interrogate reviewers` list from `<repo>/.jimmy/models.md` when present, one reviewer per entry. Otherwise run two independent reviewers that inherit the parent model. On a mixed-model host, prefer one confirmed Claude reviewer and one confirmed Codex reviewer.
 
 | Subagent | Default model |
 |----------|---------------|

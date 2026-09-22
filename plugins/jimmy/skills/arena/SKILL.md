@@ -26,7 +26,7 @@ The N candidates will receive the same prompt, so the prompt is the contract. Ge
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. Concrete: `Adds a --dry-run flag that skips writes`. Vague: `code is correct`. The rubric is the picker's tool in Phase D; candidates only see the task.
-3. Pick the runners. Use `arena runners` from `<repo>/.pstack/models.md` when present. Otherwise run two independent candidates that inherit the parent model. Spawn more only when the arena covers additional design directions. On a mixed-model host, include one confirmed Claude model and one confirmed Codex model when judgment diversity matters.
+3. Pick the runners. Use `arena runners` from `<repo>/.jimmy/models.md` when present. Otherwise run two independent candidates that inherit the parent model. Spawn more only when the arena covers additional design directions. On a mixed-model host, include one confirmed Claude model and one confirmed Codex model when judgment diversity matters.
 4. Assign output paths. Each candidate writes to its own location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`). N candidates writing to the same path is shared mutable state and fails the the **separate-before-serializing-shared-state** principle skill test.
 
 ## Phase B: Fan out
@@ -39,7 +39,7 @@ If a candidate fails to produce output, proceed with N-1 and note the dropout in
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, choose one model from the `arena cross-judge pool` in `<repo>/.pstack/models.md` when present. Otherwise inherit the parent model. Prefer another confirmed family when the runtime supports one. Spawn one read-only judge worker. It sees the rubric and candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with the parent's reading in Phase D, not with the candidates themselves. Spawning while candidates are still writing means the judge sees partial or empty outputs and reports them as dropouts.
+After all Phase B candidates complete, choose one model from the `arena cross-judge pool` in `<repo>/.jimmy/models.md` when present. Otherwise inherit the parent model. Prefer another confirmed family when the runtime supports one. Spawn one read-only judge worker. It sees the rubric and candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with the parent's reading in Phase D, not with the candidates themselves. Spawning while candidates are still writing means the judge sees partial or empty outputs and reports them as dropouts.
 
 ## Phase D: Pick a base
 

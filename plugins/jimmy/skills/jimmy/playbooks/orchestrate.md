@@ -22,7 +22,7 @@ Depth stays at coordinator, track, worker. Author the track decomposition per pr
 
 #### Store layout
 
-Create `.pstack/orchestrate/<project-slug>/` in the repository unless the runtime provides an explicit durable task-store path. Every file has exactly one writer; owners publish facts, readers aggregate at read time. When Bun is available and the installed plugin directory is writable, use `bun scripts/orch/orch.ts` for bookkeeping, written below as `orch`. Otherwise read and update the canonical TSV, JSON, and Markdown files directly while preserving the same fields and single-writer rules.
+Create `.jimmy/orchestrate/<project-slug>/` in the repository unless the runtime provides an explicit durable task-store path. Every file has exactly one writer; owners publish facts, readers aggregate at read time. When Bun is available and the installed plugin directory is writable, use `bun scripts/orch/orch.ts` for bookkeeping, written below as `orch`. Otherwise read and update the canonical TSV, JSON, and Markdown files directly while preserving the same fields and single-writer rules.
 
 - `preferences.md` is the standing-orders register: numbered lines, one constraint each (model policy, stack shape and count, verification bar, forbidden paths, escalation policy). Paste it verbatim into every spawn and every resume; directives decay across resumes, and each dropped one costs a human turn. When you catch yourself restating an instruction, append the line before you act (principle-encode-lessons-in-structure).
 - `overview.md` is the durable PR and issue DB. Append; never rewrite wholesale per event.

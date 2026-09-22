@@ -111,7 +111,7 @@ For GitHub, prefer `gh` when it is installed and authenticated. Otherwise use an
 
 Spawn a general worker and tell it to read the `jimmy-agent` and `jimmy` skills before acting. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) own their worker briefs; preserve that intent when translating to the active runtime.
 
-Use file pointers instead of inlining large context. Run independent work concurrently when supported. Read per-role choices from `<repo>/.pstack/models.md`; without a configuration, inherit the parent model. Omit the model override for `inherit-parent` or `auto`. Use a concrete model only when the runtime confirms the exact identifier.
+Use file pointers instead of inlining large context. Run independent work concurrently when supported. Read per-role choices from `<repo>/.jimmy/models.md`; without a configuration, inherit the parent model. Omit the model override for `inherit-parent` or `auto`. Use a concrete model only when the runtime confirms the exact identifier.
 
 You own every subagent's work. Review the diff and write your own summary, don't pass through what it said. Interrupt-chained resumes silently drop directives, so fire a fresh subagent with consolidated scope rather than trusting a "done" summary. A second opinion is the same prompt against a different model. Agreement is high-signal.
 

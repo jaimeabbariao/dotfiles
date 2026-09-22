@@ -9,12 +9,18 @@ from pathlib import Path
 EXPECTED_SKILLS = (
     "architect",
     "arena",
+    "automate-me",
+    "blast-radius",
+    "bro",
     "comment-sicko",
+    "create-verification-skill",
     "figure-it-out",
     "how",
     "interrogate",
     "jimmy",
     "jimmy-agent",
+    "maintain-verification-skill",
+    "make-bot-ui",
     "no-comments",
     "ponytail",
     "ponytail-debt",
@@ -39,15 +45,21 @@ EXPECTED_SKILLS = (
     "principle-sequence-verifiable-units",
     "principle-subtract-before-you-add",
     "principle-type-system-discipline",
+    "recall",
     "reflect",
+    "setup-jimmy",
     "show-me-your-work",
     "swarm",
     "tdd",
+    "teach",
     "technical-writing",
     "typescript-best-practices",
     "unslop",
     "why",
 )
+
+PONYTAIL_SKILLS = {"ponytail", "ponytail-debt"}
+PSTACK_SKILLS = set(EXPECTED_SKILLS) - PONYTAIL_SKILLS
 
 TEXT_SUFFIXES = {".json", ".md", ".mjs", ".sh", ".ts", ".txt", ".yaml", ".yml"}
 MARKDOWN_LINK = re.compile(r"\[[^]]*\]\(([^)]+)\)")
@@ -77,7 +89,9 @@ def load_manifest(path: Path, errors: list[str]) -> dict[str, object] | None:
     if manifest.get("name") != "jimmy":
         errors.append(f"{path}: name must be jimmy")
     version = manifest.get("version")
-    if not isinstance(version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", version):
+    if not isinstance(version, str) or not re.fullmatch(
+        r"\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?", version
+    ):
         errors.append(f"{path}: version must be strict semver")
     return manifest
 
@@ -108,6 +122,20 @@ def validate_package(plugin_root: Path) -> list[str]:
     if portable is not None and compatibility is not None:
         if portable.get("version") != compatibility.get("version"):
             errors.append("portable and compatibility manifest versions differ")
+
+    sources_path = plugin_root / "SOURCES.json"
+    try:
+        sources = json.loads(sources_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        errors.append(f"{sources_path}: {error}")
+        sources = {}
+    for source_name, expected in (("pstack", PSTACK_SKILLS), ("ponytail", PONYTAIL_SKILLS)):
+        declared = set(sources.get(source_name, {}).get("skills", []))
+        if declared != expected:
+            errors.append(
+                f"{sources_path}: {source_name} skill provenance mismatch; "
+                f"missing={sorted(expected - declared)}, extra={sorted(declared - expected)}"
+            )
 
     for skill_name in EXPECTED_SKILLS:
         skill_file = skills_root / skill_name / "SKILL.md"
