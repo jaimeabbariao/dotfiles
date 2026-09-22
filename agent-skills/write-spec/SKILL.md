@@ -1,6 +1,6 @@
 ---
 name: write-spec
-description: Investigate the codebase, interview the user using jimmy-mode, and develop a technical proposal with concrete mechanisms and tradeoffs. Use for "interview me into a spec", "help me spec this", or an interactive spec-writing session. A request to review an existing spec alone does not start an interview.
+description: Investigate the codebase, interview the user using jimmy, and develop a technical proposal with concrete mechanisms and tradeoffs. Use for "interview me into a spec", "help me spec this", or an interactive spec-writing session. A request to review an existing spec alone does not start an interview.
 ---
 
 # Write Spec
@@ -11,7 +11,7 @@ For an ordinary feature, aim for roughly 1,000 to 2,000 words in the main spec; 
 
 ## Ground the session
 
-Read and apply [jimmy-mode](../jimmy-mode/SKILL.md) and [grilling](../grilling/SKILL.md). Use jimmy-mode's Investigation playbook for research. This workflow owns the interview, document structure, and stopping condition. Writing the spec does not include implementing the feature or publishing it.
+Read and apply [jimmy](../jimmy/SKILL.md) and [grilling](../grilling/SKILL.md). Use jimmy's Investigation playbook for research. This workflow owns the interview, document structure, and stopping condition. Writing the spec does not include implementing the feature or publishing it.
 
 Read the bundled [spec template](assets/template.md), or a different template explicitly chosen by the user. Resolve asset paths from this skill's directory. Use the selected template throughout the interview and draft. Do not duplicate its sections in these instructions.
 

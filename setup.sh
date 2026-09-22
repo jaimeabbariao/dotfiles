@@ -282,32 +282,9 @@ else
   fi
 fi
 
-# -------------------------------------------------------
-# 8. Install ponytail skills
-# -------------------------------------------------------
 echo ""
-echo "=== Installing ponytail skills ==="
-
-# Cloned outside the repo and symlinked in, so `setup.sh` tracks upstream
-# instead of vendoring a copy that silently drifts. Skills only: the plugin's
-# always-on hooks are Claude-specific, these dirs work in Codex/Cursor too.
-PONYTAIL_DIR="$HOME/.local/share/ponytail"
-if [ -d "$PONYTAIL_DIR/.git" ]; then
-  echo "  Updating ponytail..."
-  git -C "$PONYTAIL_DIR" pull --ff-only -q || yellow "  Failed to update ponytail — using the existing checkout."
-else
-  echo "  Cloning ponytail..."
-  mkdir -p "$(dirname "$PONYTAIL_DIR")"
-  git clone --depth=1 -q https://github.com/DietrichGebert/ponytail "$PONYTAIL_DIR" || red "  Failed to clone ponytail."
-fi
-
-if [ -d "$PONYTAIL_DIR/skills" ]; then
-  for skill in "$PONYTAIL_DIR"/skills/*/; do
-    link "${skill%/}" "$DOTFILES_DIR/agent-skills/$(basename "${skill%/}")"
-  done
-else
-  red "  No ponytail skills found at $PONYTAIL_DIR/skills — skipping."
-fi
+echo "=== Using pinned Ponytail skills ==="
+green "  [ok] Ponytail ships with plugins/jimmy"
 
 # -------------------------------------------------------
 # 8b. Install caveman skill
@@ -315,9 +292,8 @@ fi
 echo ""
 echo "=== Installing caveman skill ==="
 
-# Same pattern as ponytail: track upstream, symlink in. Skill only — the proxy
-# and CLI need a global npm install and an agent wrapper. Linked after ponytail
-# on purpose: both ship a `caveman` skill, upstream's wins.
+# Track Caveman upstream and symlink its skill. The proxy and CLI need a global
+# npm install and an agent wrapper.
 CAVEMAN_DIR="$HOME/.local/share/caveman"
 if [ -d "$CAVEMAN_DIR/.git" ]; then
   echo "  Updating caveman..."
@@ -386,6 +362,7 @@ link "$DOTFILES_DIR/claude/hooks/banned-words.py" "$HOME/.claude/hooks/banned-wo
 
 echo "Setting up Codex..."
 link "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
+link "$DOTFILES_DIR/agent-skills/fix-coder-mcp-oauth/scripts/codex-coder-mcp-login" "$HOME/bin/codex-coder-mcp-login"
 
 echo "Setting up agent skills..."
 for skills_dir in \

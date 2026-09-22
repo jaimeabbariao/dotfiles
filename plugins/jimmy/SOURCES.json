@@ -1,0 +1,16 @@
+{
+  "pstack": {
+    "repository": "https://github.com/cursor/plugins",
+    "revision": "82f1d4f49ba8f21e3315a89c97e82f7c02a48fba",
+    "license": "./LICENSE.txt"
+  },
+  "ponytail": {
+    "repository": "https://github.com/DietrichGebert/ponytail",
+    "revision": "2ed6c52c9d7e5e56942508591085fd45dea277d3",
+    "license": "./licenses/ponytail-MIT.txt",
+    "skills": [
+      "ponytail",
+      "ponytail-debt"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "jimmy-team",
+  "interface": {
+    "displayName": "Jimmy Team"
+  },
+  "plugins": [
+    {
+      "name": "jimmy",
+      "source": {
+        "source": "local",
+        "path": "./plugins/jimmy"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

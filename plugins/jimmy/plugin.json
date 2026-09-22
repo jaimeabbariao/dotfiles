@@ -1,0 +1,32 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "jimmy",
+  "version": "0.1.0",
+  "description": "Jimmy's engineering workflows for ChatGPT and Codex.",
+  "author": {
+    "name": "Jimmy"
+  },
+  "license": "MIT",
+  "keywords": [
+    "engineering",
+    "code-review",
+    "productivity"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Jimmy",
+        "shortDescription": "Opinionated engineering workflows",
+        "longDescription": "Plan, implement, review, verify, and ship software with concise communication and explicit evidence.",
+        "developerName": "Jimmy",
+        "category": "Productivity",
+        "capabilities": [
+          "Instructions"
+        ],
+        "defaultPrompt": [
+          "Use $jimmy to complete this engineering task."
+        ]
+      }
+    }
+  }
+}
