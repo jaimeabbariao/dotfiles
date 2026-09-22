@@ -58,8 +58,9 @@ source_type = "local"
 source = "/Users/jabbariao/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [marketplaces.jimmy-team]
-source_type = "local"
-source = "/Users/jabbariao/jimmy"
+source_type = "git"
+source = "git@github.com:figma/jimmy.git"
+ref = "v0.1.2"
 
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
