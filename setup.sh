@@ -282,10 +282,6 @@ else
   fi
 fi
 
-echo ""
-echo "=== Using pinned Ponytail skills ==="
-green "  [ok] Ponytail ships with plugins/jimmy"
-
 # -------------------------------------------------------
 # 8b. Install caveman skill
 # -------------------------------------------------------

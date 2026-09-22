@@ -1,6 +1,0 @@
-interface:
-  display_name: "Jimmy"
-  short_description: "Opinionated engineering workflows"
-  default_prompt: "Use $jimmy to complete this engineering task."
-policy:
-  allow_implicit_invocation: true

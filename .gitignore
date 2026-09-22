@@ -23,10 +23,8 @@ herdr/.plugins.lock
 warp/settings.toml
 warp/themes/rose-pine-warp
 
-# Ignore optional Ponytail skills except the two pinned by Jimmy.
-agent-skills/ponytail*
-!agent-skills/ponytail
-!agent-skills/ponytail-debt
-
 # caveman skill is symlinked in by setup.sh
 agent-skills/caveman
+
+# Optional Ponytail skills are managed outside dotfiles.
+agent-skills/ponytail*

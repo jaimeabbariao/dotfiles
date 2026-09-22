@@ -11,7 +11,7 @@ For an ordinary feature, aim for roughly 1,000 to 2,000 words in the main spec; 
 
 ## Ground the session
 
-Read and apply [jimmy](../jimmy/SKILL.md) and [grilling](../grilling/SKILL.md). Use jimmy's Investigation playbook for research. This workflow owns the interview, document structure, and stopping condition. Writing the spec does not include implementing the feature or publishing it.
+Read and apply the installed `jimmy:jimmy` skill and [grilling](../grilling/SKILL.md). Use jimmy's Investigation playbook for research. This workflow owns the interview, document structure, and stopping condition. Writing the spec does not include implementing the feature or publishing it.
 
 Read the bundled [spec template](assets/template.md), or a different template explicitly chosen by the user. Resolve asset paths from this skill's directory. Use the selected template throughout the interview and draft. Do not duplicate its sections in these instructions.
 
@@ -59,7 +59,7 @@ Use the template's reading order, merging or omitting sections that add no disti
 
 Write for an engineering reviewer who has not seen the conversation. State each requirement once. Use a concrete noun whenever terms such as "variant", "state", "copy", or "landing" could refer to more than one thing. Label proposals without narrating interview progress or repeating confirmation disclaimers.
 
-Apply [technical-writing](../technical-writing/SKILL.md) and [unslop](../unslop/SKILL.md). A spec combines a design argument with the contracts needed to review it; do not split those apart merely to satisfy a documentation-mode rule. Keep requirements distinct from implementation choices, and product hypotheses distinct from correctness checks. Link source claims to their revision and observations to dated evidence.
+Apply the installed `jimmy:technical-writing` and `jimmy:unslop` skills. A spec combines a design argument with the contracts needed to review it; do not split those apart merely to satisfy a documentation-mode rule. Keep requirements distinct from implementation choices, and product hypotheses distinct from correctness checks. Link source claims to their revision and observations to dated evidence.
 
 ## Finish
 

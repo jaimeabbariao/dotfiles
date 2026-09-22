@@ -14,10 +14,10 @@ assert_contains() {
 }
 
 ingress_output="$(
-  VSCODE_PROXY_URI='https://{{port}}--main--demo--jimmy.apps.example.com/' \
+  VSCODE_PROXY_URI='https://{{port}}--main--demo--owner.apps.example.com/' \
     "$login_script" --dry-run linear
 )"
-assert_contains "$ingress_output" 'OAuth callback: https://32123--main--demo--jimmy.apps.example.com/callback'
+assert_contains "$ingress_output" 'OAuth callback: https://32123--main--demo--owner.apps.example.com/callback'
 assert_contains "$ingress_output" 'mcp login linear --oauth-client-registration dcr'
 
 loopback_output="$(
