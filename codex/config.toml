@@ -11,10 +11,10 @@ appearanceTheme = "light"
 appearanceDarkCodeThemeId = "github"
 followUpQueueMode = "queue"
 conversationDetailMode = "STEPS_COMMANDS"
-appearanceLightCodeThemeId = "vscode-plus"
+appearanceLightCodeThemeId = "rose-pine"
 sansFontSize = 15
 codeFontSize = 14
-selected-avatar-id = "custom:0814-violet-mage"
+selected-avatar-id = "custom:frieren"
 
 [desktop.appearanceDarkChromeTheme]
 accent = "#1f6feb"
@@ -33,21 +33,21 @@ diffRemoved = "#f85149"
 skill = "#bc8cff"
 
 [desktop.appearanceLightChromeTheme]
-accent = "#007acc"
+accent = "#d7827e"
 accentSource = "custom"
-contrast = 45
-ink = "#000000"
+contrast = 100
+ink = "#575279"
 opaqueWindows = true
-surface = "#ffffff"
+surface = "#faf4ed"
 
 [desktop.appearanceLightChromeTheme.fonts]
 code = '"PlemolJP Console NF"'
-ui = "Inter"
+ui = "Geist, Inter"
 
 [desktop.appearanceLightChromeTheme.semanticColors]
-diffAdded = "#008000"
-diffRemoved = "#ee0000"
-skill = "#0000ff"
+diffAdded = "#56949f"
+diffRemoved = "#797593"
+skill = "#907aa9"
 
 [marketplaces.openai-bundled]
 source_type = "local"
@@ -108,8 +108,8 @@ BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.915.31945"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.915.31945/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.917.51856"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.917.51856/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [projects."/Users/jabbariao/Documents/Codex/2026-09-01/https-app-notion-com-p-figma"]
@@ -134,6 +134,15 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/jabbariao/Documents/Codex/2026-09-21/hatch-pet-users-jabbariao-dotfiles-agent"]
+trust_level = "trusted"
+
+[projects."/Users/jabbariao/jimmy"]
+trust_level = "trusted"
+
+[projects."/Users/jabbariao/Documents/Codex/2026-09-23/ca"]
+trust_level = "trusted"
+
+[projects."/Users/jabbariao/Documents/Codex/2026-09-23/install-this-pet-npx-codex-pets"]
 trust_level = "trusted"
 
 [hooks.state]
