@@ -1,4 +1,4 @@
-theme = Rose Pine Dawn
+theme = iTerm2 Solarized Light
 font-family = "PlemolJP Console NF"
 font-thicken = true
 
@@ -17,7 +17,7 @@ bold-is-bright = true
 
 copy-on-select = true
 
-macos-option-as-alt = true
+macos-option-as-alt = false
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 

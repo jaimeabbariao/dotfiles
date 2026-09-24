@@ -11,7 +11,7 @@ appearanceTheme = "light"
 appearanceDarkCodeThemeId = "github"
 followUpQueueMode = "queue"
 conversationDetailMode = "STEPS_COMMANDS"
-appearanceLightCodeThemeId = "rose-pine"
+appearanceLightCodeThemeId = "solarized"
 sansFontSize = 15
 codeFontSize = 14
 selected-avatar-id = "custom:frieren"
@@ -33,21 +33,21 @@ diffRemoved = "#f85149"
 skill = "#bc8cff"
 
 [desktop.appearanceLightChromeTheme]
-accent = "#d7827e"
+accent = "#b58900"
 accentSource = "custom"
 contrast = 100
-ink = "#575279"
+ink = "#657b83"
 opaqueWindows = true
-surface = "#faf4ed"
+surface = "#fdf6e3"
 
 [desktop.appearanceLightChromeTheme.fonts]
 code = '"PlemolJP Console NF"'
 ui = "Geist, Inter"
 
 [desktop.appearanceLightChromeTheme.semanticColors]
-diffAdded = "#56949f"
-diffRemoved = "#797593"
-skill = "#907aa9"
+diffAdded = "#859900"
+diffRemoved = "#dc322f"
+skill = "#d33682"
 
 [marketplaces.openai-bundled]
 source_type = "local"
