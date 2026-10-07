@@ -1,6 +1,4 @@
 notify = ["/Users/jabbariao/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
-model = "gpt-5.6-luna"
-model_reasoning_effort = "medium"
 
 [features]
 hooks = true
@@ -8,48 +6,54 @@ js_repl = false
 
 [desktop]
 appearanceTheme = "dark"
-appearanceDarkCodeThemeId = "codex"
+appearanceDarkCodeThemeId = "github"
 followUpQueueMode = "queue"
 conversationDetailMode = "STEPS_COMMANDS"
-appearanceLightCodeThemeId = "solarized"
+appearanceLightCodeThemeId = "github"
 sansFontSize = 15
-codeFontSize = 15
+codeFontSize = 13
 selected-avatar-id = "pet_6abc23873f048191b051292064d75acb"
+show-context-window-usage = true
 
 [desktop.appearanceDarkChromeTheme]
-accent = "#0169cc"
+accent = "#1f6feb"
 accentSource = "custom"
 contrast = 59
-ink = "#fcfcfc"
+ink = "#e6edf3"
 opaqueWindows = true
-surface = "#111111"
+surface = "#0d1117"
 
 [desktop.appearanceDarkChromeTheme.fonts]
-code = '"SFMono-Medium"'
+code = '"TX-02"'
 
 [desktop.appearanceDarkChromeTheme.semanticColors]
-diffAdded = "#00a240"
-diffRemoved = "#e02e2a"
-skill = "#b06dff"
+diffAdded = "#3fb950"
+diffRemoved = "#f85149"
+skill = "#bc8cff"
 
 [desktop.appearanceLightChromeTheme]
-accent = "#b58900"
+accent = "#0969da"
 accentSource = "custom"
 contrast = 100
-ink = "#657b83"
+ink = "#1f2328"
 opaqueWindows = false
-surface = "#fdf6e3"
+surface = "#ffffff"
 
 [desktop.appearanceLightChromeTheme.fonts]
-code = '"PlemolJP Console NF"'
+code = '"TX-02"'
 
 [desktop.appearanceLightChromeTheme.semanticColors]
-diffAdded = "#859900"
-diffRemoved = "#dc322f"
-skill = "#d33682"
+diffAdded = "#1a7f37"
+diffRemoved = "#cf222e"
+skill = "#8250df"
 
 [desktop.open-in-target-preferences]
 global = "zed"
+
+[desktop.daybreak-enabled]
+accountId = "a1c9f301-577c-437b-be1f-e99fd3e157ed"
+userId = "user-tag9U0JPXZDYMpO8NhV4R97S"
+enabled = false
 
 [marketplaces.openai-bundled]
 source_type = "local"
@@ -60,8 +64,9 @@ source_type = "local"
 source = "/Users/jabbariao/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [marketplaces.jimmy-team]
-source_type = "local"
-source = "/Users/jabbariao/jimmy"
+source_type = "git"
+source = "git@github.com:figma/jimmy.git"
+ref = "v0.2.1"
 
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
@@ -93,9 +98,6 @@ enabled = true
 [plugins."jimmy@jimmy-team"]
 enabled = true
 
-[plugins."code-review@openai-bundled"]
-enabled = true
-
 [mcp_servers.node_repl]
 args = []
 command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
@@ -112,8 +114,8 @@ BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.928.21956"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.928.21956/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.930.61225"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.930.61225/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 
 [projects."/Users/jabbariao/Documents/Codex/2026-09-01/https-app-notion-com-p-figma"]

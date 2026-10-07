@@ -1,5 +1,5 @@
 theme = solarized_osaka
-font-family = "PlemolJP Console NF"
+font-family = "TX-02"
 font-thicken = true
 
 font-size = 15
@@ -21,7 +21,7 @@ macos-option-as-alt = false
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 
-background-opacity = 0.7
+background-opacity = 0.88
 background-blur-radius = 30
 
 adjust-cell-height = +25%
