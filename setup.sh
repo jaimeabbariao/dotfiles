@@ -21,6 +21,24 @@ link() {
   green "  Linked $dest -> $src"
 }
 
+# For configs the app rewrites itself: copy once, then the app owns it.
+seed() {
+  local src="$1" dest="$2"
+  mkdir -p "$(dirname "$dest")"
+  if [ -L "$dest" ]; then
+    # Replace an old symlink into the repo with a real copy of its contents.
+    local tmp
+    tmp="$(mktemp)"
+    cp "$dest" "$tmp" && mv "$tmp" "$dest"
+    green "  Converted $dest from symlink to file"
+  elif [ -e "$dest" ]; then
+    green "  [ok] $dest exists, leaving it alone"
+  else
+    cp "$src" "$dest"
+    green "  Copied $src -> $dest"
+  fi
+}
+
 # -------------------------------------------------------
 # 1. Detect package manager & install helpers
 # -------------------------------------------------------
@@ -224,7 +242,7 @@ echo "=== Installing lazygit ==="
 if command -v lazygit &>/dev/null; then
   green "  [ok] lazygit already installed"
 else
-  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | sed -n 's/.*"tag_name": *"v\([^"]*\)".*/\1/p')
   if [ -z "$LAZYGIT_VERSION" ]; then
     red "  Failed to fetch latest lazygit version."
   else
@@ -283,7 +301,7 @@ else
 fi
 
 # -------------------------------------------------------
-# 8b. Install caveman skill
+# 8. Install caveman skill
 # -------------------------------------------------------
 echo ""
 echo "=== Installing caveman skill ==="
@@ -307,7 +325,7 @@ else
 fi
 
 # -------------------------------------------------------
-# 8c. Install leaf
+# 9. Install leaf
 # -------------------------------------------------------
 
 echo ""
@@ -324,7 +342,7 @@ else
 fi
 
 # -------------------------------------------------------
-# 9. Symlink dotfiles
+# 10. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
@@ -357,7 +375,7 @@ mkdir -p "$HOME/.claude/hooks"
 link "$DOTFILES_DIR/claude/hooks/banned-words.py" "$HOME/.claude/hooks/banned-words.py"
 
 echo "Setting up Codex..."
-link "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
+seed "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
 link "$DOTFILES_DIR/agent-skills/fix-coder-mcp-oauth/scripts/codex-coder-mcp-login" "$HOME/bin/codex-coder-mcp-login"
 
 echo "Setting up agent skills..."

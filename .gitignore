@@ -1,6 +1,5 @@
 .DS_Store
 
-
 nvim/tt.*
 nvim/.tests
 nvim/doc/tags
@@ -10,8 +9,6 @@ nvim/foo.*
 nvim/*.log
 nvim/data
 
-zellij/zjstatus-releases
-
 herdr/herdr-client.log
 herdr/herdr-client.sock
 herdr/herdr-server.log
@@ -19,12 +16,14 @@ herdr/herdr.sock
 herdr/release-notes.json
 herdr/session.json
 herdr/.plugins.lock
-
-warp/settings.toml
-warp/themes/rose-pine-warp
+herdr/herdr.sock.agent
+herdr/session-snapshots/
 
 # caveman skill is symlinked in by setup.sh
 agent-skills/caveman
 
 # Optional Ponytail skills are managed outside dotfiles.
 agent-skills/ponytail*
+
+# Codex-managed system skills
+agent-skills/.system
