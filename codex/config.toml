@@ -9,7 +9,7 @@ appearanceTheme = "light"
 appearanceDarkCodeThemeId = "github"
 followUpQueueMode = "queue"
 conversationDetailMode = "STEPS_COMMANDS"
-appearanceLightCodeThemeId = "proof"
+appearanceLightCodeThemeId = "codex"
 sansFontSize = 15
 codeFontSize = 13
 selected-avatar-id = "pet_6abc23873f048191b051292064d75acb"
@@ -32,19 +32,19 @@ diffRemoved = "#f85149"
 skill = "#bc8cff"
 
 [desktop.appearanceLightChromeTheme]
-accent = "#3d755d"
+accent = "#0169cc"
 accentSource = "custom"
 contrast = 100
-ink = "#2f312d"
+ink = "#0d0d0d"
 opaqueWindows = false
-surface = "#f5f3ed"
+surface = "#ffffff"
 
 [desktop.appearanceLightChromeTheme.fonts]
 
 [desktop.appearanceLightChromeTheme.semanticColors]
-diffAdded = "#3d755d"
-diffRemoved = "#ba2623"
-skill = "#5f6ac2"
+diffAdded = "#00a240"
+diffRemoved = "#e02e2a"
+skill = "#751ed9"
 
 [desktop.open-in-target-preferences]
 global = "zed"
@@ -96,6 +96,9 @@ enabled = true
 [plugins."jimmy@jimmy-team"]
 enabled = true
 
+[plugins."code-review@openai-bundled"]
+enabled = true
+
 [mcp_servers.node_repl]
 args = []
 command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
@@ -112,8 +115,8 @@ BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.930.61225"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.930.61225/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.1007.30912"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/jabbariao/.codex/plugins/cache/openai-bundled/browser/26.1007.30912/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 
 [projects."/Users/jabbariao/Documents/Codex/2026-09-01/https-app-notion-com-p-figma"]
