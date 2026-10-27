@@ -80,10 +80,13 @@ echo "Detected package manager: $PKG_MANAGER"
 echo ""
 
 # No associative arrays: macOS ships bash 3.2. "tool:package" pairs instead.
-PACKAGES="git:git nvim:neovim rg:ripgrep curl:curl node:node npm:npm fzf:fzf fd:fd"
+PACKAGES="git:git nvim:neovim rg:ripgrep curl:curl node:node npm:npm fzf:fzf fd:fd python3:python3"
 
 # Override package names per manager
 case "$PKG_MANAGER" in
+brew)
+  PACKAGES="${PACKAGES/python3:python3/python3:python}"
+  ;;
 apt)
   # Used by Neovim and terminal apps when Ubuntu has an X11 display.
   # Headless SSH sessions use Neovim's OSC 52 provider instead.
@@ -365,6 +368,9 @@ link "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
 
 echo "Setting up herdr..."
 link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"
+
+echo "Setting up Rex..."
+link "$DOTFILES_DIR/rex" "$HOME/.config/rex"
 
 # Claude and Codex are linked file-by-file, not as directories: both keep
 # mutable state (history, sessions, projects, logs) alongside their config.

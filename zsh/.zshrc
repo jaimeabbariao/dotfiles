@@ -17,5 +17,9 @@ alias e="nvim"
 alias res="tmux a -t"
 alias yz="yazi"
 
+theme() {
+  command python3 "${${(%):-%x}:A:h:h}/scripts/theme.py" "$@"
+}
+
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"

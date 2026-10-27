@@ -8,6 +8,10 @@ nvim/.repro
 nvim/foo.*
 nvim/*.log
 nvim/data
+nvim/theme-mode
+
+scripts/__pycache__/
+scripts/tests/__pycache__/
 
 herdr/herdr-client.log
 herdr/herdr-client.sock
