@@ -94,7 +94,7 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
         self.assertNotIn('Add Remote Host', result.stdout)
 
     def test_waits_for_https_without_requesting_another_login(self):
-        self.env.update(REX_TEST_STATES='starting,running,ready', REX_CONNECT_TIMEOUT_SECONDS='60')
+        self.env.update(REX_TEST_STATES='running,running,ready', REX_CONNECT_TIMEOUT_SECONDS='60')
         result = self.run_script('connect-rex.sh')
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn('Add Remote Host', result.stdout)
@@ -113,6 +113,17 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
         result = self.run_script('connect-rex.sh')
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(self.calls().count(['--autostart=false', 'server', 'tailscale', 'login']), 1)
+
+    def test_starting_node_requests_login_before_needs_login(self):
+        self.env.update(REX_TEST_STATES='starting,starting,needs_login,ready',
+                        REX_CONNECT_TIMEOUT_SECONDS='60')
+        result = self.run_script('connect-rex.sh')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        calls = self.calls()
+        login = ['--autostart=false', 'server', 'tailscale', 'login']
+        self.assertEqual(calls.count(login), 1)
+        first_status = calls.index(['--autostart=false', 'server', 'status', '--json'])
+        self.assertEqual(calls[first_status + 1], login)
 
     def test_machine_approval_has_a_specific_error(self):
         self.env['REX_TEST_STATES'] = 'needs_machine_approval'

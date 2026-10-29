@@ -49,10 +49,10 @@ else:
     printf '%s\n' 'In Rex on your Mac, choose Add Remote Host and enter the HTTPS address shown above.'
     exit 0
     ;;
-  needs_login)
+  starting | needs_login)
     if [ "$login_requested" = false ]; then
       rex --autostart=false server tailscale login
-      printf '%s\n' 'Open the Tailscale sign-in link above. Waiting for sign-in to complete...'
+      printf '%s\n' 'If a sign-in link is shown, open it. Waiting for Tailscale to finish starting...'
       login_requested=true
     fi
     ;;
@@ -62,19 +62,23 @@ else:
     ;;
   disabled | failed)
     rex --autostart=false server status
-    printf '%s\n' 'Tailscale is unavailable. Check rex server logs --follow.' >&2
+    printf '%s\n' 'Tailscale is unavailable. Check rex server logs --lines 50.' >&2
     exit 1
     ;;
   esac
   if [ "$SECONDS" -ge "$deadline" ]; then
     rex --autostart=false server status
-    if [ "$state" = needs_login ]; then
+    if [ "$state" = starting ]; then
+      printf '%s\n' \
+        'Tailscale is still starting after the login request.' \
+        'Check rex server logs --lines 50 for connection or enrollment errors.' >&2
+    elif [ "$state" = needs_login ]; then
       printf '%s\n' 'Sign-in is still pending. Finish signing in, then rerun this script.' >&2
     else
       printf '%s\n' \
         'Tailscale HTTPS is not ready within the wait period.' \
         'Check that MagicDNS and HTTPS certificates are enabled in your tailnet.' \
-        'Inspect rex server logs --follow, then rerun this script.' >&2
+        'Inspect rex server logs --lines 50, then rerun this script.' >&2
     fi
     exit 1
   fi
