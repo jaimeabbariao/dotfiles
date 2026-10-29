@@ -24,6 +24,15 @@ import sys
 args = sys.argv[1:]
 with open(os.environ['REX_TEST_LOG'], 'a') as log:
     log.write(json.dumps(args) + '\\n')
+if args == ['--autostart=false', 'server', 'status', '--json']:
+    states = os.environ.get('REX_TEST_STATES', 'ready' if os.environ.get('REX_TEST_READY') == '1' else 'needs_login').split(',')
+    from pathlib import Path
+    counter = Path(os.environ['REX_TEST_LOG'] + '.status-count')
+    index = int(counter.read_text()) if counter.exists() else 0
+    counter.write_text(str(index + 1))
+    state = states[min(index, len(states) - 1)]
+    print(json.dumps({'tailscale': {'state': 'running' if state == 'ready' else state,
+                                   'https': {'state': 'available' if state == 'ready' else 'pending'}}}))
 if args == ['--autostart=false', 'server', 'tailscale', 'pair', '--json']:
     sys.exit(0 if os.environ.get('REX_TEST_READY') == '1' else 1)
 if args == ['--autostart=false', 'server', 'tailscale', 'login']:
@@ -33,9 +42,13 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
     sys.exit(0 if os.environ.get('REX_TEST_READY') == '1' else 1)
 ''')
         mock.chmod(0o755)
+        sleep = self.root / 'sleep'
+        sleep.write_text('#!/bin/sh\nexit 0\n')
+        sleep.chmod(0o755)
         self.env = dict(os.environ, PATH=str(self.root) + os.pathsep + os.environ['PATH'],
                         REX_TEST_LOG=str(self.log), REX_SERVER='https://wrong.invalid',
-                        REX_PACKAGE_TOKEN='synthetic-secret')
+                        REX_PACKAGE_TOKEN='synthetic-secret', REX_TEST_READY='1',
+                        REX_CONNECT_TIMEOUT_SECONDS='0')
 
     def run_script(self, name, *args):
         return subprocess.run(['bash', str(SCRIPTS / name), *args], env=self.env,
@@ -59,11 +72,12 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
         self.assertNotIn('synthetic-secret', self.log.read_text() + result.stdout + result.stderr)
 
     def test_requests_login_when_pairing_is_not_ready(self):
+        self.env['REX_TEST_READY'] = '0'
         result = self.run_script('connect-rex.sh')
-        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.returncode, 1, result.stderr)
         self.assertIn(['--autostart=false', 'server', 'tailscale', 'login'], self.calls())
         self.assertIn('https://login.example.invalid/synthetic', result.stdout)
-        self.assertIn('rerun this script', result.stdout)
+        self.assertIn('rerun this script', result.stderr)
 
     def test_ready_node_does_not_request_another_login(self):
         self.env['REX_TEST_READY'] = '1'
@@ -73,10 +87,38 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
         self.assertIn('Add Remote Host', result.stdout)
 
     def test_login_failure_is_reported(self):
+        self.env['REX_TEST_READY'] = '0'
         self.env['REX_TEST_LOGIN_EXIT'] = '7'
         result = self.run_script('connect-rex.sh')
         self.assertEqual(result.returncode, 7)
         self.assertNotIn('Add Remote Host', result.stdout)
+
+    def test_waits_for_https_without_requesting_another_login(self):
+        self.env.update(REX_TEST_STATES='starting,running,ready', REX_CONNECT_TIMEOUT_SECONDS='60')
+        result = self.run_script('connect-rex.sh')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('Add Remote Host', result.stdout)
+        self.assertNotIn(['--autostart=false', 'server', 'tailscale', 'login'], self.calls())
+
+    def test_https_timeout_does_not_suggest_signing_in(self):
+        self.env['REX_TEST_STATES'] = 'running'
+        result = self.run_script('connect-rex.sh')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('MagicDNS and HTTPS', result.stderr)
+        self.assertNotIn('Sign-in is still pending', result.stderr)
+        self.assertNotIn(['--autostart=false', 'server', 'tailscale', 'login'], self.calls())
+
+    def test_waits_for_login_and_requests_it_only_once(self):
+        self.env.update(REX_TEST_STATES='needs_login,needs_login,ready', REX_CONNECT_TIMEOUT_SECONDS='60')
+        result = self.run_script('connect-rex.sh')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.calls().count(['--autostart=false', 'server', 'tailscale', 'login']), 1)
+
+    def test_machine_approval_has_a_specific_error(self):
+        self.env['REX_TEST_STATES'] = 'needs_machine_approval'
+        result = self.run_script('connect-rex.sh')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('administrator must approve', result.stderr)
 
     def test_host_name_comes_from_coder_workspace(self):
         self.env['CODER_WORKSPACE_NAME'] = 'payments-dev'

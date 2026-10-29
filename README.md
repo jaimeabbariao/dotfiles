@@ -50,9 +50,15 @@ run this helper on the Coder box. Use the same command in your boot hook:
 ```
 
 On a new box, the helper requests a sign-in link with `rex server tailscale login`.
-Open the Tailscale sign-in link shown in the status output,
-then rerun the helper. It shows the server address and a pairing QR code once
-Tailscale is ready. In the Rex Mac app, choose **Add Remote Host** and enter
+Open the Tailscale sign-in link shown in the output. The helper waits up to
+60 seconds for sign-in and HTTPS readiness, then shows the server address and
+a pairing QR code. If sign-in takes longer, finish signing in and rerun it.
+Set `REX_CONNECT_TIMEOUT_SECONDS` to change the wait period.
+The helper requests login only when Rex reports `needs_login`. A pending HTTPS
+listener does not trigger another login. If HTTPS times out, check that MagicDNS
+and HTTPS certificates are enabled in your tailnet, then inspect Rex's logs.
+The helper requires Python 3 to read Rex's JSON status.
+In the Rex Mac app, choose **Add Remote Host** and enter
 that address. Your Mac must be connected to the same tailnet.
 Pass a different hostname as the first argument, such as
 `~/dotfiles/scripts/connect-rex.sh my-coder-box`, when setting up another box.
