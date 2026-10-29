@@ -34,5 +34,16 @@ unset REX_PACKAGE_TOKEN
 # A boot hook must start this box's server, even in a remote Rex terminal.
 unset REX_SERVER
 
-rex server start "$@"
+rex_env_args=()
+while IFS= read -r name; do
+  case "$name" in
+  CODER_* | FIGMA_CODER_* | FIGMA_CODEX_* | CODEX_PROVIDER_* | CODEX_MODEL | \
+    OPENAI_API_KEY | ANTHROPIC_AUTH_TOKEN | DEVCONTAINER | INSTANCE_TYPE | \
+    FIGMATE_EMAIL | GIT_AUTHOR_EMAIL | GIT_AUTHOR_NAME)
+    rex_env_args+=(--env "$name")
+    ;;
+  esac
+done < <(compgen -e)
+
+rex server start "${rex_env_args[@]}" "$@"
 rex --autostart=false server status
