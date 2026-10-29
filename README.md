@@ -49,14 +49,32 @@ run this helper on the Coder box. Use the same command in your boot hook:
 ~/dotfiles/scripts/connect-rex.sh
 ```
 
-On the first run, open the Tailscale sign-in link shown in the status output,
+On a new box, the helper requests a sign-in link with `rex server tailscale login`.
+Open the Tailscale sign-in link shown in the status output,
 then rerun the helper. It shows the server address and a pairing QR code once
 Tailscale is ready. In the Rex Mac app, choose **Add Remote Host** and enter
 that address. Your Mac must be connected to the same tailnet.
 Pass a different hostname as the first argument, such as
 `~/dotfiles/scripts/connect-rex.sh my-coder-box`, when setting up another box.
+By default, the helper uses `$CODER_WORKSPACE_NAME-rex`, such as
+`payments-dev-rex`. Outside a Coder-managed environment, it falls back to
+`<machine-hostname>-rex`. Keep using the same name on later boots.
+The helper also renames an already-enabled Rex Tailscale node to this name.
+If you previously saved its old address on your Mac, update that remote host.
 Without networking flags, Rex listens only locally. Startup flags apply only
 when a new server starts.
+
+The startup script forwards all exported environment variables using Rex's
+`--env NAME` option, except `REX_*` variables. This includes Coder-injected
+variables regardless of their names. Values stay out of command arguments.
+Run the helper from a Coder-managed terminal or agent startup script so those
+variables are available. An ordinary SSH session may have a different environment.
+Forwarded credentials are available to programs running in Rex terminals.
+
+Environment changes apply only when Rex starts a new server. If a server was
+already running with an incomplete environment, finish its sessions before
+running `rex server stop`, then rerun the helper from a Coder-managed terminal.
+Stopping the server ends its sessions.
 
 To inspect startup errors, run `rex server logs --follow` on the Coder box.
 This script starts Rex when called. It does not register a boot hook itself.

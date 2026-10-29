@@ -3,12 +3,13 @@ set +x
 set -euo pipefail
 
 if [ "$#" -gt 1 ] || [ "${1:-}" = '-h' ] || [ "${1:-}" = '--help' ]; then
-  printf '%s\n' 'Usage: connect-rex.sh [tailscale-hostname]' 'Run on the Coder box. The default hostname is coder-rex.'
+  printf '%s\n' 'Usage: connect-rex.sh [tailscale-hostname]' \
+    'Run on the Coder box. The default is $CODER_WORKSPACE_NAME-rex, falling back to <machine-hostname>-rex.'
   exit 0
 fi
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-hostname="${1:-coder-rex}"
+hostname="${1:-${CODER_WORKSPACE_NAME:-$(hostname -s)}-rex}"
 
 "$script_dir/start-rex.sh" --tailscale --tailscale-hostname "$hostname"
 
@@ -17,6 +18,10 @@ unset REX_SERVER REX_PACKAGE_TOKEN
 
 # Start flags leave an existing server unchanged, so enable its listener too.
 rex --autostart=false server tailscale on --hostname "$hostname"
+rex --autostart=false server tailscale rename "$hostname"
+if ! rex --autostart=false server tailscale pair --json >/dev/null 2>&1; then
+  rex --autostart=false server tailscale login
+fi
 rex --autostart=false server status
 
 if rex --autostart=false server tailscale pair; then

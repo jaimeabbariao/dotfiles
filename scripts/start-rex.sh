@@ -37,12 +37,9 @@ unset REX_SERVER
 rex_env_args=()
 while IFS= read -r name; do
   case "$name" in
-  CODER_* | FIGMA_CODER_* | FIGMA_CODEX_* | CODEX_PROVIDER_* | CODEX_MODEL | \
-    OPENAI_API_KEY | ANTHROPIC_AUTH_TOKEN | DEVCONTAINER | INSTANCE_TYPE | \
-    FIGMATE_EMAIL | GIT_AUTHOR_EMAIL | GIT_AUTHOR_NAME)
-    rex_env_args+=(--env "$name")
-    ;;
+  REX_*) continue ;;
   esac
+  rex_env_args+=(--env "$name")
 done < <(compgen -e)
 
 rex server start "${rex_env_args[@]}" "$@"
