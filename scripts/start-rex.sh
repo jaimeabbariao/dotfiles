@@ -2,6 +2,13 @@
 set +x
 set -euo pipefail
 
+if [ "$#" -gt 1 ] || [ "${1:-}" = '-h' ] || [ "${1:-}" = '--help' ]; then
+  printf '%s\n' 'Usage: start-rex.sh [tailscale-hostname]' \
+    'Boot hook for the Coder box. The default is $CODER_WORKSPACE_NAME-$CODER_WORKSPACE_OWNER_NAME-rex.'
+  exit 0
+fi
+hostname="${1:-${CODER_WORKSPACE_NAME:-$(hostname -s)}${CODER_WORKSPACE_OWNER_NAME:+-$CODER_WORKSPACE_OWNER_NAME}-rex}"
+
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 if ! command -v rex >/dev/null 2>&1; then
@@ -31,6 +38,11 @@ fi
 
 unset REX_PACKAGE_TOKEN
 
+# Without cap_net_raw, Tailscale falls back to interface-bound dials that time out on Coder.
+# Updates replace the binary and drop the capability, so set it every boot.
+sudo -n setcap cap_net_raw=ep "$(readlink -f "$(command -v rex)")" ||
+  printf '%s\n' 'Could not set cap_net_raw on rex; Tailscale may fail to connect.' >&2
+
 # A boot hook must start this box's server, even in a remote Rex terminal.
 unset REX_SERVER
 
@@ -42,5 +54,6 @@ while IFS= read -r name; do
   rex_env_args+=(--env "$name")
 done < <(compgen -e)
 
-rex server start "${rex_env_args[@]}" "$@"
+# Tailscale is runtime-only, so every boot must pass these flags.
+rex server start "${rex_env_args[@]}" --tailscale --tailscale-hostname "$hostname"
 rex --autostart=false server status

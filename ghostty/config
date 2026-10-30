@@ -24,7 +24,7 @@ keybind = alt+right=unbind
 #background-opacity = 0.88
 #background-blur-radius = 30
 
-adjust-cell-height = +25%
+#adjust-cell-height = +25%
 
 window-padding-balance = true
 

@@ -4,13 +4,13 @@ set -euo pipefail
 
 if [ "$#" -gt 1 ] || [ "${1:-}" = '-h' ] || [ "${1:-}" = '--help' ]; then
   printf '%s\n' 'Usage: connect-rex.sh [tailscale-hostname]' \
-    'Run on the Coder box. The default is $CODER_WORKSPACE_NAME-rex, falling back to <machine-hostname>-rex.'
+    'Run once by hand on a new Coder box. The default is $CODER_WORKSPACE_NAME-$CODER_WORKSPACE_OWNER_NAME-rex.'
   exit 0
 fi
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-hostname="${1:-${CODER_WORKSPACE_NAME:-$(hostname -s)}-rex}"
-wait_seconds="${REX_CONNECT_TIMEOUT_SECONDS:-60}"
+hostname="${1:-${CODER_WORKSPACE_NAME:-$(hostname -s)}${CODER_WORKSPACE_OWNER_NAME:+-$CODER_WORKSPACE_OWNER_NAME}-rex}"
+wait_seconds="${REX_CONNECT_TIMEOUT_SECONDS:-300}"
 if ! [[ "$wait_seconds" =~ ^[0-9]+$ ]]; then
   printf '%s\n' 'REX_CONNECT_TIMEOUT_SECONDS must be a nonnegative integer.' >&2
   exit 2
@@ -21,7 +21,7 @@ command -v python3 >/dev/null 2>&1 || {
   exit 1
 }
 
-"$script_dir/start-rex.sh" --tailscale --tailscale-hostname "$hostname"
+"$script_dir/start-rex.sh" "$hostname"
 
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 unset REX_SERVER REX_PACKAGE_TOKEN
@@ -31,6 +31,7 @@ rex --autostart=false server tailscale on --hostname "$hostname"
 rex --autostart=false server tailscale rename "$hostname"
 deadline=$((SECONDS + wait_seconds))
 login_requested=false
+last_state=
 printf '%s\n' 'Waiting for Tailscale sign-in and HTTPS readiness...'
 while :; do
   state="$(rex --autostart=false server status --json | python3 -c '
@@ -40,19 +41,26 @@ if t.get("error"):
     print("failed")
 elif t.get("state") == "running" and t.get("https", {}).get("state") == "available":
     print("ready")
+elif t.get("state") == "running":
+    print("https_pending")
 else:
     print(t.get("state", "starting"))
 ')"
+  if [ "$state" != "$last_state" ]; then
+    printf 'Tailscale state: %s\n' "$state"
+    last_state="$state"
+  fi
   case "$state" in
   ready)
     rex --autostart=false server tailscale pair
     printf '%s\n' 'In Rex on your Mac, choose Add Remote Host and enter the HTTPS address shown above.'
     exit 0
     ;;
-  starting | needs_login)
+  # A saved node reports starting until it reaches control; login would discard its key.
+  needs_login)
     if [ "$login_requested" = false ]; then
       rex --autostart=false server tailscale login
-      printf '%s\n' 'If a sign-in link is shown, open it. Waiting for Tailscale to finish starting...'
+      printf '%s\n' 'Open the sign-in link shown above. Waiting for Tailscale...'
       login_requested=true
     fi
     ;;
@@ -70,8 +78,8 @@ else:
     rex --autostart=false server status
     if [ "$state" = starting ]; then
       printf '%s\n' \
-        'Tailscale is still starting after the login request.' \
-        'Check rex server logs --lines 50 for connection or enrollment errors.' >&2
+        'Tailscale could not reach its coordination server.' \
+        'Check rex server logs --lines 50 and ~/.local/state/rex/tsnet/node/tailscaled.log*.' >&2
     elif [ "$state" = needs_login ]; then
       printf '%s\n' 'Sign-in is still pending. Finish signing in, then rerun this script.' >&2
     else

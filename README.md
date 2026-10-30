@@ -31,7 +31,15 @@ Add that command to your Coder workspace's startup script to run it at every
 boot. If Rex is missing, the script downloads and runs the
 [official Linux installer](https://www.superlogical.com/rex/docs/linux/installation)
 using the injected token. Installation may require sudo. The script then starts
-a background personal server and prints its status.
+a background personal server with
+[Rex's built-in Tailscale](https://www.superlogical.com/rex/docs/linux/remote-access)
+enabled and prints its status. Tailscale is runtime-only in Rex, so the boot hook
+must pass these flags each time. A node that signed in before reconnects on its
+own; the boot hook never waits for sign-in.
+Before starting Rex, it runs `sudo -n setcap cap_net_raw=ep` on the Rex binary.
+Without that capability, Tailscale's connections time out on Coder boxes.
+Updates replace the binary, so this runs on every boot. If sudo fails, it warns
+and starts Rex anyway.
 Repeated runs leave an existing server running. It does not require systemd
 to start Rex. Keep Rex's state directory on a persistent workspace volume.
 
@@ -41,35 +49,35 @@ installer and package manager also receive the token and may store repository
 credentials. Their token handling has not been audited here. Processes running
 as your workspace user or root can access injected secrets.
 
-For remote access through
-[Rex's built-in Tailscale](https://www.superlogical.com/rex/docs/linux/remote-access),
-run this helper on the Coder box. Use the same command in your boot hook:
+On a new box, run this helper once by hand to sign in and pair. Do not put it
+in your boot hook:
 
 ```sh
 ~/dotfiles/scripts/connect-rex.sh
 ```
 
-On a new box, the helper requests a sign-in link with `rex server tailscale login`.
-Open the Tailscale sign-in link shown in the output. The helper waits up to
-60 seconds for sign-in and HTTPS readiness, then shows the server address and
+When Rex reports `needs_login`, the helper requests a sign-in link once with
+`rex server tailscale login`. Open the link shown in the output. The helper waits up to
+5 minutes for sign-in and HTTPS readiness, then shows the server address and
 a pairing QR code. If sign-in takes longer, finish signing in and rerun it.
 Set `REX_CONNECT_TIMEOUT_SECONDS` to change the wait period.
-The helper requests login once when Rex reports `starting` or `needs_login`.
-An authenticated node with a pending HTTPS listener does not trigger another
-login. If HTTPS times out, check that MagicDNS
+It never requests login while Rex reports `starting`: a saved node reports that
+until it reaches Tailscale's coordination server, and a login request would
+discard its key. If it times out in `starting`, the node cannot reach Tailscale;
+check `~/.local/state/rex/tsnet/node/tailscaled.log*`. If HTTPS times out, check that MagicDNS
 and HTTPS certificates are enabled in your tailnet, then inspect Rex's logs.
 The helper requires Python 3 to read Rex's JSON status.
 In the Rex Mac app, choose **Add Remote Host** and enter
 that address. Your Mac must be connected to the same tailnet.
 Pass a different hostname as the first argument, such as
-`~/dotfiles/scripts/connect-rex.sh my-coder-box`, when setting up another box.
-By default, the helper uses `$CODER_WORKSPACE_NAME-rex`, such as
-`payments-dev-rex`. Outside a Coder-managed environment, it falls back to
-`<machine-hostname>-rex`. Keep using the same name on later boots.
+`~/dotfiles/scripts/connect-rex.sh my-coder-box`, and pass the same name to
+`start-rex.sh` in your boot hook.
+By default, both scripts use `$CODER_WORKSPACE_NAME-$CODER_WORKSPACE_OWNER_NAME-rex`,
+such as `payments-dev-alex-rex`, so names stay unique on a shared tailnet.
+Outside a Coder-managed environment, they fall back to `<machine-hostname>-rex`.
 The helper also renames an already-enabled Rex Tailscale node to this name.
 If you previously saved its old address on your Mac, update that remote host.
-Without networking flags, Rex listens only locally. Startup flags apply only
-when a new server starts.
+Startup flags apply only when a new server starts.
 
 The startup script forwards all exported environment variables using Rex's
 `--env NAME` option, except `REX_*` variables. This includes Coder-injected

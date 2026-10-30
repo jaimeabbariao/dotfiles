@@ -42,6 +42,13 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
     sys.exit(0 if os.environ.get('REX_TEST_READY') == '1' else 1)
 ''')
         mock.chmod(0o755)
+        sudo = self.root / 'sudo'
+        sudo.write_text(f'#!{sys.executable}\n' + '''import json, os, sys
+with open(os.environ['REX_TEST_LOG'] + '.sudo', 'a') as log:
+    log.write(json.dumps(sys.argv[1:]) + '\\n')
+sys.exit(int(os.environ.get('REX_TEST_SUDO_EXIT', '0')))
+''')
+        sudo.chmod(0o755)
         sleep = self.root / 'sleep'
         sleep.write_text('#!/bin/sh\nexit 0\n')
         sleep.chmod(0o755)
@@ -70,6 +77,21 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
             self.assertNotIn(self.env[name], start)
         self.assertFalse(any(name.startswith('REX_') for name in forwarded))
         self.assertNotIn('synthetic-secret', self.log.read_text() + result.stdout + result.stderr)
+
+    def test_grants_raw_socket_capability_to_rex(self):
+        result = self.run_script('start-rex.sh')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        sudo_calls = [json.loads(line) for line in
+                      Path(str(self.log) + '.sudo').read_text().splitlines()]
+        self.assertEqual(sudo_calls, [['-n', 'setcap', 'cap_net_raw=ep',
+                                       str((self.root / 'rex').resolve())]])
+
+    def test_capability_failure_still_starts_rex(self):
+        self.env['REX_TEST_SUDO_EXIT'] = '1'
+        result = self.run_script('start-rex.sh')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('cap_net_raw', result.stderr)
+        self.assertEqual(self.calls()[0][:2], ['server', 'start'])
 
     def test_requests_login_when_pairing_is_not_ready(self):
         self.env['REX_TEST_READY'] = '0'
@@ -108,22 +130,39 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
         self.assertNotIn('Sign-in is still pending', result.stderr)
         self.assertNotIn(['--autostart=false', 'server', 'tailscale', 'login'], self.calls())
 
+    def test_reports_each_state_change_once(self):
+        self.env.update(REX_TEST_STATES='needs_login,needs_login,running,ready',
+                        REX_CONNECT_TIMEOUT_SECONDS='60')
+        result = self.run_script('connect-rex.sh')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout.count('Tailscale state: needs_login'), 1)
+        self.assertIn('Tailscale state: https_pending', result.stdout)
+        self.assertIn('Tailscale state: ready', result.stdout)
+
     def test_waits_for_login_and_requests_it_only_once(self):
         self.env.update(REX_TEST_STATES='needs_login,needs_login,ready', REX_CONNECT_TIMEOUT_SECONDS='60')
         result = self.run_script('connect-rex.sh')
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(self.calls().count(['--autostart=false', 'server', 'tailscale', 'login']), 1)
 
-    def test_starting_node_requests_login_before_needs_login(self):
-        self.env.update(REX_TEST_STATES='starting,starting,needs_login,ready',
+    def test_starting_node_does_not_request_login(self):
+        self.env.update(REX_TEST_STATES='starting,starting,ready', REX_CONNECT_TIMEOUT_SECONDS='60')
+        result = self.run_script('connect-rex.sh')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn(['--autostart=false', 'server', 'tailscale', 'login'], self.calls())
+
+    def test_new_node_requests_login_once_it_needs_login(self):
+        self.env.update(REX_TEST_STATES='starting,needs_login,needs_login,ready',
                         REX_CONNECT_TIMEOUT_SECONDS='60')
         result = self.run_script('connect-rex.sh')
         self.assertEqual(result.returncode, 0, result.stderr)
-        calls = self.calls()
-        login = ['--autostart=false', 'server', 'tailscale', 'login']
-        self.assertEqual(calls.count(login), 1)
-        first_status = calls.index(['--autostart=false', 'server', 'status', '--json'])
-        self.assertEqual(calls[first_status + 1], login)
+        self.assertEqual(self.calls().count(['--autostart=false', 'server', 'tailscale', 'login']), 1)
+
+    def test_starting_timeout_points_at_connectivity(self):
+        self.env['REX_TEST_STATES'] = 'starting'
+        result = self.run_script('connect-rex.sh')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('coordination server', result.stderr)
 
     def test_machine_approval_has_a_specific_error(self):
         self.env['REX_TEST_STATES'] = 'needs_machine_approval'
@@ -131,16 +170,24 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
         self.assertEqual(result.returncode, 1)
         self.assertIn('administrator must approve', result.stderr)
 
+    def test_boot_hook_enables_tailscale_with_owner_scoped_name(self):
+        self.env.update(CODER_WORKSPACE_NAME='payments-dev', CODER_WORKSPACE_OWNER_NAME='alex')
+        result = self.run_script('start-rex.sh')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        start = self.calls()[0]
+        self.assertIn('--tailscale', start)
+        self.assertEqual(start[start.index('--tailscale-hostname') + 1], 'payments-dev-alex-rex')
+
     def test_host_name_comes_from_coder_workspace(self):
-        self.env['CODER_WORKSPACE_NAME'] = 'payments-dev'
+        self.env.update(CODER_WORKSPACE_NAME='payments-dev', CODER_WORKSPACE_OWNER_NAME='alex')
         result = self.run_script('connect-rex.sh')
         self.assertEqual(result.returncode, 0, result.stderr)
         start = self.calls()[0]
-        self.assertEqual(start[start.index('--tailscale-hostname') + 1], 'payments-dev-rex')
+        self.assertEqual(start[start.index('--tailscale-hostname') + 1], 'payments-dev-alex-rex')
         self.assertIn(['--autostart=false', 'server', 'tailscale', 'on',
-                       '--hostname', 'payments-dev-rex'], self.calls())
+                       '--hostname', 'payments-dev-alex-rex'], self.calls())
         self.assertIn(['--autostart=false', 'server', 'tailscale', 'rename',
-                       'payments-dev-rex'], self.calls())
+                       'payments-dev-alex-rex'], self.calls())
 
     def test_explicit_host_name_overrides_workspace(self):
         self.env['CODER_WORKSPACE_NAME'] = 'payments-dev'
@@ -151,12 +198,12 @@ if args == ['--autostart=false', 'server', 'tailscale', 'pair']:
 
     def test_host_name_falls_back_to_machine_name(self):
         self.env.pop('CODER_WORKSPACE_NAME', None)
+        self.env.pop('CODER_WORKSPACE_OWNER_NAME', None)
         result = self.run_script('connect-rex.sh')
         self.assertEqual(result.returncode, 0, result.stderr)
         machine = subprocess.check_output(['hostname', '-s'], text=True).strip()
         start = self.calls()[0]
         self.assertEqual(start[start.index('--tailscale-hostname') + 1], machine + '-rex')
-
 
 if __name__ == '__main__':
     unittest.main()
