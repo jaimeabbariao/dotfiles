@@ -304,31 +304,7 @@ else
 fi
 
 # -------------------------------------------------------
-# 8. Install caveman skill
-# -------------------------------------------------------
-echo ""
-echo "=== Installing caveman skill ==="
-
-# Track Caveman upstream and symlink its skill. The proxy and CLI need a global
-# npm install and an agent wrapper.
-CAVEMAN_DIR="$HOME/.local/share/caveman"
-if [ -d "$CAVEMAN_DIR/.git" ]; then
-  echo "  Updating caveman..."
-  git -C "$CAVEMAN_DIR" pull --ff-only -q || yellow "  Failed to update caveman — using the existing checkout."
-else
-  echo "  Cloning caveman..."
-  mkdir -p "$(dirname "$CAVEMAN_DIR")"
-  git clone --depth=1 -q https://github.com/JuliusBrussee/caveman "$CAVEMAN_DIR" || red "  Failed to clone caveman."
-fi
-
-if [ -d "$CAVEMAN_DIR/skills/caveman" ]; then
-  link "$CAVEMAN_DIR/skills/caveman" "$DOTFILES_DIR/agent-skills/caveman"
-else
-  red "  No caveman skill found at $CAVEMAN_DIR/skills/caveman — skipping."
-fi
-
-# -------------------------------------------------------
-# 9. Install leaf
+# 8. Install leaf
 # -------------------------------------------------------
 
 echo ""
@@ -345,7 +321,7 @@ else
 fi
 
 # -------------------------------------------------------
-# 10. Symlink dotfiles
+# 9. Symlink dotfiles
 # -------------------------------------------------------
 echo ""
 echo "=== Symlinking Dotfiles ==="
@@ -363,14 +339,15 @@ link "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
 echo "Setting up Ghostty..."
 link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
 
-echo "Setting up WezTerm..."
-link "$DOTFILES_DIR/wezterm" "$HOME/.config/wezterm"
-
 echo "Setting up herdr..."
 link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"
 
 echo "Setting up Rex..."
 link "$DOTFILES_DIR/rex" "$HOME/.config/rex"
+# Rex installs and updates its own agent skill and session hook.
+if command -v rex &>/dev/null; then
+  rex skill setup || red "  Failed to set up Rex agent skill."
+fi
 
 # Claude and Codex are linked file-by-file, not as directories: both keep
 # mutable state (history, sessions, projects, logs) alongside their config.
@@ -382,15 +359,6 @@ link "$DOTFILES_DIR/claude/hooks/banned-words.py" "$HOME/.claude/hooks/banned-wo
 
 echo "Setting up Codex..."
 seed "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
-link "$DOTFILES_DIR/agent-skills/fix-coder-mcp-oauth/scripts/codex-coder-mcp-login" "$HOME/bin/codex-coder-mcp-login"
-
-echo "Setting up agent skills..."
-for skills_dir in \
-  "$HOME/.claude/skills" \
-  "$HOME/.codex/skills" \
-  "$HOME/.cursor/skills"; do
-  link "$DOTFILES_DIR/agent-skills" "$skills_dir"
-done
 
 echo ""
 green "Done! All set up."

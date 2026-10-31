@@ -22,12 +22,3 @@ herdr/session.json
 herdr/.plugins.lock
 herdr/herdr.sock.agent
 herdr/session-snapshots/
-
-# caveman skill is symlinked in by setup.sh
-agent-skills/caveman
-
-# Optional Ponytail skills are managed outside dotfiles.
-agent-skills/ponytail*
-
-# Codex-managed system skills
-agent-skills/.system
