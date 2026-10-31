@@ -107,14 +107,17 @@ theme status
 
 Running `theme` without an argument toggles the mode. Adapted from
 [ja153903/dotfiles](https://github.com/ja153903/dotfiles/tree/9888a72b8b3a84a4b72eebd683e228d81262e471),
-the command switches Ghostty, Herdr, and Neovim between One Light and One Dark.
+the command switches Ghostty, Herdr, and Neovim between One Light and One Dark,
+and switches each running Rex app to its light or dark appearance.
 It saves the mode in `nvim/theme-mode`, which Git ignores. The default is dark.
 Theme changes edit the linked Ghostty and Herdr configs, so those changes appear in `git diff`.
 
 Ghostty reloads through AppleScript on macOS. Herdr reloads its running server
 and attached clients. A stopped Herdr server stays stopped. Neovim watches the
 saved mode and updates without restarting. Restart existing Neovim sessions
-once to load the watcher. macOS appearance stays independent.
+once to load the watcher. Rex uses the light and dark themes picked in its
+settings. Turn on Remote Control under Settings → Rex Server once, or Rex
+rejects the switch. A stopped Rex server is skipped. macOS appearance stays independent.
 
 The command requires Python 3. It uses `XDG_CONFIG_HOME`, or `~/.config` by
 default. `HERDR_CONFIG_PATH` overrides the Herdr config path. If a reload fails,
