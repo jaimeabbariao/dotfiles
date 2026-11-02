@@ -1,0 +1,3 @@
+WRN 2026-11-02T09:55:07.298 ?.3206     server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/v1Y85k/nvim.3206.0
+WRN 2026-11-02T09:55:13.871 ?.3212     server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/WMbZWn/nvim.3212.0
+WRN 2026-11-02T09:56:46.717 ?.4580     server_start:197: Failed to start server: operation not permitted: /var/folders/r7/3ggtgcw163q0_8ql5ny5w3p00000gn/T/nvim.jabbariao/mBcR7A/nvim.4580.0

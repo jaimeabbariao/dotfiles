@@ -16,11 +16,11 @@ vim.opt.wrap = false
 vim.opt.clipboard = "unnamedplus"
 
 -- A remote host cannot access the desktop clipboard directly. OSC 52 sends
--- yanks through SSH (and Herdr) to the local terminal instead. Do not use the
+-- yanks through SSH, Herdr, or Rex to the local terminal instead. Do not use the
 -- OSC 52 paste/query operation: some terminals prompt with "Waiting for OSC 52"
 -- while Neovim waits for a clipboard response. Cache our own yanks for `p`, and
 -- use the terminal's normal paste shortcut for text copied outside Neovim.
-if os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION") then
+if os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION") or (os.getenv("REX_SESSION") and vim.fn.has("mac") == 0) then
   local osc52 = require("vim.ui.clipboard.osc52")
   local cache = {
     ["+"] = { {}, "v" },
