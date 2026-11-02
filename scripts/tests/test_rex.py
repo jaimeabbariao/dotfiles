@@ -64,6 +64,37 @@ sys.exit(int(os.environ.get('REX_TEST_SUDO_EXIT', '0')))
     def calls(self):
         return [json.loads(line) for line in self.log.read_text().splitlines()]
 
+    def run_rex_setup(self, system):
+        uname = self.root / 'uname'
+        uname.write_text('#!/bin/sh\nprintf "%s\\n" ' + system + '\n')
+        uname.chmod(0o755)
+        setup = (SCRIPTS.parent / 'setup.sh').read_text()
+        section = setup[setup.index('echo "Setting up Rex..."'):setup.index('# Claude and Codex')]
+        self.env['DOTFILES_DIR'] = str(SCRIPTS.parent)
+        return subprocess.run(['bash', '-eu', '-c',
+                               'link() { :; }; red() { echo "$1" >&2; };\n' + section],
+                              env=self.env, capture_output=True, text=True)
+
+    def test_setup_starts_rex_before_installing_skill_on_coder_linux(self):
+        self.env['CODER_WORKSPACE_NAME'] = 'synthetic-box'
+        result = self.run_rex_setup('Linux')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.calls()[0][:2], ['server', 'start'])
+        self.assertEqual(self.calls()[-1], ['skill', 'setup'])
+        self.assertFalse(any('login' in call or 'pair' in call for call in self.calls()))
+
+    def test_setup_skips_starting_rex_outside_coder(self):
+        self.env.pop('CODER_WORKSPACE_NAME', None)
+        result = self.run_rex_setup('Linux')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.calls(), [['skill', 'setup']])
+
+    def test_setup_skips_starting_rex_on_macos(self):
+        self.env['CODER_WORKSPACE_NAME'] = 'synthetic-box'
+        result = self.run_rex_setup('Darwin')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.calls(), [['skill', 'setup']])
+
     def test_forwards_exported_variables_without_a_name_whitelist(self):
         self.env.update(CODER_WORKSPACE_NAME='synthetic-box',
                         CUSTOM_WORKSPACE_SETTING='synthetic value\nwith spaces',

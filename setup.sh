@@ -344,6 +344,10 @@ link "$DOTFILES_DIR/herdr" "$HOME/.config/herdr"
 
 echo "Setting up Rex..."
 link "$DOTFILES_DIR/rex" "$HOME/.config/rex"
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+if [ "$(uname -s)" = Linux ] && [ -n "${CODER_WORKSPACE_NAME:-}" ]; then
+  "$DOTFILES_DIR/scripts/start-rex.sh" || red "  Failed to start Rex."
+fi
 # Rex installs and updates its own agent skill and session hook.
 if command -v rex &>/dev/null; then
   rex skill setup || red "  Failed to set up Rex agent skill."

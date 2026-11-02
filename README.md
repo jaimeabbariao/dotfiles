@@ -21,14 +21,19 @@ See [Coder user secrets](https://coder.com/docs/user-guides/user-secrets).
 If your Coder version lacks user secrets, have your template inject the variable
 from your organization's secret manager.
 
-Run this as your normal workspace user:
+`setup.sh` calls `scripts/start-rex.sh` automatically on Linux when
+`CODER_WORKSPACE_NAME` is set, before setting up Rex's agent skill.
+If your template runs dotfiles setup at every boot, this also starts Rex at every boot.
+
+To start Rex separately, run this as your normal workspace user:
 
 ```sh
 ~/dotfiles/scripts/start-rex.sh
 ```
 
-Add that command to your Coder workspace's startup script to run it at every
-boot. If Rex is missing, the script downloads and runs the
+If your template runs dotfiles setup only once, add that command to your
+Coder workspace's startup script to run it at every boot. If Rex is missing,
+the script downloads and runs the
 [official Linux installer](https://www.superlogical.com/rex/docs/linux/installation)
 using the injected token. Installation may require sudo. The script then starts
 a background personal server with
