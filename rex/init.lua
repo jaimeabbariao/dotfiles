@@ -29,8 +29,8 @@ rex.bind("alt+s>h", "session.previous")
 rex.bind("alt+s>s", "session.switch")
 rex.bind("alt+s>n", "session.new")
 
--- Pane focus
-rex.bind("alt+h", "pane.focus.left")
-rex.bind("alt+j", "pane.focus.down")
-rex.bind("alt+k", "pane.focus.up")
-rex.bind("alt+l", "pane.focus.right")
+-- Pane focus (alt+p prefix keeps alt+hjkl available to terminal applications)
+rex.bind("alt+p>h", "pane.focus.left")
+rex.bind("alt+p>j", "pane.focus.down")
+rex.bind("alt+p>k", "pane.focus.up")
+rex.bind("alt+p>l", "pane.focus.right")
